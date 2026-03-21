@@ -1,0 +1,164 @@
+/* ── Base Reset & Global Styles ────────────────────────────────────────────── */
+@import "./tokens.css";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(108, 99, 255, 0.45) rgba(10, 14, 26, 0.42);
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: 0;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border: 2px solid rgba(10, 14, 26, 0.42);
+  border-radius: 0;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+html {
+  font-size: 14px;
+}
+
+body {
+  font-family: var(--font);
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(108, 99, 255, 0.16), transparent 55%),
+    radial-gradient(90% 60% at 100% 100%, rgba(34, 197, 94, 0.08), transparent 60%),
+    var(--bg);
+  color: var(--text);
+  font-size: var(--font-size-lg);
+  line-height: 1.5;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+/* ── Focus ──────────────────────────────────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+}
+
+/* ── Selection ──────────────────────────────────────────────────────────────── */
+::selection {
+  background: rgba(108, 99, 255, 0.35);
+  color: var(--text-heading);
+}
+
+/* ── Inputs (global base) ───────────────────────────────────────────────────── */
+input[type="text"],
+input[type="password"],
+input[type="number"],
+select {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 0;
+  color: var(--text);
+  padding: 8px 12px;
+  font-family: var(--font-mono);
+  outline: none;
+  transition: border-color var(--duration-base);
+  width: 100%;
+}
+
+input:focus,
+select:focus {
+  border-color: var(--border-focus);
+}
+
+select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238888aa' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  accent-color: var(--accent);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(
+    to right,
+    var(--accent) var(--_pct, 0%),
+    var(--border) var(--_pct, 0%)
+  );
+  outline: none;
+  cursor: pointer;
+  padding: 0;
+  border: none;
+}
+
+input[type="range"]::-webkit-slider-runnable-track {
+  height: 3px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 13px;
+  height: 13px;
+  background: var(--accent);
+  border: 2px solid var(--bg);
+  cursor: grab;
+  margin-top: -5px;
+  transition: background var(--duration-fast);
+}
+
+input[type="range"]::-webkit-slider-thumb:active {
+  cursor: grabbing;
+  background: var(--accent-hover);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 13px;
+  height: 13px;
+  background: var(--accent);
+  border: 2px solid var(--bg);
+  border-radius: 0;
+  cursor: grab;
+}
+
+input[type="range"]::-moz-range-track {
+  height: 3px;
+  background: var(--border);
+}
+
+input[type="range"]::-moz-range-progress {
+  height: 3px;
+  background: var(--accent);
+}
+
+/* ── Overlay base ───────────────────────────────────────────────────────────── */
+.overlay-base html,
+.overlay-base body {
+  background: transparent;
+  overflow: hidden;
+}

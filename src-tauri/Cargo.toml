@@ -1,0 +1,18 @@
+[package]
+name = "goblin-design-system"
+version = "0.1.0"
+description = "Goblin Design System — reusable UI library and demo app"
+authors = ["Sergej Popov"]
+edition = "2021"
+
+[lib]
+name = "goblin_design_system_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-store = "2"
+serde_json = "1"

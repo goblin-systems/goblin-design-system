@@ -1,0 +1,877 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Goblin Design System</title>
+    <link rel="stylesheet" href="/src/app.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+
+      <!-- Window frame / title bar -->
+      <div class="window-frame-row">
+        <div class="window-title-wrap">
+          <div class="window-title">Goblin Design System</div>
+          <div class="window-subtitle">Component library &amp; visual reference</div>
+        </div>
+
+        <!-- Top-level section tabs -->
+        <div class="top-tabs">
+          <button class="top-tab is-active" data-tab-trigger="foundations">Foundations</button>
+          <button class="top-tab" data-tab-trigger="primitives">Primitives</button>
+          <button class="top-tab" data-tab-trigger="feedback">Feedback</button>
+          <button class="top-tab" data-tab-trigger="navigation">Navigation</button>
+          <button class="top-tab" data-tab-trigger="waveform">Waveform</button>
+          <button class="top-tab" data-tab-trigger="overlay">Overlay</button>
+        </div>
+
+        <!-- Window controls -->
+        <div class="window-actions">
+          <button id="window-minimize-btn" class="icon-btn icon-btn-md" title="Minimize"><i data-lucide="minus"></i></button>
+          <button id="window-maximize-btn" class="icon-btn icon-btn-md" title="Maximize"><i data-lucide="maximize-2"></i></button>
+          <button id="window-close-btn" class="icon-btn icon-btn-md" title="Close"><i data-lucide="x"></i></button>
+        </div>
+      </div>
+
+      <!-- ─────────────────────── FOUNDATIONS ─────────────────────────────── -->
+      <div class="tab-panel is-active" data-tab-panel="foundations">
+        <div class="demo-section">
+
+          <div class="settings-section">
+            <div class="section-heading-row">
+              <h2>Color Tokens</h2>
+              <span class="badge default">:root</span>
+            </div>
+
+            <div class="mini-panel">
+              <h3>Semantic Surfaces</h3>
+              <div class="demo-swatch-grid">
+                <div class="demo-swatch" style="background:var(--bg)"><span>--bg</span></div>
+                <div class="demo-swatch" style="background:var(--bg-section)"><span>--bg-section</span></div>
+                <div class="demo-swatch" style="background:var(--bg-input)"><span>--bg-input</span></div>
+                <div class="demo-swatch" style="background:var(--bg-deep)"><span>--bg-deep</span></div>
+              </div>
+            </div>
+
+            <div class="mini-panel">
+              <h3>Accent Palette</h3>
+              <div class="demo-swatch-grid">
+                <div class="demo-swatch" style="background:var(--goblin-purple-500)"><span>purple-500</span></div>
+                <div class="demo-swatch" style="background:var(--goblin-purple-400)"><span>purple-400</span></div>
+                <div class="demo-swatch" style="background:var(--goblin-purple-300)"><span>purple-300</span></div>
+                <div class="demo-swatch" style="background:var(--goblin-purple-200)"><span>purple-200</span></div>
+              </div>
+            </div>
+
+            <div class="mini-panel">
+              <h3>Semantic Colors</h3>
+              <div class="demo-swatch-grid">
+                <div class="demo-swatch" style="background:var(--success)"><span>--success</span></div>
+                <div class="demo-swatch" style="background:var(--warning)"><span>--warning</span></div>
+                <div class="demo-swatch" style="background:var(--error)"><span>--error</span></div>
+                <div class="demo-swatch" style="background:var(--accent)"><span>--accent</span></div>
+                <div class="demo-swatch" style="background:var(--goblin-blue-400)"><span>blue-400</span></div>
+                <div class="demo-swatch" style="background:var(--goblin-cyan-400)"><span>cyan-400</span></div>
+                <div class="demo-swatch" style="background:var(--goblin-pink-400)"><span>pink-400</span></div>
+                <div class="demo-swatch" style="background:var(--goblin-amber-400)"><span>amber-400</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h2>Typography</h2>
+            <div class="demo-type-scale">
+              <div class="demo-type-row">
+                <span class="demo-type-label">--font-size-xs · 10px</span>
+                <span style="font-size:var(--font-size-xs)">The quick brown fox jumps over the lazy goblin</span>
+              </div>
+              <div class="demo-type-row">
+                <span class="demo-type-label">--font-size-sm · 11px</span>
+                <span style="font-size:var(--font-size-sm)">The quick brown fox jumps over the lazy goblin</span>
+              </div>
+              <div class="demo-type-row">
+                <span class="demo-type-label">--font-size-md · 12px</span>
+                <span style="font-size:var(--font-size-md)">The quick brown fox jumps over the lazy goblin</span>
+              </div>
+              <div class="demo-type-row">
+                <span class="demo-type-label">--font-size-base · 13px</span>
+                <span style="font-size:var(--font-size-base)">The quick brown fox jumps over the lazy goblin</span>
+              </div>
+              <div class="demo-type-row">
+                <span class="demo-type-label">--font-size-lg · 14px</span>
+                <span style="font-size:var(--font-size-lg)">The quick brown fox jumps over the lazy goblin</span>
+              </div>
+              <div class="demo-type-row">
+                <span class="demo-type-label">--font-size-xl · 15px</span>
+                <span style="font-size:var(--font-size-xl)">The quick brown fox jumps over the lazy goblin</span>
+              </div>
+              <div class="demo-type-row">
+                <span class="demo-type-label">--font-size-2xl · 16px</span>
+                <span style="font-size:var(--font-size-2xl)">The quick brown fox jumps over the lazy goblin</span>
+              </div>
+              <div class="demo-type-row">
+                <span class="demo-type-label">--font-mono</span>
+                <span style="font-family:var(--font-mono); font-size:var(--font-size-base)">0123456789 abcdef HELLO WORLD</span>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="settings-section">
+            <h2>Shadows</h2>
+            <div class="demo-grid">
+              <div class="mini-panel" style="box-shadow:var(--shadow-card)">
+                <h3>Card shadow</h3>
+                <span class="hint">--shadow-card</span>
+              </div>
+              <div class="mini-panel" style="box-shadow:var(--shadow-modal)">
+                <h3>Modal shadow</h3>
+                <span class="hint">--shadow-modal</span>
+              </div>
+              <div class="mini-panel" style="box-shadow:var(--shadow-toast)">
+                <h3>Toast shadow</h3>
+                <span class="hint">--shadow-toast</span>
+              </div>
+              <div class="mini-panel" style="box-shadow:var(--shadow-inset)">
+                <h3>Inset highlight</h3>
+                <span class="hint">--shadow-inset</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ─────────────────────── PRIMITIVES ─────────────────────────────── -->
+      <div class="tab-panel" data-tab-panel="primitives">
+        <div class="demo-section">
+
+          <div class="settings-section">
+            <h2>Buttons</h2>
+            <div class="section-heading-row" style="margin-bottom:2px">
+              <span class="hint">Text actions</span>
+            </div>
+            <div class="demo-row">
+              <button class="secondary-btn"><i data-lucide="download"></i> Download</button>
+              <button class="secondary-btn"><i data-lucide="upload"></i> Upload</button>
+              <button class="secondary-btn"><i data-lucide="refresh-cw"></i> Refresh</button>
+              <button class="secondary-btn slim-btn"><i data-lucide="plus"></i></button>
+              <button class="secondary-btn" disabled><i data-lucide="lock"></i> Disabled</button>
+            </div>
+
+            <div class="section-heading-row" style="margin-top:6px; margin-bottom:2px">
+              <span class="hint">Icon buttons — sm / md / lg</span>
+            </div>
+            <div class="demo-row">
+              <button class="icon-btn icon-btn-sm" title="Search"><i data-lucide="search"></i></button>
+              <button class="icon-btn icon-btn-sm" title="Filter"><i data-lucide="filter"></i></button>
+              <button class="icon-btn icon-btn-sm" title="Settings"><i data-lucide="settings"></i></button>
+
+              <button class="icon-btn icon-btn-md" title="Edit"><i data-lucide="pencil"></i></button>
+              <button class="icon-btn icon-btn-md" title="Copy"><i data-lucide="copy"></i></button>
+              <button class="icon-btn icon-btn-md" title="Delete"><i data-lucide="trash-2"></i></button>
+              <button class="icon-btn icon-btn-md" title="Eye"><i data-lucide="eye"></i></button>
+              <button class="icon-btn icon-btn-md" title="Layers"><i data-lucide="layers"></i></button>
+
+              <button class="icon-btn icon-btn-lg" title="Wand"><i data-lucide="wand-2"></i></button>
+              <button class="icon-btn icon-btn-lg" title="Palette"><i data-lucide="palette"></i></button>
+              <button class="icon-btn icon-btn-lg" title="Sliders"><i data-lucide="sliders-horizontal"></i></button>
+
+              <button class="icon-btn icon-btn-md" title="Minimize (window)" id="window-minimize-btn-demo"><i data-lucide="minus"></i></button>
+              <button class="icon-btn icon-btn-md" title="Close (window)"><i data-lucide="x"></i></button>
+            </div>
+
+            <div class="section-heading-row" style="margin-top:6px; margin-bottom:2px">
+              <span class="hint">Help &amp; close inline variants</span>
+            </div>
+            <div class="demo-row">
+              <button class="icon-btn help-btn"><i data-lucide="info"></i></button>
+              <button class="icon-btn modal-close-btn"><i data-lucide="x"></i></button>
+              <button class="icon-btn icon-btn-sm" disabled title="Disabled"><i data-lucide="mic-off"></i></button>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h2>Icon Library</h2>
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:8px">
+              <div class="search-field" style="width:280px">
+                <span class="search-field-icon"><i data-lucide="search"></i></span>
+                <input id="icon-search" type="text" placeholder="Search icons…" />
+                <div class="search-suggestions"></div>
+              </div>
+              <span id="icon-count" class="hint"></span>
+            </div>
+            <span class="hint">Lucide icons (ISC license) — click any icon to copy its name.</span>
+            <div class="scroll-panel scroll-panel-lg" style="margin-top:8px">
+              <div id="icon-gallery" class="demo-swatch-grid" style="grid-template-columns:repeat(auto-fill,minmax(72px,1fr)); gap:6px"></div>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h2>Badges</h2>
+            <div class="demo-row">
+              <span class="badge default">Default</span>
+              <span class="badge beta">Beta</span>
+              <span class="badge success">Success</span>
+              <span class="badge error">Error</span>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h2>Status Indicators</h2>
+            <div class="demo-grid">
+              <div class="status-indicator connected">
+                <span class="status-dot"></span>
+                <span>Connected</span>
+              </div>
+              <div class="status-indicator untested">
+                <span class="status-dot"></span>
+                <span>Untested</span>
+              </div>
+              <div class="status-indicator disconnected">
+                <span class="status-dot"></span>
+                <span>Disconnected</span>
+              </div>
+              <div class="status-indicator error">
+                <span class="status-dot"></span>
+                <span>Error</span>
+              </div>
+            </div>
+            <div class="demo-row" style="padding-top:4px">
+              <button class="secondary-btn slim-btn" id="cycle-status-btn">Cycle state →</button>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h2>Hint Text &amp; Kbd</h2>
+            <div class="demo-row" style="align-items:flex-start; flex-direction:column; gap:8px">
+              <p class="hint">This is a hint text block. It provides contextual help below a field or section heading using a muted tone and compact line-height.</p>
+              <div style="display:flex;align-items:center;gap:6px">
+                <kbd>Ctrl</kbd><span style="color:var(--text-muted)">+</span><kbd>Shift</kbd><span style="color:var(--text-muted)">+</span><kbd>G</kbd>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h2>Stat Cards</h2>
+            <div class="stat-grid">
+              <div class="stat-card">
+                <span>Sessions today</span>
+                <strong>42</strong>
+              </div>
+              <div class="stat-card">
+                <span>Avg latency</span>
+                <strong>180ms</strong>
+              </div>
+              <div class="stat-card">
+                <span>Errors</span>
+                <strong style="color:var(--error)">3</strong>
+              </div>
+              <div class="stat-card">
+                <span>Uptime</span>
+                <strong style="color:var(--success)">99.8%</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h2>Form Controls</h2>
+            <div class="demo-grid">
+              <div class="field-block">
+                <label>Text input</label>
+                <input type="text" placeholder="Enter value…" />
+              </div>
+              <div class="field-block">
+                <label>Password</label>
+                <input type="password" placeholder="••••••••" />
+              </div>
+              <div class="field-block">
+                <label>Number</label>
+                <input type="number" value="42" style="width:100px" />
+              </div>
+              <div class="field-block">
+                <label>Select</label>
+                <select>
+                  <option>Aurora</option>
+                  <option>Ember</option>
+                  <option>Glacier</option>
+                  <option>Sunset</option>
+                  <option>Monochrome</option>
+                </select>
+              </div>
+            </div>
+            <div class="field-block">
+              <label>Single range</label>
+              <input id="demo-single-range" type="range" min="0" max="100" value="60" />
+            </div>
+            <div class="field-block" style="max-width:400px">
+              <label>Price range (double)</label>
+              <div id="demo-range" class="range-slider">
+                <div class="range-track">
+                  <div class="range-fill"></div>
+                  <div class="range-thumb" data-thumb="lo"></div>
+                  <div class="range-thumb" data-thumb="hi"></div>
+                </div>
+                <div class="range-labels">
+                  <span class="range-label-lo"></span>
+                  <span class="range-label-hi"></span>
+                </div>
+              </div>
+            </div>
+            <div class="field-block" style="max-width:400px">
+              <label>Year range (step 5)</label>
+              <div id="demo-range-2" class="range-slider">
+                <div class="range-track">
+                  <div class="range-fill"></div>
+                  <div class="range-thumb" data-thumb="lo"></div>
+                  <div class="range-thumb" data-thumb="hi"></div>
+                </div>
+                <div class="range-labels">
+                  <span class="range-label-lo"></span>
+                  <span class="range-label-hi"></span>
+                </div>
+              </div>
+            </div>
+            <div class="field-block" style="max-width:400px">
+              <label>Exclusion range — inverted (step 10)</label>
+              <div id="demo-range-inv" class="range-slider">
+                <div class="range-track">
+                  <div class="range-fill"></div>
+                  <div class="range-fill-end"></div>
+                  <div class="range-thumb" data-thumb="lo"></div>
+                  <div class="range-thumb" data-thumb="hi"></div>
+                </div>
+                <div class="range-labels">
+                  <span class="range-label-lo"></span>
+                  <span class="range-label-hi"></span>
+                </div>
+              </div>
+            </div>
+            <div id="range-log" style="font-size:var(--font-size-sm);color:var(--text-muted);margin-top:4px"></div>
+            <div class="radio-group">
+              <label class="radio-label">
+                <input type="radio" name="demo-radio" checked />
+                <span>Option A</span>
+                <span class="badge default" style="margin-left:auto">Default</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="demo-radio" />
+                <span>Option B</span>
+                <span class="badge beta" style="margin-left:auto">Beta</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" checked />
+                <span>Enable feature</span>
+              </label>
+              <label class="checkbox-label">
+                <input type="checkbox" />
+                <span>Another toggle</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h2>Empty State</h2>
+            <div class="empty-state">
+              <div class="empty-state-card">
+                <span class="badge default">No results</span>
+                <p style="color:var(--text-muted); font-size:var(--font-size-base)">Nothing to show here yet. Add some content to get started.</p>
+                <button class="secondary-btn" style="align-self:center">Get started</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ─────────────────────── FEEDBACK ────────────────────────────────── -->
+      <div class="tab-panel" data-tab-panel="feedback">
+        <div class="demo-section">
+
+          <div class="settings-section">
+            <h2>Toast</h2>
+            <div class="section-heading-row">
+              <span class="hint">Click a button to trigger an animated toast notification.</span>
+            </div>
+            <div class="demo-row">
+              <button class="secondary-btn" id="toast-success-btn">Toast Success</button>
+              <button class="secondary-btn" id="toast-error-btn">Toast Error</button>
+              <button class="secondary-btn" id="toast-info-btn">Toast Info</button>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h2>Modal</h2>
+            <div class="demo-row">
+              <button class="secondary-btn" id="open-modal-btn">Open Modal</button>
+              <button class="secondary-btn" id="confirm-modal-btn">Confirm Modal</button>
+              <button class="secondary-btn" id="confirm-danger-btn">Danger Confirm</button>
+            </div>
+            <div id="modal-result-log" style="font-size:var(--font-size-sm);color:var(--text-muted);min-height:20px"></div>
+          </div>
+
+          <div class="settings-section">
+            <h2>Disabled States</h2>
+            <div class="demo-grid">
+              <div style="opacity:0.45; pointer-events:none; display:flex; flex-direction:column; gap:8px">
+                <input type="text" value="Disabled field" />
+                <select><option>Disabled select</option></select>
+                <button class="secondary-btn" disabled>Disabled button</button>
+              </div>
+              <div class="field-block">
+                <label>Normal for contrast</label>
+                <input type="text" placeholder="Active field" />
+                <button class="secondary-btn">Active button</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h2>Recording Dot States</h2>
+            <div class="demo-row">
+              <div style="display:flex;align-items:center;gap:6px">
+                <span class="recording-dot loading"></span>
+                <span class="hint">Loading</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px">
+                <span class="recording-dot listening"></span>
+                <span class="hint">Listening</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px">
+                <span class="recording-dot transcribing"></span>
+                <span class="hint">Transcribing</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px">
+                <span class="recording-dot correcting"></span>
+                <span class="hint">Correcting</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:6px">
+                <span class="recording-dot done"></span>
+                <span class="hint">Done</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ─────────────────────── NAVIGATION ──────────────────────────────── -->
+      <div class="tab-panel" data-tab-panel="navigation">
+        <div class="demo-section">
+
+          <!-- ── Header nav with dropdowns & sub-menus ── -->
+          <div class="settings-section">
+            <h2>Header Navigation</h2>
+            <span class="hint">Click a trigger to open its dropdown. Hover items with arrows for sub-menus.</span>
+
+            <nav class="nav-bar" id="demo-nav" style="margin-top:4px">
+
+              <!-- File -->
+              <div class="nav-item">
+                <button class="nav-trigger">File <i data-lucide="chevron-down"></i></button>
+                <div class="nav-dropdown">
+                  <button class="nav-option" data-nav-id="new-file">
+                    <span class="nav-option-icon"><i data-lucide="plus"></i></span>
+                    <span class="nav-option-label">New File</span>
+                    <span class="nav-option-shortcut">Ctrl N</span>
+                  </button>
+                  <button class="nav-option" data-nav-id="open-file">
+                    <span class="nav-option-icon"><i data-lucide="folder-open"></i></span>
+                    <span class="nav-option-label">Open…</span>
+                    <span class="nav-option-shortcut">Ctrl O</span>
+                  </button>
+                  <button class="nav-option" data-nav-id="save-file">
+                    <span class="nav-option-icon"><i data-lucide="download"></i></span>
+                    <span class="nav-option-label">Save</span>
+                    <span class="nav-option-shortcut">Ctrl S</span>
+                  </button>
+                  <div class="nav-divider"></div>
+                  <div class="nav-option nav-option--has-sub" data-nav-id="export">
+                    <span class="nav-option-icon"><i data-lucide="upload"></i></span>
+                    <span class="nav-option-label">Export As</span>
+                    <span class="nav-option-arrow"><i data-lucide="chevron-right"></i></span>
+                    <div class="nav-submenu">
+                      <button class="nav-option" data-nav-id="export-png">
+                        <span class="nav-option-label">PNG Image</span>
+                        <span class="nav-option-shortcut">⇧ E P</span>
+                      </button>
+                      <button class="nav-option" data-nav-id="export-svg">
+                        <span class="nav-option-label">SVG Vector</span>
+                        <span class="nav-option-shortcut">⇧ E S</span>
+                      </button>
+                      <button class="nav-option" data-nav-id="export-pdf">
+                        <span class="nav-option-label">PDF Document</span>
+                      </button>
+                      <div class="nav-divider"></div>
+                      <button class="nav-option nav-option--disabled" data-nav-id="export-raw">
+                        <span class="nav-option-label">Raw Data</span>
+                        <span class="nav-option-shortcut">Pro</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="nav-divider"></div>
+                  <button class="nav-option" data-nav-id="close-file">
+                    <span class="nav-option-icon"><i data-lucide="x"></i></span>
+                    <span class="nav-option-label">Close</span>
+                    <span class="nav-option-shortcut">Ctrl W</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Edit -->
+              <div class="nav-item">
+                <button class="nav-trigger">Edit <i data-lucide="chevron-down"></i></button>
+                <div class="nav-dropdown">
+                  <button class="nav-option" data-nav-id="undo">
+                    <span class="nav-option-icon"><i data-lucide="rotate-ccw"></i></span>
+                    <span class="nav-option-label">Undo</span>
+                    <span class="nav-option-shortcut">Ctrl Z</span>
+                  </button>
+                  <button class="nav-option" data-nav-id="redo">
+                    <span class="nav-option-icon"><i data-lucide="refresh-cw"></i></span>
+                    <span class="nav-option-label">Redo</span>
+                    <span class="nav-option-shortcut">Ctrl Y</span>
+                  </button>
+                  <div class="nav-divider"></div>
+                  <button class="nav-option" data-nav-id="cut">
+                    <span class="nav-option-label">Cut</span>
+                    <span class="nav-option-shortcut">Ctrl X</span>
+                  </button>
+                  <button class="nav-option" data-nav-id="copy">
+                    <span class="nav-option-icon"><i data-lucide="copy"></i></span>
+                    <span class="nav-option-label">Copy</span>
+                    <span class="nav-option-shortcut">Ctrl C</span>
+                  </button>
+                  <button class="nav-option" data-nav-id="paste">
+                    <span class="nav-option-label">Paste</span>
+                    <span class="nav-option-shortcut">Ctrl V</span>
+                  </button>
+                  <div class="nav-divider"></div>
+                  <button class="nav-option" data-nav-id="select-all">
+                    <span class="nav-option-label">Select All</span>
+                    <span class="nav-option-shortcut">Ctrl A</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- View -->
+              <div class="nav-item">
+                <button class="nav-trigger">View <i data-lucide="chevron-down"></i></button>
+                <div class="nav-dropdown">
+                  <button class="nav-option" data-nav-id="zoom-in">
+                    <span class="nav-option-icon"><i data-lucide="zoom-in"></i></span>
+                    <span class="nav-option-label">Zoom In</span>
+                    <span class="nav-option-shortcut">Ctrl +</span>
+                  </button>
+                  <button class="nav-option" data-nav-id="zoom-out">
+                    <span class="nav-option-icon"><i data-lucide="zoom-out"></i></span>
+                    <span class="nav-option-label">Zoom Out</span>
+                    <span class="nav-option-shortcut">Ctrl −</span>
+                  </button>
+                  <button class="nav-option" data-nav-id="zoom-fit">
+                    <span class="nav-option-label">Fit to Window</span>
+                    <span class="nav-option-shortcut">Ctrl 0</span>
+                  </button>
+                  <div class="nav-divider"></div>
+                  <div class="nav-option nav-option--has-sub">
+                    <span class="nav-option-icon"><i data-lucide="panel-left"></i></span>
+                    <span class="nav-option-label">Panels</span>
+                    <span class="nav-option-arrow"><i data-lucide="chevron-right"></i></span>
+                    <div class="nav-submenu">
+                      <button class="nav-option" data-nav-id="panel-left">
+                        <span class="nav-option-icon"><i data-lucide="panel-left"></i></span>
+                        <span class="nav-option-label">Left Panel</span>
+                      </button>
+                      <button class="nav-option" data-nav-id="panel-right">
+                        <span class="nav-option-icon"><i data-lucide="panel-right"></i></span>
+                        <span class="nav-option-label">Right Panel</span>
+                      </button>
+                      <button class="nav-option" data-nav-id="panel-status">
+                        <span class="nav-option-label">Status Bar</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="nav-divider"></div>
+                  <button class="nav-option" data-nav-id="fullscreen">
+                    <span class="nav-option-icon"><i data-lucide="maximize-2"></i></span>
+                    <span class="nav-option-label">Full Screen</span>
+                    <span class="nav-option-shortcut">F11</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Tools -->
+              <div class="nav-item">
+                <button class="nav-trigger">Tools <i data-lucide="chevron-down"></i></button>
+                <div class="nav-dropdown">
+                  <div class="nav-option nav-option--has-sub">
+                    <span class="nav-option-icon"><i data-lucide="wand-2"></i></span>
+                    <span class="nav-option-label">Transform</span>
+                    <span class="nav-option-arrow"><i data-lucide="chevron-right"></i></span>
+                    <div class="nav-submenu">
+                      <button class="nav-option" data-nav-id="rotate-cw">
+                        <span class="nav-option-icon"><i data-lucide="refresh-cw"></i></span>
+                        <span class="nav-option-label">Rotate 90° CW</span>
+                      </button>
+                      <button class="nav-option" data-nav-id="rotate-ccw">
+                        <span class="nav-option-icon"><i data-lucide="rotate-ccw"></i></span>
+                        <span class="nav-option-label">Rotate 90° CCW</span>
+                      </button>
+                      <div class="nav-divider"></div>
+                      <button class="nav-option" data-nav-id="flip-h">
+                        <span class="nav-option-label">Flip Horizontal</span>
+                      </button>
+                      <button class="nav-option" data-nav-id="flip-v">
+                        <span class="nav-option-label">Flip Vertical</span>
+                      </button>
+                    </div>
+                  </div>
+                  <button class="nav-option" data-nav-id="palette">
+                    <span class="nav-option-icon"><i data-lucide="palette"></i></span>
+                    <span class="nav-option-label">Color Picker</span>
+                  </button>
+                  <div class="nav-divider"></div>
+                  <button class="nav-option" data-nav-id="settings">
+                    <span class="nav-option-icon"><i data-lucide="settings"></i></span>
+                    <span class="nav-option-label">Settings</span>
+                    <span class="nav-option-shortcut">Ctrl ,</span>
+                  </button>
+                </div>
+              </div>
+
+            </nav>
+
+            <div id="nav-action-log" class="hint" style="padding: 6px 8px; border:1px solid var(--border); font-family:var(--font-mono); min-height:28px">
+              — select an action —
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h2>Document Tabs</h2>
+            <div class="document-tabs">
+              <div class="document-tab-wrap">
+                <button class="document-tab is-active" data-tab-trigger="doc-a">
+                  <span class="document-tab-dirty"></span>
+                  document-a.ts
+                  <button class="document-tab-close">✕</button>
+                </button>
+              </div>
+              <div class="document-tab-wrap">
+                <button class="document-tab" data-tab-trigger="doc-b">
+                  styles.css
+                  <button class="document-tab-close">✕</button>
+                </button>
+              </div>
+              <div class="document-tab-wrap">
+                <button class="document-tab" data-tab-trigger="doc-c">
+                  index.html
+                  <button class="document-tab-close">✕</button>
+                </button>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="settings-section">
+            <h2>Split Workspace</h2>
+            <span class="hint" style="margin-bottom:4px">Drag the resizer rails to resize the side panels.</span>
+            <div class="editor-workspace" id="split-workspace" style="min-height:420px">
+              <!-- Left panel + resizer -->
+              <div class="editor-tools-pane">
+                <div class="mini-panel">
+                  <h3>Left Panel</h3>
+                  <div class="compact-list">
+                    <span>Layer A</span>
+                    <span>Layer B</span>
+                    <span>Layer C</span>
+                  </div>
+                </div>
+                <div class="mini-panel">
+                  <h3>Properties</h3>
+                  <div class="field-block">
+                    <label>Width</label>
+                    <input type="number" value="800" />
+                  </div>
+                  <div class="field-block">
+                    <label>Height</label>
+                    <input type="number" value="600" />
+                  </div>
+                </div>
+              </div>
+              <div class="pane-resizer" id="left-pane-resizer"></div>
+
+              <!-- Center -->
+              <div class="editor-canvas-pane">
+                <div class="section-heading-row">
+                  <div class="toolbar-actions">
+                    <button class="icon-btn icon-btn-sm" id="collapse-left-btn" title="Toggle left panel"><i data-lucide="panel-left"></i></button>
+                    <span class="badge default">Canvas</span>
+                  </div>
+                  <div class="toolbar-actions">
+                    <button class="icon-btn icon-btn-sm" id="collapse-right-btn" title="Toggle right panel"><i data-lucide="panel-right"></i></button>
+                  </div>
+                </div>
+                <div style="flex:1; min-height:300px; border:1px solid rgba(108,99,255,0.25); background:linear-gradient(180deg,rgba(7,11,21,0.95),rgba(13,18,31,0.95)); display:grid; place-items:center;">
+                  <span class="hint">Content area</span>
+                </div>
+                <div class="editor-status-bar">
+                  <span>Goblin Design System</span>
+                  <span class="status-indicator connected"><span class="status-dot"></span> Ready</span>
+                  <span>1280 × 900</span>
+                </div>
+              </div>
+
+              <div class="pane-resizer" id="right-pane-resizer"></div>
+
+              <!-- Right panel -->
+              <div class="editor-sidebar-pane">
+                <div class="mini-panel">
+                  <h3>Inspector</h3>
+                  <div class="stat-grid">
+                    <div class="stat-card"><span>X</span><strong>120</strong></div>
+                    <div class="stat-card"><span>Y</span><strong>80</strong></div>
+                    <div class="stat-card"><span>W</span><strong>640</strong></div>
+                    <div class="stat-card"><span>H</span><strong>480</strong></div>
+                  </div>
+                </div>
+                <div class="mini-panel">
+                  <h3>History</h3>
+                  <div class="compact-list">
+                    <span>Move layer</span>
+                    <span>Apply filter</span>
+                    <span>Resize canvas</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ─────────────────────── WAVEFORM ─────────────────────────────────── -->
+      <div class="tab-panel" data-tab-panel="waveform">
+        <div class="demo-section">
+
+          <div class="settings-section">
+            <h2>Waveform Preview</h2>
+            <div class="hint">All 5 styles × 5 colour schemes. Live animated.</div>
+          </div>
+
+          <!-- One panel per waveform style -->
+          <div id="waveform-panels" class="demo-grid" style="grid-template-columns:repeat(auto-fill,minmax(320px,1fr))"></div>
+
+          <div class="settings-section">
+            <h2>Controls</h2>
+            <div class="demo-row">
+              <button class="secondary-btn" id="wave-style-btn">Style: Classic →</button>
+              <button class="secondary-btn" id="wave-scheme-btn">Scheme: Aurora →</button>
+              <button class="secondary-btn" id="wave-active-btn">Active: ON</button>
+            </div>
+          </div>
+
+          <!-- Focused single waveform -->
+          <div class="settings-section">
+            <h2>Single Preview</h2>
+            <div class="wave-panel">
+              <div class="wave-canvas-wrap" style="height:100px">
+                <canvas id="main-wave-canvas" height="100"></canvas>
+              </div>
+              <div class="wave-controls">
+                <span class="wave-label" id="main-wave-style-label">classic</span>
+                <span style="color:var(--border)">·</span>
+                <span class="wave-label" id="main-wave-scheme-label">aurora</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ─────────────────────── OVERLAY ──────────────────────────────────── -->
+      <div class="tab-panel" data-tab-panel="overlay">
+        <div class="demo-section">
+
+          <div class="settings-section">
+            <h2>Overlay Window Controls</h2>
+            <div class="hint">Manage the transparent always-on-top overlay window.</div>
+            <div class="demo-row" style="padding-top:4px">
+              <button class="secondary-btn" id="overlay-show-btn">Show Overlay</button>
+              <button class="secondary-btn" id="overlay-hide-btn">Hide Overlay</button>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h2>Overlay Pill Preview</h2>
+            <div class="hint">Static preview of the overlay HUD component.</div>
+            <div style="display:flex;justify-content:center;padding:24px 0">
+              <div class="overlay-pill" style="cursor:default; app-region:none; -webkit-app-region:none">
+                <div class="overlay-main-row">
+                  <span class="recording-dot listening" id="demo-dot"></span>
+                  <span class="overlay-label" id="demo-label">Listening…</span>
+                  <span class="overlay-timer" id="demo-timer">0:04</span>
+                </div>
+                <div class="overlay-wave-wrap">
+                  <canvas id="overlay-demo-canvas" height="28"></canvas>
+                </div>
+                <div class="overlay-hud" id="demo-hud">
+                  <span>Classic</span>
+                  <span>·</span>
+                  <span>Aurora</span>
+                </div>
+                <div class="overlay-transcript visible" id="demo-transcript">Transcript preview text here…</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h2>Overlay State Controls</h2>
+            <div class="demo-row">
+              <button class="secondary-btn" id="overlay-state-loading">Loading</button>
+              <button class="secondary-btn" id="overlay-state-listening">Listening</button>
+              <button class="secondary-btn" id="overlay-state-transcribing">Transcribing</button>
+              <button class="secondary-btn" id="overlay-state-correcting">Correcting</button>
+              <button class="secondary-btn" id="overlay-state-done">Done</button>
+            </div>
+            <div class="demo-row">
+              <button class="secondary-btn" id="overlay-toggle-transcript">Toggle Transcript</button>
+              <button class="secondary-btn" id="overlay-toggle-hud">Toggle HUD</button>
+              <button class="secondary-btn" id="overlay-cycle-wave-style">Cycle Wave Style</button>
+              <button class="secondary-btn" id="overlay-cycle-wave-scheme">Cycle Scheme</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div><!-- /app-shell -->
+
+    <!-- Toast -->
+    <div id="app-toast" class="app-toast" role="status" aria-live="polite"></div>
+
+    <!-- Modal -->
+    <div id="demo-modal" class="modal-backdrop" hidden>
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3>Modal Example</h3>
+          <button class="icon-btn modal-close-btn modal-btn-reject" aria-label="Close"><i data-lucide="x"></i></button>
+        </div>
+        <p class="modal-body-text">
+          This is a reusable modal card. Close by clicking outside, pressing Escape, or the buttons below.
+        </p>
+        <ul class="modal-list">
+          <li>Accept / reject callbacks</li>
+          <li>Configurable close-on-backdrop</li>
+          <li>Escape key support</li>
+        </ul>
+        <div class="modal-footer">
+          <button class="secondary-btn modal-btn-reject">Cancel</button>
+          <button class="modal-btn-accept">Confirm</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Goblin Overlay</title>
+    <link rel="stylesheet" href="/src/overlay-app.css" />
+  </head>
+  <body>
+    <div class="overlay-pill" id="overlay-root">
+      <div class="overlay-main-row">
+        <span class="recording-dot listening" id="overlay-dot"></span>
+        <span class="overlay-label" id="overlay-label">Listening…</span>
+        <span class="overlay-timer" id="overlay-timer">0:00</span>
+      </div>
+      <div class="overlay-wave-wrap">
+        <canvas id="overlay-wave-canvas" height="28"></canvas>
+      </div>
+      <div class="overlay-hud" id="overlay-hud">
+        <span id="overlay-hud-style">Classic</span>
+        <span>·</span>
+        <span id="overlay-hud-scheme">Aurora</span>
+      </div>
+      <div class="overlay-transcript" id="overlay-transcript"></div>
+    </div>
+
+    <script type="module" src="/src/overlay.ts"></script>
+  </body>
+</html>
