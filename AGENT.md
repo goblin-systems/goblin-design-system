@@ -3,6 +3,9 @@
 This file is for AI agents working on the `goblin-design-system` repository itself.
 For guidance on *using* the library in another project, see `skills/SKILL.md`.
 
+`skills/SKILL.md` is the main consumer-facing documentation for this package.
+Any change to public exports, consumer CSS classes, markup patterns, design tokens, or usage constraints must be reflected there in the same change.
+
 ---
 
 ## What this repo is
@@ -101,6 +104,16 @@ Add to `src/lib/index.ts`:
 export { bindMyComponent } from "./headless/my-component";
 export type { MyComponentOptions, MyComponentHandle } from "./headless/my-component";
 ```
+
+### 3.5. Documentation sync
+
+Update `skills/SKILL.md` whenever you change anything user-facing, including:
+
+- public exports in `src/lib/index.ts`
+- consumer markup structure
+- CSS class names or modifiers in `src/lib/components.css` or `src/lib/base.css`
+- design tokens in `src/lib/tokens.css`
+- behavioural constraints, defaults, or gotchas
 
 ### 4. Demo
 

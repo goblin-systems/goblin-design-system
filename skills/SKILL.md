@@ -1,68 +1,418 @@
-You are helping build UI using the **Goblin Design System** (`@goblin-systems/goblin-design-system`).
+---
+name: goblin-design-system
+description: Documents the Goblin Design System package, including all public exports, CSS classes, markup patterns, design tokens, and usage constraints. Use when working with `@goblin-systems/goblin-design-system` or when building UI that should follow its dark, square, vanilla TypeScript patterns.
+---
+
+# Goblin Design System
+
+Package: `@goblin-systems/goblin-design-system`
+
+## Install
+
+```bash
+npm install @goblin-systems/goblin-design-system lucide
+```
+
+`lucide` is a required peer dependency.
 
 ## Setup
 
 ```ts
-// main entry
-import { applyIcons, showToast, bindTabs, /* etc */ } from "@goblin-systems/goblin-design-system";
-// styles (import once in your app entry)
 import "@goblin-systems/goblin-design-system/style.css";
+
+import {
+  applyIcons,
+  bindNavigation,
+  bindRange,
+  bindSearch,
+  bindSplitPaneResize,
+  bindTabs,
+  confirmModal,
+  openModal,
+  showToast,
+} from "@goblin-systems/goblin-design-system";
 ```
 
-After injecting any HTML that contains `<i data-lucide="...">` icons, call `applyIcons()`.
+After any HTML containing `<i data-lucide="...">` is in the DOM, call `applyIcons()`.
 
----
+## Design Rules
 
-## Design constraints
+- Dark theme only
+- Square corners only
+- Vanilla TS/JS only
+- CSS classes provide appearance
+- TypeScript functions provide behaviour
+- Visual values come from CSS custom properties
 
-- **Dark theme only** — all colours from CSS custom properties
-- **No border-radius** — all corners are square by design
-- **Vanilla TS/JS only** — no framework required; all behaviour is DOM-based
-- **Headless pattern** — CSS classes handle appearance; TypeScript functions handle behaviour
+## Public Exports
 
----
+### Icons
 
-## CSS classes reference
+```ts
+import {
+  applyIcons,
+  createIcon,
+  ICON_SET,
+  type IconNode,
+} from "@goblin-systems/goblin-design-system";
+```
+
+- `applyIcons()` replaces `<i data-lucide="..."></i>` placeholders currently in the DOM
+- `createIcon(name)` returns a single `SVGSVGElement | null`
+- `ICON_SET` is the full Lucide-backed icon map used by the package
+- icon names are kebab-case, for example `search`, `chevron-right`, `trash-2`
+
+### DOM Helpers
+
+```ts
+import {
+  byId,
+  byIdOptional,
+  qs,
+  qsAll,
+  populateSelectOptions,
+  setGroupDisabled,
+} from "@goblin-systems/goblin-design-system";
+```
+
+- `byId<T>(id, doc?)` throws if the element is missing
+- `byIdOptional<T>(id, doc?)` returns `null` when missing
+- `qs<T>(selector, root?)` throws if the element is missing
+- `qsAll<T>(selector, root?)` returns all matches
+- `populateSelectOptions(select, options, preferred)` replaces all `<option>` nodes and disables the `<select>` when empty
+- `setGroupDisabled(container, disabled)` toggles `disabled` on child `input`, `select`, and `button` elements
+
+### Tabs
+
+```ts
+import { bindTabs, type TabsOptions } from "@goblin-systems/goblin-design-system";
+
+const tabs = bindTabs({
+  root: document,
+  triggerSelector: "[data-tab-trigger]",
+  panelSelector: "[data-tab-panel]",
+  onChange: (tabId) => console.log(tabId),
+});
+
+tabs.activate("panel-a");
+```
+
+`bindTabs()` toggles `.is-active` on matching triggers and panels.
+
+### Navigation
+
+```ts
+import {
+  bindNavigation,
+  type NavigationHandle,
+  type NavigationOptions,
+} from "@goblin-systems/goblin-design-system";
+
+const nav = bindNavigation({
+  root: document.getElementById("my-nav") ?? document,
+  onSelect: (id) => console.log(id),
+});
+
+nav.closeAll();
+```
+
+Returned handle:
+
+- `openItem(item)`
+- `closeItem(item)`
+- `closeAll()`
+
+### Toast
+
+```ts
+import {
+  mountToast,
+  showToast,
+  type ToastOptions,
+  type ToastVariant,
+} from "@goblin-systems/goblin-design-system";
+
+showToast("Saved", "success");
+showToast("Failed", "error", 4000);
+
+mountToast(document.getElementById("app-toast")!, {
+  message: "Saved",
+  variant: "success",
+  durationMs: 3000,
+});
+```
+
+### Search
+
+```ts
+import {
+  bindSearch,
+  type SearchHandle,
+  type SearchOptions,
+} from "@goblin-systems/goblin-design-system";
+
+const search = bindSearch({
+  input: document.getElementById("my-search") as HTMLInputElement,
+  debounce: 200,
+  minChars: 0,
+  onSearch: (query) => {
+    search.setSuggestions(myItems.filter((item) => item.includes(query)));
+  },
+  onSelect: (value) => console.log(value),
+});
+
+search.clearSuggestions();
+search.destroy();
+```
+
+Returned handle:
+
+- `setSuggestions(items)`
+- `clearSuggestions()`
+- `destroy()`
+
+### Double Range Slider
+
+```ts
+import {
+  bindRange,
+  type RangeHandle,
+  type RangeOptions,
+} from "@goblin-systems/goblin-design-system";
+
+const range = bindRange({
+  el: document.getElementById("my-range")!,
+  min: 0,
+  max: 100,
+  step: 1,
+  value: [20, 80],
+  inverted: false,
+  onChange: (lo, hi) => console.log(lo, hi),
+});
+
+range.setValue(30, 70);
+range.getValue();
+range.destroy();
+```
+
+Returned handle:
+
+- `setValue(lo, hi)`
+- `getValue()`
+- `destroy()`
+
+### Modal
+
+```ts
+import {
+  bindModal,
+  closeModal,
+  confirmModal,
+  openModal,
+  type ConfirmOptions,
+  type ModalOptions,
+} from "@goblin-systems/goblin-design-system";
+
+openModal({
+  backdrop: document.getElementById("my-modal")!,
+  onAccept: () => console.log("accepted"),
+  onReject: () => console.log("rejected"),
+});
+
+bindModal("open-modal-btn", "my-modal");
+
+closeModal({
+  backdrop: document.getElementById("my-modal")!,
+});
+
+const ok = await confirmModal({
+  title: "Delete item?",
+  message: "This cannot be undone.",
+  acceptLabel: "Delete",
+  rejectLabel: "Cancel",
+  variant: "danger",
+});
+```
+
+### Split Pane
+
+```ts
+import {
+  bindSplitPaneResize,
+  type SplitPaneOptions,
+} from "@goblin-systems/goblin-design-system";
+
+bindSplitPaneResize({
+  workspace: document.getElementById("workspace")!,
+  leftResizer: document.getElementById("left-pane-resizer")!,
+  rightResizer: document.getElementById("right-pane-resizer")!,
+  leftVar: "--left-panel-width",
+  rightVar: "--right-panel-width",
+  minLeft: 160,
+  maxLeft: 480,
+  minRight: 160,
+  maxRight: 520,
+});
+```
+
+### Tauri Helpers
+
+```ts
+import {
+  setupContextMenuGuard,
+  setupWindowControls,
+  type WindowControlOptions,
+} from "@goblin-systems/goblin-design-system";
+
+setupWindowControls({
+  minimizeBtnId: "window-minimize-btn",
+  maximizeBtnId: "window-maximize-btn",
+  closeBtnId: "window-close-btn",
+});
+
+setupContextMenuGuard();
+```
+
+### Waveform
+
+```ts
+import {
+  WAVEFORM_COLOR_SCHEMES,
+  WAVEFORM_STYLES,
+  createWaveProgressGradient,
+  cycleWaveformColorScheme,
+  cycleWaveformStyle,
+  drawWaveform,
+  getWaveformColorSchemeLabel,
+  getWaveformStyleLabel,
+  isWaveformColorScheme,
+  isWaveformStyle,
+  type DrawWaveformOptions,
+  type WaveformColorScheme,
+  type WaveformStyle,
+} from "@goblin-systems/goblin-design-system";
+```
+
+- `WAVEFORM_STYLES`: `classic`, `bars`, `pulse`, `bloom`, `fan`
+- `WAVEFORM_COLOR_SCHEMES`: `aurora`, `ember`, `glacier`, `sunset`, `monochrome`
+- `drawWaveform(style, options)` draws a frame into a canvas context
+- `createWaveProgressGradient(ctx, height, colorScheme)` builds a vertical progress gradient
+- `isWaveformStyle()` and `isWaveformColorScheme()` validate unknown values
+- `cycleWaveformStyle()` and `cycleWaveformColorScheme()` step through the available sets
+- `getWaveformStyleLabel()` and `getWaveformColorSchemeLabel()` return display labels
+
+Minimal canvas usage:
+
+```ts
+const canvas = document.querySelector("canvas")!;
+const ctx = canvas.getContext("2d")!;
+
+drawWaveform("classic", {
+  ctx,
+  width: canvas.width,
+  height: canvas.height,
+  amplitude: 18,
+  phase: performance.now() / 180,
+  active: true,
+  colorScheme: "aurora",
+});
+```
+
+## Markup Patterns
 
 ### Buttons
 
 ```html
 <button class="secondary-btn">Label</button>
-<button class="secondary-btn" disabled>Disabled</button>
+<button class="secondary-btn slim-btn">Small</button>
+<button class="secondary-btn help-btn">?</button>
 
-<!-- Icon buttons -->
 <button class="icon-btn"><i data-lucide="search"></i></button>
-<button class="icon-btn icon-btn-sm">…</button>   <!-- 26px -->
-<button class="icon-btn icon-btn-md">…</button>   <!-- 32px -->
-<button class="icon-btn icon-btn-lg">…</button>   <!-- 40px -->
+<button class="icon-btn icon-btn-sm"><i data-lucide="x"></i></button>
+<button class="icon-btn icon-btn-md"><i data-lucide="search"></i></button>
+<button class="icon-btn icon-btn-lg"><i data-lucide="plus"></i></button>
 ```
 
-Active/selected state on any button: add `is-active` class.
+Classes:
+
+- `secondary-btn`
+- `slim-btn`
+- `help-btn`
+- `icon-btn`
+- `icon-btn-sm`
+- `icon-btn-md`
+- `icon-btn-lg`
+- `is-active`
+
+### Window Shell
+
+```html
+<div class="app-shell">
+  <div class="window-frame-row">
+    <div class="window-title-wrap">
+      <div class="window-title">Goblin</div>
+      <div class="window-subtitle">Desktop UI</div>
+    </div>
+    <div class="window-actions">
+      <button id="window-minimize-btn" class="icon-btn window-action-btn"><i data-lucide="minus"></i></button>
+      <button id="window-maximize-btn" class="icon-btn window-action-btn"><i data-lucide="maximize-2"></i></button>
+      <button id="window-close-btn" class="icon-btn window-action-btn"><i data-lucide="x"></i></button>
+    </div>
+  </div>
+</div>
+```
+
+Classes:
+
+- `app-shell`
+- `window-frame-row`
+- `window-title-wrap`
+- `window-title`
+- `window-subtitle`
+- `window-actions`
+- `window-action-btn`
 
 ### Tabs
 
 ```html
-<!-- Top-level tabs -->
-<div data-tab-group="my-group">
+<div class="top-tabs">
   <button class="top-tab is-active" data-tab-trigger="panel-a">Tab A</button>
   <button class="top-tab" data-tab-trigger="panel-b">Tab B</button>
 </div>
-<div data-tab-panel="panel-a">…content…</div>
-<div data-tab-panel="panel-b" hidden>…content…</div>
 
-<!-- Document-style tabs -->
-<button class="document-tab is-active" data-tab-trigger="doc-1">doc-1</button>
+<div class="tab-panel is-active" data-tab-panel="panel-a">A</div>
+<div class="tab-panel" data-tab-panel="panel-b">B</div>
 ```
 
-```ts
-import { bindTabs } from "@goblin-systems/goblin-design-system";
-bindTabs({ root: document });
+Document tabs:
+
+```html
+<div class="document-tabs">
+  <div class="document-tab-wrap">
+    <button class="document-tab is-active" data-tab-trigger="doc-1">
+      <span class="document-tab-dirty"></span>
+      <span>doc-1</span>
+    </button>
+    <button class="document-tab-close" type="button">x</button>
+  </div>
+</div>
 ```
+
+Classes:
+
+- `top-tabs`
+- `top-tab`
+- `tab-panel`
+- `document-tabs`
+- `document-tab-wrap`
+- `document-tab`
+- `document-tab-dirty`
+- `document-tab-close`
+- `is-active`
 
 ### Modal
 
 ```html
-<!-- Static markup modal -->
 <div id="my-modal" class="modal-backdrop" hidden>
   <div class="modal-card">
     <div class="modal-header">
@@ -72,58 +422,58 @@ bindTabs({ root: document });
       </button>
     </div>
     <p class="modal-body-text">Body text here.</p>
+    <ul class="modal-list">
+      <li>Optional list content</li>
+    </ul>
     <div class="modal-footer">
       <button class="secondary-btn modal-btn-reject">Cancel</button>
       <button class="modal-btn-accept">Confirm</button>
-      <!-- danger variant: -->
       <button class="modal-btn-accept danger">Delete</button>
     </div>
   </div>
 </div>
 ```
 
-```ts
-import { openModal, closeModal, confirmModal } from "@goblin-systems/goblin-design-system";
+Classes:
 
-// Static modal with callbacks
-openModal({
-  backdrop: document.getElementById("my-modal")!,
-  onAccept: () => console.log("accepted"),
-  onReject: () => console.log("rejected"),
-});
-
-// Programmatic confirm — returns Promise<boolean>
-const ok = await confirmModal({
-  title: "Delete item?",
-  message: "This cannot be undone.",
-  acceptLabel: "Delete",
-  variant: "danger",   // "default" | "danger"
-});
-```
+- `modal-backdrop`
+- `modal-card`
+- `modal-header`
+- `modal-close-btn`
+- `modal-body-text`
+- `modal-list`
+- `modal-footer`
+- `modal-btn-accept`
+- `modal-btn-reject`
+- `danger`
+- `modal-open` on `body` while open
 
 ### Toast
 
 ```html
-<!-- Place once in body -->
 <div id="app-toast" class="app-toast" role="status" aria-live="polite"></div>
 ```
 
-```ts
-import { showToast } from "@goblin-systems/goblin-design-system";
-showToast("Saved.", "success");           // "success" | "error" | "info"
-showToast("Oops.", "error", 4000);        // custom duration ms
-```
+State classes applied by JS:
 
-### Navigation (dropdown nav bar)
+- `visible`
+- `success`
+- `error`
+- `info`
+
+### Navigation
 
 ```html
 <nav id="my-nav" class="nav-bar">
   <div class="nav-item">
     <button class="nav-trigger">File <i data-lucide="chevron-down"></i></button>
     <div class="nav-dropdown">
-      <button class="nav-option" data-nav-id="new">New</button>
+      <button class="nav-option" data-nav-id="new">
+        <span class="nav-option-icon"><i data-lucide="file-plus"></i></span>
+        <span class="nav-option-label">New</span>
+        <span class="nav-option-shortcut">Ctrl+N</span>
+      </button>
       <div class="nav-divider"></div>
-      <!-- Submenu: use div, NOT button, for the parent -->
       <div class="nav-option nav-option--has-sub">
         <span class="nav-option-icon"><i data-lucide="upload"></i></span>
         <span class="nav-option-label">Export As</span>
@@ -133,240 +483,414 @@ showToast("Oops.", "error", 4000);        // custom duration ms
           <button class="nav-option" data-nav-id="export-svg">SVG</button>
         </div>
       </div>
-      <!-- Disabled option -->
       <button class="nav-option nav-option--disabled" data-nav-id="save">Save</button>
     </div>
   </div>
 </nav>
 ```
 
-**Important:** `.nav-option--has-sub` must be a `<div>`, not a `<button>` — browsers disallow nested buttons, which would break submenu rendering.
+Classes:
 
-```ts
-import { bindNavigation } from "@goblin-systems/goblin-design-system";
-const nav = bindNavigation({
-  root: document.getElementById("my-nav") ?? document,
-  onSelect: (id) => console.log("selected:", id),
-});
-// nav.closeAll(), nav.openItem(el), nav.closeItem(el)
-```
+- `nav-bar`
+- `nav-item`
+- `nav-trigger`
+- `nav-dropdown`
+- `nav-option`
+- `nav-option--has-sub`
+- `nav-option--disabled`
+- `nav-option-icon`
+- `nav-option-label`
+- `nav-option-shortcut`
+- `nav-option-arrow`
+- `nav-divider`
+- `nav-submenu`
+- `is-open`
+- `is-sub-open`
 
-### Search field
+Important: `.nav-option--has-sub` must be a container such as `<div>`, not a nested `<button>`.
+
+### Search
 
 ```html
-<div class="search-field" style="width:280px">
+<div class="search-field" style="width: 280px">
   <span class="search-field-icon"><i data-lucide="search"></i></span>
-  <input id="my-search" type="text" placeholder="Search…" />
-  <div class="search-suggestions"></div>  <!-- omit if no autocomplete needed -->
+  <input id="my-search" type="text" placeholder="Search..." />
+  <div class="search-suggestions"></div>
 </div>
 ```
 
-```ts
-import { bindSearch } from "@goblin-systems/goblin-design-system";
-const search = bindSearch({
-  input: document.getElementById("my-search") as HTMLInputElement,
-  debounce: 200,
-  onSearch: (query) => {
-    const results = myData.filter(x => x.includes(query));
-    search.setSuggestions(results);   // populates the dropdown
-  },
-  onSelect: (value) => console.log("picked:", value),
-});
-```
+Classes:
 
-### Range slider (double handle)
+- `search-field`
+- `search-field-icon`
+- `search-suggestions`
+- `search-suggestion`
+- `is-open`
+- `is-active`
+
+### Double Range Slider
 
 ```html
 <div id="my-range" class="range-slider">
   <div class="range-track">
     <div class="range-fill"></div>
-    <!-- For inverted range, also add: -->
-    <!-- <div class="range-fill-end"></div> -->
+    <div class="range-fill-end"></div>
     <div class="range-thumb" data-thumb="lo"></div>
     <div class="range-thumb" data-thumb="hi"></div>
   </div>
-  <div class="range-labels">                    <!-- optional -->
+  <div class="range-labels">
     <span class="range-label-lo"></span>
     <span class="range-label-hi"></span>
   </div>
 </div>
 ```
 
-```ts
-import { bindRange } from "@goblin-systems/goblin-design-system";
-const range = bindRange({
-  el: document.getElementById("my-range")!,
-  min: 0, max: 100, step: 1,
-  value: [20, 80],
-  inverted: false,  // true = fill outside the handles (exclusion zone)
-  onChange: (lo, hi) => console.log(lo, hi),
-});
-range.setValue(30, 70);
-range.getValue(); // [30, 70]
+Classes:
+
+- `range-slider`
+- `range-track`
+- `range-fill`
+- `range-fill-end`
+- `range-thumb`
+- `range-labels`
+- `range-label-lo`
+- `range-label-hi`
+- `is-dragging`
+
+Use `.range-fill-end` only when using `inverted: true`.
+
+### Native Form Elements
+
+Styled automatically from `base.css`:
+
+```html
+<input type="text" placeholder="..." />
+<input type="password" />
+<input type="number" />
+<select><option>...</option></select>
+<input type="checkbox" />
+<input type="radio" name="g" />
+<input type="range" min="0" max="100" value="50" />
 ```
 
-### Single range
-
-Native `<input type="range">` is fully styled. To animate the track fill, update a CSS variable:
+To animate native range fill, update `--_pct`:
 
 ```ts
 function syncFill(input: HTMLInputElement) {
   const pct = ((+input.value - +input.min) / (+input.max - +input.min)) * 100;
   input.style.setProperty("--_pct", `${pct}%`);
 }
-const input = document.querySelector("input[type=range]") as HTMLInputElement;
-syncFill(input);
-input.addEventListener("input", () => syncFill(input));
 ```
 
-### Split pane
+### Field Helpers
 
 ```html
-<div id="workspace" class="split-workspace">
-  <div class="split-pane split-pane-left">…</div>
-  <div id="left-resizer" class="split-resizer"></div>
-  <div class="split-pane split-pane-main">…</div>
-  <div id="right-resizer" class="split-resizer"></div>
-  <div class="split-pane split-pane-right">…</div>
+<div class="field">
+  <div class="field-block">
+    <label>Label</label>
+    <input type="text" />
+  </div>
+  <span class="unit">px</span>
+</div>
+
+<label class="inline-field">
+  <span>Zoom</span>
+  <input type="range" min="0" max="100" value="50" />
+  <input type="number" value="50" />
+</label>
+
+<div class="language-grid">
+  <div class="language-field">
+    <label>English</label>
+    <input type="text" />
+  </div>
 </div>
 ```
 
-```ts
-import { bindSplitPaneResize } from "@goblin-systems/goblin-design-system";
-bindSplitPaneResize({
-  workspace: document.getElementById("workspace")!,
-  leftResizer: document.getElementById("left-resizer")!,
-  rightResizer: document.getElementById("right-resizer")!,
-});
-// Collapse panels by toggling classes:
-workspace.classList.toggle("left-collapsed");
-workspace.classList.toggle("right-collapsed");
-```
+Classes:
 
-### Scroll panel
+- `field`
+- `field-block`
+- `inline-field`
+- `language-grid`
+- `language-field`
+- `unit`
 
-CSS-only. Constrains height and applies custom scrollbar:
+### Radio And Checkbox Groups
 
 ```html
-<div class="scroll-panel scroll-panel-lg">
-  <!-- any content -->
+<div class="radio-group">
+  <label class="radio-label"><input type="radio" name="mode" /> One</label>
+  <label class="checkbox-label"><input type="checkbox" /> Enabled</label>
 </div>
 ```
 
-Size modifiers: `scroll-panel-sm` (200px) · `scroll-panel-md` (360px) · `scroll-panel-lg` (520px) · `scroll-panel-xl` (680px)
+Classes:
 
-Custom height: `style="--scroll-panel-height: 400px"`
+- `radio-group`
+- `radio-label`
+- `checkbox-label`
 
-### Status indicator
+### Surfaces And Layout Helpers
 
 ```html
-<span class="status-indicator connected">
-  <span></span>
-  <span>Connected</span>
-</span>
-<!-- States: connected | untested | disconnected | error -->
+<div class="settings-section">
+  <div class="section-heading-row">
+    <h2>Section title</h2>
+    <div class="toolbar-actions"></div>
+  </div>
+  <p class="hint">Helpful text</p>
+  <span class="kbd">Ctrl+S</span>
+</div>
+
+<div class="mini-panel">...</div>
+<div class="demo-row">...</div>
+<div class="demo-grid">...</div>
 ```
 
-### Badges
+Reusable classes:
+
+- `settings-section`
+- `mini-panel`
+- `section-heading-row`
+- `toolbar-actions`
+- `hint`
+- `kbd`
+- `demo-section`
+- `demo-row`
+- `demo-grid`
+
+Demo-only helpers:
+
+- `demo-swatch-grid`
+- `demo-swatch`
+- `demo-radius-strip`
+- `demo-radius-box`
+- `demo-type-scale`
+- `demo-type-row`
+- `demo-type-label`
+- `icon-gallery-cell`
+
+### Badges And Status
 
 ```html
 <span class="badge default">Stable</span>
 <span class="badge beta">Beta</span>
-```
+<span class="badge success">Ready</span>
+<span class="badge error">Failed</span>
 
-### Form elements
-
-All styled automatically from `base.css`:
-
-```html
-<input type="text" placeholder="…" />
-<input type="password" />
-<input type="number" />
-<select><option>…</option></select>
-<input type="checkbox" />
-<input type="radio" name="g" />
-<input type="range" min="0" max="100" value="50" />
-```
-
-Group label + input:
-
-```html
-<div class="field-block">
-  <label>Field label</label>
-  <input type="text" />
+<div class="status-row">
+  <span class="status-indicator connected">
+    <span class="status-dot"></span>
+    <span>Connected</span>
+  </span>
 </div>
 ```
 
-### Layout helpers
+Classes:
+
+- `badge`
+- `default`
+- `beta`
+- `success`
+- `error`
+- `status-row`
+- `status-indicator`
+- `status-dot`
+- `connected`
+- `untested`
+- `disconnected`
+- `error`
+
+### Split Workspace
 
 ```html
-<div class="settings-section">   <!-- padded card section -->
-  <h2>Section title</h2>
-  …
+<div id="workspace" class="editor-workspace">
+  <aside class="editor-tools-pane">...</aside>
+  <div id="left-pane-resizer" class="pane-resizer"></div>
+  <main class="editor-canvas-pane">...</main>
+  <div id="right-pane-resizer" class="pane-resizer"></div>
+  <aside class="editor-sidebar-pane">...</aside>
 </div>
-<div class="demo-row">           <!-- flex row with gap -->…</div>
-<div class="demo-grid">          <!-- 2-col responsive grid -->…</div>
 ```
 
----
+Classes:
 
-## Icons
+- `editor-workspace`
+- `editor-tools-pane`
+- `editor-canvas-pane`
+- `editor-sidebar-pane`
+- `pane-resizer`
+- `left-collapsed`
+- `right-collapsed`
 
-1,900+ Lucide icons available. Use `data-lucide` attribute, then call `applyIcons()`:
+Width variables:
+
+- `--left-panel-width`
+- `--right-panel-width`
+
+### Scroll Panel
 
 ```html
-<i data-lucide="search"></i>
-<i data-lucide="chevron-right"></i>
-<i data-lucide="trash-2"></i>
+<div class="scroll-panel scroll-panel-lg">...</div>
 ```
 
-```ts
-import { applyIcons, createIcon } from "@goblin-systems/goblin-design-system";
-applyIcons();                        // replace all <i data-lucide> in DOM
-const svg = createIcon("search");    // create single SVGElement programmatically
-```
+Modifiers:
 
----
+- `scroll-panel-sm`
+- `scroll-panel-md`
+- `scroll-panel-lg`
+- `scroll-panel-xl`
 
-## Tauri window controls (optional)
-
-Only needed in Tauri apps:
+Custom height:
 
 ```html
-<button id="window-minimize-btn" class="icon-btn"><i data-lucide="minus"></i></button>
-<button id="window-maximize-btn" class="icon-btn"><i data-lucide="maximize-2"></i></button>
-<button id="window-close-btn"    class="icon-btn"><i data-lucide="x"></i></button>
+<div class="scroll-panel" style="--scroll-panel-height: 400px"></div>
 ```
 
-```ts
-import { setupWindowControls, setupContextMenuGuard } from "@goblin-systems/goblin-design-system";
-setupWindowControls();       // wires the three buttons above
-setupContextMenuGuard();     // disables right-click context menu
+### Status Bar, Lists, Stats, Empty State
+
+```html
+<div class="editor-status-bar">...</div>
+
+<ul class="compact-list">
+  <li>Item</li>
+</ul>
+
+<div class="stack-actions">...</div>
+
+<div class="stat-grid">
+  <div class="stat-card"><span>Items</span><strong>12</strong></div>
+</div>
+
+<div class="empty-state">
+  <div class="empty-state-card">No data</div>
+</div>
 ```
 
----
+Classes:
 
-## Design tokens
+- `editor-status-bar`
+- `compact-list`
+- `stack-actions`
+- `stat-grid`
+- `stat-card`
+- `empty-state`
+- `empty-state-card`
 
-Override in your own `:root` after importing the stylesheet.
+### Waveform Panel
+
+```html
+<div class="wave-panel">
+  <div class="wave-canvas-wrap">
+    <canvas id="wave-canvas"></canvas>
+  </div>
+  <div class="wave-controls">
+    <span class="wave-label">Classic</span>
+  </div>
+</div>
+```
+
+Classes:
+
+- `wave-panel`
+- `wave-canvas-wrap`
+- `wave-controls`
+- `wave-label`
+
+### Overlay Structure
+
+Reusable overlay-related classes:
+
+```html
+<div class="overlay-pill">
+  <div class="overlay-main-row">
+    <span class="recording-dot listening"></span>
+    <span class="overlay-label">Listening...</span>
+    <span class="overlay-timer">0:00</span>
+  </div>
+  <div class="overlay-wave-wrap"><canvas></canvas></div>
+  <div class="overlay-hud">...</div>
+  <div class="overlay-transcript visible">Transcript</div>
+</div>
+```
+
+Classes:
+
+- `overlay-base`
+- `overlay-pill`
+- `overlay-main-row`
+- `recording-dot`
+- `loading`
+- `listening`
+- `transcribing`
+- `correcting`
+- `done`
+- `overlay-label`
+- `overlay-timer`
+- `overlay-wave-wrap`
+- `overlay-hud`
+- `overlay-transcript`
+- `visible`
+
+## Tokens
+
+Override tokens after importing the stylesheet.
 
 ```css
 :root {
-  /* Surfaces */
-  --bg: #0d1324;          --bg-section: #16213e;
-  --bg-input: #0f1729;    --bg-deep: #0b1020;
-  /* Borders */
-  --border: #2a2a4a;      --border-focus: #6c63ff;
-  /* Text */
-  --text: #e0e0e0;        --text-muted: #8888aa;
-  --text-heading: #fff;   --text-subtle: #b8b8d4;
-  /* Semantic */
-  --accent: #6c63ff;      --accent-hover: #7c73ff;
-  --success: #4ade80;     --warning: #fbbf24;   --error: #f87171;
-  /* Typography */
+  --bg: #0d1324;
+  --bg-section: #16213e;
+  --bg-input: #0f1729;
+  --bg-deep: #0b1020;
+
+  --border: #2a2a4a;
+  --border-focus: #6c63ff;
+
+  --text: #e0e0e0;
+  --text-muted: #8888aa;
+  --text-heading: #ffffff;
+  --text-subtle: #b8b8d4;
+
+  --accent: #6c63ff;
+  --accent-hover: #7c73ff;
+  --success: #4ade80;
+  --warning: #fbbf24;
+  --error: #f87171;
+
   --font: "Segoe UI", -apple-system, sans-serif;
   --font-mono: "Cascadia Code", "Fira Code", monospace;
-  /* Spacing: --space-1 (4px) … --space-10 (32px) */
-  /* Animation: --duration-fast / --duration-base / --duration-slow */
 }
 ```
+
+Also available in the token set:
+
+- font sizes `--font-size-xs` through `--font-size-2xl`
+- spacing `--space-1` through `--space-10`
+- durations `--duration-fast`, `--duration-base`, `--duration-slow`
+- shadows such as `--shadow-card`, `--shadow-modal`, `--shadow-toast`
+- scrollbar tokens used by global and scroll-panel styles
+
+## Behaviour Notes
+
+- `style.css` is required for the package to look correct
+- `applyIcons()` only affects icon placeholders already in the DOM; call it again after injecting HTML
+- `createIcon()` returns `null` for unknown icon names
+- `byId()` and `qs()` throw when elements are missing
+- `bindTabs()` only toggles `.is-active`; it does not manage ARIA, focus, or `hidden`
+- `.search-suggestions` must live inside the same `.search-field` as the bound input
+- `showToast()` silently does nothing if the toast element does not exist
+- `bindRange()` expects the documented child structure to exist
+- `bindRange().setValue()` updates the UI but does not call `onChange`
+- inverted range UI needs `.range-fill-end`
+- `closeModal()` removes `body.modal-open`; stacked modals are not supported
+- `setupWindowControls()` is only for Tauri apps
+- `setupContextMenuGuard()` disables right-click and keyboard context-menu shortcuts globally
+- `drawWaveform()` is low-level canvas drawing; the caller owns animation, clearing, sizing, and DPR handling
+
+## Consumer Guidance
+
+- Prefer the documented class names and structure exactly as shown
+- Keep behaviour headless and markup-driven
+- Use CSS custom properties instead of hardcoded colours
+- Do not introduce rounded corners when extending the system
