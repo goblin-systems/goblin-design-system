@@ -125,7 +125,7 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
 
-      - name: Setup Node (npm auth)
+      - name: Setup Node (npm publish)
         uses: actions/setup-node@v4
         with:
           node-version: "20"
@@ -139,8 +139,6 @@ jobs:
 
       - name: Publish to npm
         run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2
