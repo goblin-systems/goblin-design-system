@@ -129,7 +129,6 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          registry-url: "https://registry.npmjs.org"
 
       - name: Install dependencies
         run: bun install --frozen-lockfile
@@ -138,7 +137,9 @@ jobs:
         run: bun run build:lib
 
       - name: Publish to npm
-        run: npm publish --access public
+        run: npm publish --provenance --access public
+        env:
+          NPM_CONFIG_REGISTRY: https://registry.npmjs.org/
 
       - name: Create GitHub release
         uses: softprops/action-gh-release@v2
