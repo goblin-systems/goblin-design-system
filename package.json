@@ -1,5 +1,9 @@
 {
   "name": "@goblin-systems/goblin-design-system",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/goblin-systems/goblin-design-system"
+  },
   "version": "0.1.5",
   "type": "module",
   "main": "./dist/index.cjs",
