@@ -125,17 +125,17 @@ jobs:
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
 
+      - name: Setup Node (npm publish)
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          registry-url: "https://registry.npmjs.org"
+
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
       - name: Build library
         run: bun run build:lib
-
-      - name: Setup Node (npm publish)
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          registry-url: "https://registry.npmjs.org"
 
       - name: Publish to npm
         run: npm publish --provenance --access public
