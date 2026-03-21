@@ -85,31 +85,23 @@ jobs:
           Write-Host "Latest tag: $latestTag"
           Write-Host "Next version: $newVersion"
 
-      - name: Update package.json version
+      - name: Create and push tag
         shell: pwsh
         env:
-          NEW_VERSION: ${{ steps.version.outputs.new_version }}
-        run: |
-          $pkg = Get-Content package.json -Raw | ConvertFrom-Json
-          $pkg.version = $env:NEW_VERSION
-          $pkg | ConvertTo-Json -Depth 50 | Set-Content package.json -Encoding utf8
-          Write-Host "package.json updated to $($env:NEW_VERSION)"
-
-      - name: Commit and tag release
-        shell: pwsh
-        env:
-          NEW_VERSION: ${{ steps.version.outputs.new_version }}
           NEW_TAG: ${{ steps.version.outputs.new_tag }}
         run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          $tag = $env:NEW_TAG.Trim()
+          if ([string]::IsNullOrWhiteSpace($tag)) {
+            throw "NEW_TAG output is empty"
+          }
 
-          git add package.json
-          git commit -m "chore: release v$($env:NEW_VERSION)"
-          git push origin HEAD:master
+          git show-ref --tags --verify --quiet "refs/tags/$tag"
+          if ($LASTEXITCODE -eq 0) {
+            throw "Tag $tag already exists"
+          }
 
-          git tag $env:NEW_TAG
-          git push origin $env:NEW_TAG
+          git tag $tag
+          git push origin $tag
 
   publish:
     name: Build & publish to npm
@@ -133,6 +125,9 @@ jobs:
 
       - name: Install dependencies
         run: bun install --frozen-lockfile
+
+      - name: Set package version
+        run: npm version ${{ needs.prepare.outputs.new_version }} --no-git-tag-version
 
       - name: Build library
         run: bun run build:lib
