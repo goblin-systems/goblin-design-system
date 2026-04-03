@@ -1,5 +1,6 @@
 /* ── Goblin Design Tokens ──────────────────────────────────────────────────── */
-:root {
+:root,
+[data-theme="goblin"] {
   /* ── Color Palette ──────────────────────────────────────────────────────── */
   --goblin-purple-500: #6c63ff;
   --goblin-purple-400: #7c73ff;
@@ -25,6 +26,7 @@
   /* ── Border & Focus ─────────────────────────────────────────────────────── */
   --border:       #2a2a4a;
   --border-focus: #6c63ff;
+  --border-subtle: rgba(255, 255, 255, 0.05);
 
   /* ── Text Hierarchy ─────────────────────────────────────────────────────── */
   --text:         #e0e0e0;
@@ -59,6 +61,7 @@
   --shadow-modal:  0 20px 45px rgba(4, 8, 18, 0.58);
   --shadow-toast:  0 18px 45px rgba(0, 0, 0, 0.38);
   --shadow-inset:  inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  --shadow-empty-state: 0 18px 45px rgba(0, 0, 0, 0.28);
 
   /* ── Spacing Scale ──────────────────────────────────────────────────────── */
   --space-1:  4px;
@@ -79,8 +82,241 @@
   --easing-standard: ease;
   --easing-spring:   cubic-bezier(0.34, 1.56, 0.64, 1);
 
+  /* ── Themed visuals ─────────────────────────────────────────────────────── */
+  --body-bg: var(--bg);
+  --body-bg-image:
+    radial-gradient(120% 80% at 50% 0%, rgba(108, 99, 255, 0.16), transparent 55%),
+    radial-gradient(90% 60% at 100% 100%, rgba(34, 197, 94, 0.08), transparent 60%);
+  --selection-bg: rgba(108, 99, 255, 0.35);
+  --select-chevron-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238888aa' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+  --surface-raised-overlay: linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0));
+  --surface-interactive-overlay: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0));
+  --top-tab-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0)), rgba(15, 23, 41, 0.88);
+  --top-tab-active-bg: linear-gradient(180deg, rgba(108, 99, 255, 0.2), rgba(108, 99, 255, 0.08)), rgba(15, 23, 41, 0.92);
+  --top-tab-active-border: rgba(108, 99, 255, 0.58);
+  --document-tab-bg: rgba(12, 18, 34, 0.88);
+  --document-tab-close-bg: rgba(255, 255, 255, 0.08);
+  --document-tab-close-bg-hover: rgba(255, 255, 255, 0.16);
+  --hover-subtle: rgba(108, 99, 255, 0.08);
+  --hover-accent-soft: rgba(108, 99, 255, 0.1);
+  --badge-default-bg: rgba(108, 99, 255, 0.15);
+  --badge-default-text: var(--goblin-purple-300);
+  --badge-default-border: rgba(108, 99, 255, 0.3);
+  --badge-beta-bg: rgba(245, 158, 11, 0.15);
+  --badge-beta-border: rgba(245, 158, 11, 0.3);
+  --badge-success-bg: rgba(74, 222, 128, 0.12);
+  --badge-success-border: rgba(74, 222, 128, 0.28);
+  --badge-error-bg: rgba(248, 113, 113, 0.12);
+  --badge-error-border: rgba(248, 113, 113, 0.28);
+  --toast-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.01)), rgba(9, 13, 24, 0.96);
+  --toast-success-border: rgba(74, 222, 128, 0.35);
+  --toast-success-text: #d9ffe8;
+  --toast-error-border: rgba(248, 113, 113, 0.45);
+  --toast-error-text: #ffd7d7;
+  --toast-info-border: rgba(96, 165, 250, 0.4);
+  --toast-info-text: #dbeeff;
+  --modal-backdrop-bg: rgba(8, 12, 24, 0.76);
+  --editor-status-bg: rgba(11, 16, 32, 0.72);
+  --editor-status-border: rgba(255, 255, 255, 0.05);
+  --stat-card-bg: rgba(12, 18, 34, 0.8);
+  --stat-card-border: rgba(255, 255, 255, 0.04);
+  --empty-state-card-bg: rgba(11, 16, 32, 0.72);
+  --empty-state-card-border: rgba(108, 99, 255, 0.22);
+  --pane-resizer-bg: linear-gradient(180deg, rgba(108, 99, 255, 0.24), rgba(108, 99, 255, 0.06));
+  --pane-resizer-border: rgba(108, 99, 255, 0.12);
+  --pane-resizer-bg-hover: linear-gradient(180deg, rgba(108, 99, 255, 0.4), rgba(108, 99, 255, 0.15));
+  --pane-resizer-border-hover: rgba(108, 99, 255, 0.3);
+  --range-thumb-focus-ring: rgba(108, 99, 255, 0.4);
+  --range-thumb-drag-ring: rgba(108, 99, 255, 0.25);
+  --wave-panel-border: rgba(108, 99, 255, 0.25);
+  --wave-panel-bg: linear-gradient(180deg, rgba(7, 11, 21, 0.95), rgba(13, 18, 31, 0.95));
+  --wave-canvas-bg: rgba(10, 14, 26, 0.8);
+  --overlay-pill-bg: rgba(20, 20, 40, 0.92);
+  --overlay-pill-border: rgba(108, 99, 255, 0.4);
+  --overlay-hud-color: rgba(190, 195, 225, 0.78);
+  --overlay-transcript-color: rgba(200, 200, 220, 0.6);
+  --demo-swatch-border: rgba(255, 255, 255, 0.06);
+  --demo-swatch-text: rgba(255, 255, 255, 0.7);
+  --demo-swatch-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+  --demo-radius-box-bg: rgba(108, 99, 255, 0.18);
+  --demo-radius-box-border: rgba(108, 99, 255, 0.35);
+
   /* ── Scrollbar ──────────────────────────────────────────────────────────── */
   --scrollbar-thumb: linear-gradient(180deg, rgba(124, 115, 255, 0.88), rgba(89, 81, 220, 0.86));
   --scrollbar-thumb-hover: linear-gradient(180deg, rgba(143, 135, 255, 0.95), rgba(107, 98, 234, 0.92));
   --scrollbar-track: rgba(10, 14, 26, 0.42);
+  --scrollbar-thumb-color: rgba(108, 99, 255, 0.45);
+  --scrollbar-track-color: rgba(10, 14, 26, 0.42);
+}
+
+[data-theme="dark"] {
+  --bg: #1e1e1e;
+  --bg-section: #252526;
+  --bg-input: #2d2d2d;
+  --bg-deep: #181818;
+
+  --border: #3c3c3c;
+  --border-focus: #007acc;
+  --border-subtle: rgba(255, 255, 255, 0.08);
+
+  --text: #d4d4d4;
+  --text-muted: #858585;
+  --text-heading: #ffffff;
+  --text-subtle: #9cdcfe;
+
+  --accent: #007acc;
+  --accent-hover: #1a8ad4;
+  --success: #4ec9b0;
+  --warning: #dcdcaa;
+  --error: #f44747;
+
+  --badge-default: #007acc;
+  --badge-beta: #d7ba7d;
+
+  --shadow-card: 0 14px 26px rgba(0, 0, 0, 0.36);
+  --shadow-modal: 0 20px 45px rgba(0, 0, 0, 0.5);
+  --shadow-toast: 0 18px 45px rgba(0, 0, 0, 0.32);
+  --shadow-empty-state: none;
+
+  --body-bg: var(--bg);
+  --body-bg-image: none;
+  --selection-bg: rgba(0, 122, 204, 0.35);
+  --select-chevron-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23858585' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+  --surface-raised-overlay: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0));
+  --surface-interactive-overlay: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0));
+  --top-tab-bg: var(--bg-input);
+  --top-tab-active-bg: linear-gradient(180deg, color-mix(in srgb, var(--accent) 20%, transparent), color-mix(in srgb, var(--accent) 8%, transparent)), var(--bg-input);
+  --top-tab-active-border: color-mix(in srgb, var(--accent) 58%, transparent);
+  --document-tab-bg: var(--bg-input);
+  --document-tab-close-bg: rgba(255, 255, 255, 0.08);
+  --document-tab-close-bg-hover: rgba(255, 255, 255, 0.16);
+  --hover-subtle: rgba(255, 255, 255, 0.07);
+  --hover-accent-soft: rgba(255, 255, 255, 0.07);
+  --badge-default-bg: color-mix(in srgb, var(--accent) 15%, transparent);
+  --badge-default-text: color-mix(in srgb, var(--accent) 90%, var(--text));
+  --badge-default-border: color-mix(in srgb, var(--accent) 30%, transparent);
+  --toast-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0)), color-mix(in srgb, var(--bg-section) 88%, #000 12%);
+  --toast-success-border: color-mix(in srgb, var(--success) 38%, var(--border));
+  --toast-success-text: var(--text-heading);
+  --toast-error-border: color-mix(in srgb, var(--error) 45%, var(--border));
+  --toast-error-text: var(--text-heading);
+  --toast-info-border: color-mix(in srgb, var(--accent) 40%, var(--border));
+  --toast-info-text: var(--text-heading);
+  --modal-backdrop-bg: rgba(0, 0, 0, 0.55);
+  --editor-status-bg: var(--bg-deep);
+  --editor-status-border: var(--border);
+  --stat-card-bg: var(--bg-input);
+  --stat-card-border: var(--border);
+  --empty-state-card-bg: var(--bg-input);
+  --empty-state-card-border: var(--border);
+  --pane-resizer-bg: linear-gradient(180deg, color-mix(in srgb, var(--accent) 24%, transparent), color-mix(in srgb, var(--accent) 6%, transparent));
+  --pane-resizer-border: color-mix(in srgb, var(--accent) 12%, transparent);
+  --pane-resizer-bg-hover: linear-gradient(180deg, color-mix(in srgb, var(--accent) 40%, transparent), color-mix(in srgb, var(--accent) 15%, transparent));
+  --pane-resizer-border-hover: color-mix(in srgb, var(--accent) 30%, transparent);
+  --range-thumb-focus-ring: color-mix(in srgb, var(--accent) 40%, transparent);
+  --range-thumb-drag-ring: color-mix(in srgb, var(--accent) 25%, transparent);
+  --wave-panel-border: color-mix(in srgb, var(--accent) 25%, transparent);
+  --wave-panel-bg: linear-gradient(180deg, #1a1a1a, #1e1e1e);
+  --wave-canvas-bg: rgba(24, 24, 24, 0.8);
+  --overlay-pill-bg: rgba(30, 30, 30, 0.92);
+  --overlay-pill-border: color-mix(in srgb, var(--accent) 40%, transparent);
+  --overlay-hud-color: color-mix(in srgb, var(--text-subtle) 72%, var(--text-muted));
+  --overlay-transcript-color: color-mix(in srgb, var(--text) 65%, transparent);
+  --demo-swatch-border: rgba(255, 255, 255, 0.08);
+  --demo-swatch-text: rgba(255, 255, 255, 0.82);
+  --demo-swatch-text-shadow: none;
+  --demo-radius-box-bg: color-mix(in srgb, var(--accent) 18%, transparent);
+  --demo-radius-box-border: color-mix(in srgb, var(--accent) 35%, transparent);
+
+  --scrollbar-thumb: linear-gradient(180deg, rgba(0, 122, 204, 0.75), rgba(0, 100, 180, 0.7));
+  --scrollbar-thumb-hover: linear-gradient(180deg, rgba(26, 138, 212, 0.9), rgba(0, 122, 204, 0.85));
+  --scrollbar-track: rgba(24, 24, 24, 0.6);
+  --scrollbar-thumb-color: rgba(0, 122, 204, 0.5);
+  --scrollbar-track-color: rgba(24, 24, 24, 0.6);
+}
+
+[data-theme="light"] {
+  --bg: #f3f3f3;
+  --bg-section: #ffffff;
+  --bg-input: #ececec;
+  --bg-deep: #e8e8e8;
+
+  --border: #cecece;
+  --border-focus: #0078d4;
+  --border-subtle: rgba(0, 0, 0, 0.08);
+
+  --text: #3b3b3b;
+  --text-muted: #717171;
+  --text-heading: #1e1e1e;
+  --text-subtle: #0451a5;
+
+  --accent: #0078d4;
+  --accent-hover: #006cbf;
+  --success: #008000;
+  --warning: #8a6800;
+  --error: #cd3131;
+
+  --badge-default: #0078d4;
+  --badge-beta: #8a6800;
+
+  --shadow-card: 0 10px 20px rgba(0, 0, 0, 0.08);
+  --shadow-modal: 0 18px 32px rgba(0, 0, 0, 0.14);
+  --shadow-toast: 0 14px 26px rgba(0, 0, 0, 0.12);
+  --shadow-empty-state: none;
+
+  --body-bg: var(--bg);
+  --body-bg-image: none;
+  --selection-bg: rgba(0, 120, 212, 0.25);
+  --select-chevron-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23717171' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+  --surface-raised-overlay: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0));
+  --surface-interactive-overlay: linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0));
+  --top-tab-bg: var(--bg-input);
+  --top-tab-active-bg: color-mix(in srgb, var(--accent) 10%, var(--bg-section));
+  --top-tab-active-border: color-mix(in srgb, var(--accent) 55%, transparent);
+  --document-tab-bg: var(--bg-input);
+  --document-tab-close-bg: rgba(0, 0, 0, 0.08);
+  --document-tab-close-bg-hover: rgba(0, 0, 0, 0.14);
+  --hover-subtle: rgba(0, 0, 0, 0.06);
+  --hover-accent-soft: rgba(0, 120, 212, 0.1);
+  --badge-default-bg: color-mix(in srgb, var(--accent) 15%, transparent);
+  --badge-default-text: color-mix(in srgb, var(--accent) 92%, var(--text));
+  --badge-default-border: color-mix(in srgb, var(--accent) 30%, transparent);
+  --toast-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0.22)), color-mix(in srgb, var(--bg-section) 96%, var(--bg-deep));
+  --toast-success-border: color-mix(in srgb, var(--success) 32%, var(--border));
+  --toast-success-text: var(--text-heading);
+  --toast-error-border: color-mix(in srgb, var(--error) 38%, var(--border));
+  --toast-error-text: var(--text-heading);
+  --toast-info-border: color-mix(in srgb, var(--accent) 35%, var(--border));
+  --toast-info-text: var(--text-heading);
+  --modal-backdrop-bg: rgba(30, 30, 30, 0.2);
+  --editor-status-bg: var(--bg-deep);
+  --editor-status-border: var(--border);
+  --stat-card-bg: var(--bg-input);
+  --stat-card-border: var(--border);
+  --empty-state-card-bg: var(--bg-input);
+  --empty-state-card-border: var(--border);
+  --pane-resizer-bg: linear-gradient(180deg, color-mix(in srgb, var(--accent) 18%, transparent), color-mix(in srgb, var(--accent) 4%, transparent));
+  --pane-resizer-border: color-mix(in srgb, var(--accent) 12%, transparent);
+  --pane-resizer-bg-hover: linear-gradient(180deg, color-mix(in srgb, var(--accent) 32%, transparent), color-mix(in srgb, var(--accent) 10%, transparent));
+  --pane-resizer-border-hover: color-mix(in srgb, var(--accent) 24%, transparent);
+  --range-thumb-focus-ring: color-mix(in srgb, var(--accent) 28%, transparent);
+  --range-thumb-drag-ring: color-mix(in srgb, var(--accent) 18%, transparent);
+  --wave-panel-border: color-mix(in srgb, var(--accent) 24%, transparent);
+  --wave-panel-bg: linear-gradient(180deg, #f8f8f8, #ececec);
+  --wave-canvas-bg: rgba(0, 0, 0, 0.04);
+  --overlay-pill-bg: rgba(255, 255, 255, 0.94);
+  --overlay-pill-border: color-mix(in srgb, var(--accent) 34%, transparent);
+  --overlay-hud-color: color-mix(in srgb, var(--text-subtle) 62%, var(--text-muted));
+  --overlay-transcript-color: color-mix(in srgb, var(--text) 62%, transparent);
+  --demo-swatch-border: rgba(0, 0, 0, 0.08);
+  --demo-swatch-text: rgba(0, 0, 0, 0.72);
+  --demo-swatch-text-shadow: none;
+  --demo-radius-box-bg: color-mix(in srgb, var(--accent) 14%, transparent);
+  --demo-radius-box-border: color-mix(in srgb, var(--accent) 28%, transparent);
+
+  --scrollbar-thumb: linear-gradient(180deg, rgba(0, 120, 212, 0.55), rgba(0, 100, 190, 0.5));
+  --scrollbar-thumb-hover: linear-gradient(180deg, rgba(0, 120, 212, 0.8), rgba(0, 100, 190, 0.75));
+  --scrollbar-track: rgba(200, 200, 200, 0.5);
+  --scrollbar-thumb-color: rgba(0, 120, 212, 0.5);
+  --scrollbar-track-color: rgba(200, 200, 200, 0.5);
 }

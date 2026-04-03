@@ -8,6 +8,7 @@ import { bindRange } from "./lib/headless/range";
 import { bindRadial } from "./lib/headless/radial";
 import { bindNavigation } from "./lib/headless/navigation";
 import { bindSplitPaneResize } from "./lib/headless/split-pane";
+import { THEME_LABELS, getTheme, isBuiltinTheme, setTheme } from "./lib/theme";
 import {
   WAVEFORM_STYLES,
   WAVEFORM_COLOR_SCHEMES,
@@ -36,6 +37,29 @@ setupContextMenuGuard();
 
 // ── Top-level tabs ────────────────────────────────────────────────────────────
 bindTabs({ root: document });
+
+// ── Built-in theme demo ───────────────────────────────────────────────────────
+const themeSelect = document.getElementById("theme-select") as HTMLSelectElement | null;
+const themeCurrentBadge = document.getElementById("theme-current-badge");
+const themeCurrentId = document.getElementById("theme-current-id");
+
+function syncThemeDemo(theme = getTheme()) {
+  if (themeSelect) themeSelect.value = theme;
+  if (themeCurrentBadge) themeCurrentBadge.textContent = THEME_LABELS[theme];
+  if (themeCurrentId) themeCurrentId.textContent = `data-theme=${theme}`;
+}
+
+syncThemeDemo();
+
+themeSelect?.addEventListener("change", () => {
+  const nextTheme = themeSelect.value;
+  if (!isBuiltinTheme(nextTheme)) {
+    syncThemeDemo();
+    return;
+  }
+
+  syncThemeDemo(setTheme(nextTheme));
+});
 
 // ── Header navigation demo ────────────────────────────────────────────────────
 const navLog = document.getElementById("nav-action-log");

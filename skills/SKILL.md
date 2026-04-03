@@ -1,6 +1,6 @@
 ---
 name: goblin-design-system
-description: Documents the Goblin Design System package, including all public exports, CSS classes, markup patterns, design tokens, and usage constraints. Use when working with `@goblin-systems/goblin-design-system` or when building UI that should follow its dark, square, vanilla TypeScript patterns.
+description: Documents the Goblin Design System package, including built-in themes, public exports, CSS classes, markup patterns, design tokens, and usage constraints. Use when working with `@goblin-systems/goblin-design-system` or when building UI that should follow its square, vanilla TypeScript patterns.
 ---
 
 # Goblin Design System
@@ -22,6 +22,7 @@ import "@goblin-systems/goblin-design-system/style.css";
 
 import {
   applyIcons,
+  applyTheme,
   bindNavigation,
   bindRadial,
   bindRange,
@@ -32,18 +33,22 @@ import {
   openModal,
   showToast,
 } from "@goblin-systems/goblin-design-system";
+
+applyTheme("dark");
 ```
 
 After any HTML containing `<i data-lucide="...">` is in the DOM, call `applyIcons()`.
 
+Theme switching also works without JavaScript by setting `data-theme` on any ancestor element. Omitting `data-theme` uses the default `goblin` theme.
+
 ## Design Rules
 
-- Dark theme only
+- Built-in themes: `goblin`, `dark`, `light`
 - Square corners only
 - Vanilla TS/JS only
 - CSS classes provide appearance
 - TypeScript functions provide behaviour
-- Visual values come from CSS custom properties
+- Visual values come from CSS custom properties and `data-theme` token overrides
 
 ## Public Exports
 
@@ -82,6 +87,33 @@ import {
 - `qsAll<T>(selector, root?)` returns all matches
 - `populateSelectOptions(select, options, preferred)` replaces all `<option>` nodes and disables the `<select>` when empty
 - `setGroupDisabled(container, disabled)` toggles `disabled` on child `input`, `select`, and `button` elements
+
+### Themes
+
+```ts
+import {
+  BUILTIN_THEMES,
+  THEME_LABELS,
+  applyTheme,
+  getTheme,
+  isBuiltinTheme,
+  setTheme,
+  type BuiltinTheme,
+  type UiTheme,
+} from "@goblin-systems/goblin-design-system";
+
+applyTheme("dark");
+setTheme("light");
+
+const current = getTheme();
+```
+
+- `BuiltinTheme` and `UiTheme` are the built-in theme union: `goblin | dark | light`
+- `BUILTIN_THEMES` is the ordered built-in theme list
+- `THEME_LABELS` maps theme ids to display labels
+- `applyTheme(theme)` and `setTheme(theme, options?)` set `data-theme` on `document.documentElement` by default
+- `getTheme(target?)` reads `data-theme` and falls back to `goblin`
+- `isBuiltinTheme()` and `isUiTheme()` validate unknown values
 
 ### Tabs
 
@@ -907,7 +939,9 @@ Classes:
 
 ## Tokens
 
-Override tokens after importing the stylesheet.
+`style.css` ships the official `goblin`, `dark`, and `light` token blocks. Goblin is the default via `:root`, and the same token set is also available under `[data-theme="goblin"]`.
+
+To add an app-specific theme, override tokens after importing the stylesheet and scope them with `data-theme`.
 
 ```css
 :root {
@@ -935,12 +969,23 @@ Override tokens after importing the stylesheet.
 }
 ```
 
+Built-in theme switching works with either CSS or TypeScript:
+
+```html
+<html data-theme="light"></html>
+```
+
+```ts
+applyTheme("dark");
+```
+
 Also available in the token set:
 
 - font sizes `--font-size-xs` through `--font-size-2xl`
 - spacing `--space-1` through `--space-10`
 - durations `--duration-fast`, `--duration-base`, `--duration-slow`
 - shadows such as `--shadow-card`, `--shadow-modal`, `--shadow-toast`
+- component tokens such as `--top-tab-active-bg`, `--editor-status-bg`, `--pane-resizer-bg`, `--toast-bg`, and `--wave-panel-bg`
 - scrollbar tokens used by global and scroll-panel styles
 
 ## Behaviour Notes
@@ -968,4 +1013,6 @@ Also available in the token set:
 - Prefer the documented class names and structure exactly as shown
 - Keep behaviour headless and markup-driven
 - Use CSS custom properties instead of hardcoded colours
+- Prefer `data-theme` token overrides over selector-specific visual overrides
+- Built-in theme switching should not require app-local overrides for design-system-owned visuals
 - Do not introduce rounded corners when extending the system

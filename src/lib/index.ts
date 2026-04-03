@@ -10,6 +10,8 @@ export type { IconNode } from "./icons/index";
 
 // ── Headless utilities ────────────────────────────────────────────────────────
 export { byId, byIdOptional, qs, qsAll, populateSelectOptions, setGroupDisabled } from "./headless/dom";
+export { BUILTIN_THEMES, THEME_LABELS, applyTheme, getTheme, isBuiltinTheme, isUiTheme, setTheme } from "./theme";
+export type { ApplyThemeOptions, BuiltinTheme, UiTheme } from "./theme";
 export { bindNavigation } from "./headless/navigation";
 export type { NavigationOptions, NavigationHandle } from "./headless/navigation";
 export { mountToast, showToast } from "./headless/toast";
