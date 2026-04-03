@@ -348,7 +348,59 @@
                 </div>
               </div>
             </div>
+            <div class="demo-row" style="align-items:start; gap:20px; flex-wrap:wrap; margin-top:16px">
+              <div class="field-block">
+                <label>Direction radial (0-360)</label>
+                <div id="demo-radial" class="radial-control">
+                  <svg class="radial-control-visual" viewBox="0 0 100 100" aria-hidden="true">
+                    <path class="radial-control-track"></path>
+                    <path class="radial-control-fill"></path>
+                    <line class="radial-control-pointer" x1="50" y1="50" x2="50" y2="22"></line>
+                    <circle class="radial-control-thumb" cx="50" cy="12" r="5"></circle>
+                  </svg>
+                  <div class="radial-control-readout">
+                    <span class="radial-control-value"></span>
+                    <span class="radial-control-caption">Heading</span>
+                  </div>
+                </div>
+              </div>
+              <div class="field-block">
+                <label>Limited sweep (20-160)</label>
+                <div id="demo-radial-sweep" class="radial-control radial-control-sm">
+                  <svg class="radial-control-visual" viewBox="0 0 100 100" aria-hidden="true">
+                    <path class="radial-control-track"></path>
+                    <path class="radial-control-fill"></path>
+                    <line class="radial-control-pointer" x1="50" y1="50" x2="50" y2="22"></line>
+                    <circle class="radial-control-thumb" cx="50" cy="12" r="5"></circle>
+                  </svg>
+                  <div class="radial-control-readout">
+                    <span class="radial-control-value"></span>
+                    <span class="radial-control-caption">Cone</span>
+                  </div>
+                </div>
+              </div>
+              <div class="field-block">
+                <label>Fine trim (-12 to +12)</label>
+                <div
+                  id="demo-radial-fine"
+                  class="radial-control radial-control-xs"
+                  style="--radial-control-fill-color:color-mix(in srgb, var(--warning) 62%, var(--text-heading));--radial-control-fill-shadow:color-mix(in srgb, var(--warning) 28%, transparent);--radial-control-thumb-stroke:color-mix(in srgb, var(--warning) 68%, var(--text-heading));--radial-control-focus-ring:color-mix(in srgb, var(--warning) 28%, transparent)"
+                >
+                  <svg class="radial-control-visual" viewBox="0 0 100 100" aria-hidden="true">
+                    <path class="radial-control-track"></path>
+                    <path class="radial-control-fill"></path>
+                    <line class="radial-control-pointer" x1="50" y1="50" x2="50" y2="22"></line>
+                    <circle class="radial-control-thumb" cx="50" cy="12" r="5"></circle>
+                  </svg>
+                  <div class="radial-control-readout">
+                    <span class="radial-control-value"></span>
+                    <span class="radial-control-caption">Trim</span>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div id="range-log" style="font-size:var(--font-size-sm);color:var(--text-muted);margin-top:4px"></div>
+            <div id="radial-log" style="font-size:var(--font-size-sm);color:var(--text-muted);margin-top:4px"></div>
             <div class="radio-group">
               <label class="radio-label">
                 <input type="radio" name="demo-radio" checked />

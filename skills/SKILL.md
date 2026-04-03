@@ -23,6 +23,7 @@ import "@goblin-systems/goblin-design-system/style.css";
 import {
   applyIcons,
   bindNavigation,
+  bindRadial,
   bindRange,
   bindSearch,
   bindSplitPaneResize,
@@ -198,6 +199,38 @@ range.destroy();
 Returned handle:
 
 - `setValue(lo, hi)`
+- `getValue()`
+- `destroy()`
+
+### Radial Control
+
+```ts
+import {
+  bindRadial,
+  type RadialHandle,
+  type RadialOptions,
+} from "@goblin-systems/goblin-design-system";
+
+const radial = bindRadial({
+  el: document.getElementById("my-radial")!,
+  min: 0,
+  max: 360,
+  step: 5,
+  value: 135,
+  startAngle: -90,
+  endAngle: 270,
+  formatValue: (value) => `${value}°`,
+  onChange: (value) => console.log(value),
+});
+
+radial.setValue(180);
+radial.getValue();
+radial.destroy();
+```
+
+Returned handle:
+
+- `setValue(value)`
 - `getValue()`
 - `destroy()`
 
@@ -559,6 +592,45 @@ Classes:
 
 Use `.range-fill-end` only when using `inverted: true`.
 
+### Radial Control
+
+```html
+<div id="my-radial" class="radial-control">
+  <svg class="radial-control-visual" viewBox="0 0 100 100" aria-hidden="true">
+    <path class="radial-control-track"></path>
+    <path class="radial-control-fill"></path>
+    <line class="radial-control-pointer" x1="50" y1="50" x2="50" y2="22"></line>
+    <circle class="radial-control-thumb" cx="50" cy="12" r="5"></circle>
+  </svg>
+  <div class="radial-control-readout">
+    <span class="radial-control-value"></span>
+    <span class="radial-control-caption">Heading</span>
+  </div>
+</div>
+```
+
+Classes:
+
+- `radial-control`
+- `radial-control-sm`
+- `radial-control-xs`
+- `radial-control-visual`
+- `radial-control-track`
+- `radial-control-fill`
+- `radial-control-pointer`
+- `radial-control-thumb`
+- `radial-control-readout`
+- `radial-control-value`
+- `radial-control-caption`
+- `is-dragging`
+
+Optional CSS variables for per-instance styling:
+
+- `--radial-control-fill-color`
+- `--radial-control-track-color`
+- `--radial-control-thumb-stroke`
+- `--radial-control-focus-ring`
+
 ### Native Form Elements
 
 Styled automatically from `base.css`:
@@ -883,6 +955,9 @@ Also available in the token set:
 - `bindRange()` expects the documented child structure to exist
 - `bindRange().setValue()` updates the UI but does not call `onChange`
 - inverted range UI needs `.range-fill-end`
+- `bindRadial()` expects the documented SVG child structure to exist
+- `bindRadial()` sweeps clockwise from `startAngle` to `endAngle`; identical angles mean a full circle
+- `bindRadial().setValue()` updates the UI but does not call `onChange`
 - `closeModal()` removes `body.modal-open`; stacked modals are not supported
 - `setupWindowControls()` is only for Tauri apps
 - `setupContextMenuGuard()` disables right-click and keyboard context-menu shortcuts globally

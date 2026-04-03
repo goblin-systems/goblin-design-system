@@ -5,6 +5,7 @@ import { showToast } from "./lib/headless/toast";
 import { openModal, closeModal, confirmModal } from "./lib/headless/modal";
 import { bindSearch } from "./lib/headless/search";
 import { bindRange } from "./lib/headless/range";
+import { bindRadial } from "./lib/headless/radial";
 import { bindNavigation } from "./lib/headless/navigation";
 import { bindSplitPaneResize } from "./lib/headless/split-pane";
 import {
@@ -170,6 +171,57 @@ if (rangeElInv) {
     inverted: true,
     onChange: (lo, hi) => {
       if (rangeLog) rangeLog.textContent = `Exclusion: < ${lo} and > ${hi}`;
+    },
+  });
+}
+
+const radialLog = document.getElementById("radial-log");
+
+const radialEl = document.getElementById("demo-radial");
+if (radialEl) {
+  bindRadial({
+    el: radialEl,
+    min: 0,
+    max: 360,
+    step: 5,
+    value: 135,
+    formatValue: (value) => `${value}\u00b0`,
+    onChange: (value) => {
+      if (radialLog) radialLog.textContent = `Heading: ${value}\u00b0`;
+    },
+  });
+}
+
+const radialSweepEl = document.getElementById("demo-radial-sweep");
+if (radialSweepEl) {
+  bindRadial({
+    el: radialSweepEl,
+    min: 20,
+    max: 160,
+    step: 5,
+    value: 65,
+    startAngle: 210,
+    endAngle: 330,
+    formatValue: (value) => `${value}\u00b0`,
+    onChange: (value) => {
+      if (radialLog) radialLog.textContent = `Cone: ${value}\u00b0 within 20\u00b0-160\u00b0`;
+    },
+  });
+}
+
+const radialFineEl = document.getElementById("demo-radial-fine");
+if (radialFineEl) {
+  bindRadial({
+    el: radialFineEl,
+    min: -12,
+    max: 12,
+    step: 1,
+    value: 3,
+    startAngle: 235,
+    endAngle: 485,
+    formatValue: (value) => `${value > 0 ? "+" : ""}${value}`,
+    onChange: (value) => {
+      if (radialLog) radialLog.textContent = `Trim: ${value > 0 ? "+" : ""}${value}`;
     },
   });
 }

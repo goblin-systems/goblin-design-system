@@ -1339,6 +1339,192 @@ body.modal-open {
   pointer-events: none;
 }
 
+/* ── Radial control ──────────────────────────────────────────────────────────── */
+
+/**
+ * Single-value radial control.
+ *
+ * Markup:
+ *   <div class="radial-control">
+ *     <svg class="radial-control-visual" viewBox="0 0 100 100" aria-hidden="true">
+ *       <path class="radial-control-track"></path>
+ *       <path class="radial-control-fill"></path>
+ *       <line class="radial-control-pointer"></line>
+ *       <circle class="radial-control-thumb"></circle>
+ *     </svg>
+ *     <div class="radial-control-readout">   <!-- optional -->
+ *       <span class="radial-control-value"></span>
+ *       <span class="radial-control-caption"></span>
+ *     </div>
+ *   </div>
+ */
+
+.radial-control {
+  --radial-control-size: 112px;
+  --radial-control-shell: color-mix(in srgb, var(--bg-input) 74%, var(--bg-deep));
+  --radial-control-edge: color-mix(in srgb, var(--border) 78%, var(--text-muted));
+  --radial-control-inner-edge: color-mix(in srgb, var(--border) 46%, transparent);
+  --radial-control-track-color: color-mix(in srgb, var(--border) 72%, var(--text-muted));
+  --radial-control-fill-color: color-mix(in srgb, var(--accent) 58%, var(--text-heading));
+  --radial-control-fill-shadow: color-mix(in srgb, var(--accent) 30%, transparent);
+  --radial-control-pointer-color: color-mix(in srgb, var(--text-heading) 84%, var(--text-subtle));
+  --radial-control-thumb-fill: color-mix(in srgb, var(--bg-section) 72%, var(--text-heading));
+  --radial-control-thumb-stroke: color-mix(in srgb, var(--accent) 62%, var(--text-heading));
+  --radial-control-label-color: var(--text-heading);
+  --radial-control-caption-color: color-mix(in srgb, var(--text-muted) 84%, var(--text-subtle));
+  --radial-control-focus-ring: color-mix(in srgb, var(--accent) 28%, transparent);
+  width: var(--radial-control-size);
+  height: var(--radial-control-size);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle at 50% 28%, color-mix(in srgb, var(--text-heading) 10%, transparent), transparent 44%),
+    radial-gradient(circle at 50% 62%, color-mix(in srgb, var(--bg-section) 52%, transparent), transparent 70%),
+    linear-gradient(180deg, color-mix(in srgb, var(--bg-section) 84%, var(--radial-control-shell)), color-mix(in srgb, var(--bg-deep) 86%, var(--radial-control-shell)));
+  border: 1px solid var(--radial-control-edge);
+  border-radius: 50%;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--text-heading) 10%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--radial-control-inner-edge) 100%, transparent),
+    0 10px 18px color-mix(in srgb, var(--bg) 38%, transparent);
+  cursor: grab;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+  transition:
+    border-color var(--duration-fast),
+    box-shadow var(--duration-fast),
+    transform var(--duration-fast);
+}
+
+.radial-control::before {
+  content: "";
+  position: absolute;
+  inset: 11px;
+  border: 1px solid color-mix(in srgb, var(--radial-control-track-color) 38%, transparent);
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--text-heading) 3%, transparent);
+  pointer-events: none;
+}
+
+.radial-control:hover {
+  border-color: color-mix(in srgb, var(--radial-control-edge) 58%, var(--radial-control-fill-color));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--text-heading) 12%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--radial-control-inner-edge) 100%, transparent),
+    0 12px 22px color-mix(in srgb, var(--bg) 44%, transparent);
+}
+
+.radial-control:focus-visible {
+  outline: none;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--text-heading) 10%, transparent),
+    inset 0 0 0 1px color-mix(in srgb, var(--radial-control-inner-edge) 100%, transparent),
+    0 0 0 3px var(--radial-control-focus-ring),
+    0 12px 22px color-mix(in srgb, var(--bg) 44%, transparent);
+}
+
+.radial-control.is-dragging,
+.radial-control:active {
+  cursor: grabbing;
+  transform: translateY(0);
+}
+
+.radial-control-sm {
+  --radial-control-size: 96px;
+}
+
+.radial-control-xs {
+  --radial-control-size: 80px;
+}
+
+.radial-control-sm .radial-control-readout {
+  gap: 3px;
+}
+
+.radial-control-sm .radial-control-value {
+  font-size: var(--font-size-lg);
+}
+
+.radial-control-xs .radial-control-readout {
+  gap: 2px;
+}
+
+.radial-control-xs .radial-control-value {
+  font-size: var(--font-size-base);
+}
+
+.radial-control-xs .radial-control-caption {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+}
+
+.radial-control-visual {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.radial-control-track,
+.radial-control-fill {
+  fill: none;
+  stroke-linecap: square;
+}
+
+.radial-control-track {
+  stroke: var(--radial-control-track-color);
+  stroke-width: 8;
+  opacity: 0.82;
+}
+
+.radial-control-fill {
+  stroke: var(--radial-control-fill-color);
+  stroke-width: 5.5;
+  filter: none;
+}
+
+.radial-control-pointer {
+  stroke: var(--radial-control-pointer-color);
+  stroke-width: 2.25;
+  opacity: 0.92;
+}
+
+.radial-control-thumb {
+  fill: var(--radial-control-thumb-fill);
+  stroke: var(--radial-control-thumb-stroke);
+  stroke-width: 2;
+  filter: none;
+}
+
+.radial-control-readout {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  pointer-events: none;
+  text-align: center;
+}
+
+.radial-control-value {
+  color: var(--radial-control-label-color);
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  line-height: 1;
+  text-shadow: 0 1px 0 color-mix(in srgb, var(--bg) 55%, transparent);
+}
+
+.radial-control-caption {
+  color: var(--radial-control-caption-color);
+  font-size: var(--font-size-xs, 11px);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
 /* ── Search field ────────────────────────────────────────────────────────────── */
 
 .search-field {

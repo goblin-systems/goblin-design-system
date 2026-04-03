@@ -36,6 +36,7 @@ import {
   bindNavigation,
   bindSearch,
   bindRange,
+  bindRadial,
   openModal,
   confirmModal,
   bindSplitPaneResize,

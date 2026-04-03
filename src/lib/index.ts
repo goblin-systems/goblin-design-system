@@ -18,6 +18,8 @@ export { bindSearch } from "./headless/search";
 export type { SearchOptions, SearchHandle } from "./headless/search";
 export { bindRange } from "./headless/range";
 export type { RangeOptions, RangeHandle } from "./headless/range";
+export { bindRadial } from "./headless/radial";
+export type { RadialOptions, RadialHandle } from "./headless/radial";
 export { openModal, closeModal, bindModal, confirmModal } from "./headless/modal";
 export type { ModalOptions, ConfirmOptions } from "./headless/modal";
 export { bindTabs } from "./headless/tabs";
