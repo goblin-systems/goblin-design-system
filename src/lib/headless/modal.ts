@@ -1,3 +1,5 @@
+import { trapFocus, FOCUSABLE } from "./focus-trap";
+
 // ── Types ─────────────────────────────────────────────────────────────────────
 
 export interface ModalOptions {
@@ -57,12 +59,23 @@ export function openModal(options: ModalOptions) {
   backdrop.removeAttribute("hidden");
   document.body.classList.add("modal-open");
 
+  const card = backdrop.querySelector<HTMLElement>(".modal-card");
+  const releaseTrap = card ? trapFocus(card) : () => {};
+
+  // Focus the first focusable element inside the card
+  requestAnimationFrame(() => {
+    const first = card?.querySelector<HTMLElement>(FOCUSABLE);
+    first?.focus();
+  });
+
   const accept = () => {
+    releaseTrap();
     closeModal({ backdrop, onClose });
     onAccept?.();
   };
 
   const reject = () => {
+    releaseTrap();
     closeModal({ backdrop, onClose });
     onReject?.();
   };
@@ -197,10 +210,13 @@ export function confirmModal(options: ConfirmOptions): Promise<boolean> {
     document.body.appendChild(backdrop);
     document.body.classList.add("modal-open");
 
+    const releaseTrap = trapFocus(card);
+
     // Focus the safe-default button (reject) when opened
     requestAnimationFrame(() => rejectBtn.focus());
 
     const teardown = () => {
+      releaseTrap();
       backdrop.remove();
       document.body.classList.remove("modal-open");
     };

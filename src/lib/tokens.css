@@ -27,6 +27,7 @@
   --border:       #2a2a4a;
   --border-focus: #6c63ff;
   --border-subtle: rgba(255, 255, 255, 0.05);
+  --focus-ring: 0 0 0 2px var(--border-focus);
 
   /* ── Text Hierarchy ─────────────────────────────────────────────────────── */
   --text:         #e0e0e0;
@@ -55,6 +56,9 @@
   --font-size-lg:  14px;
   --font-size-xl:  15px;
   --font-size-2xl: 16px;
+  --icon-size-sm: 14px;
+  --icon-size-md: 18px;
+  --icon-size-lg: 22px;
 
   /* ── Shadows ────────────────────────────────────────────────────────────── */
   --shadow-card:   0 14px 26px rgba(4, 8, 18, 0.45);
@@ -62,6 +66,13 @@
   --shadow-toast:  0 18px 45px rgba(0, 0, 0, 0.38);
   --shadow-inset:  inset 0 1px 0 rgba(255, 255, 255, 0.04);
   --shadow-empty-state: 0 18px 45px rgba(0, 0, 0, 0.28);
+
+  /* ── Elevation Scale ────────────────────────────────────────────────────── */
+  --elevation-1: 0 2px 6px rgba(4, 8, 18, 0.28);
+  --elevation-2: var(--shadow-card);
+  --elevation-3: 0 8px 20px rgba(4, 8, 18, 0.5);
+  --elevation-4: var(--shadow-modal);
+  --elevation-5: var(--shadow-toast);
 
   /* ── Spacing Scale ──────────────────────────────────────────────────────── */
   --space-1:  4px;
@@ -108,6 +119,8 @@
   --badge-success-border: rgba(74, 222, 128, 0.28);
   --badge-error-bg: rgba(248, 113, 113, 0.12);
   --badge-error-border: rgba(248, 113, 113, 0.28);
+  --badge-warning-bg: rgba(251, 191, 36, 0.12);
+  --badge-warning-border: rgba(251, 191, 36, 0.28);
   --toast-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.01)), rgba(9, 13, 24, 0.96);
   --toast-success-border: rgba(74, 222, 128, 0.35);
   --toast-success-text: #d9ffe8;
@@ -147,6 +160,16 @@
   --scrollbar-track: rgba(10, 14, 26, 0.42);
   --scrollbar-thumb-color: rgba(108, 99, 255, 0.45);
   --scrollbar-track-color: rgba(10, 14, 26, 0.42);
+
+  /* ── Z-Index Scale ──────────────────────────────────────────────────────── */
+  --z-dropdown: 100;
+  --z-drawer:   200;
+  --z-modal:    300;
+  --z-toast:    400;
+  --z-tooltip:  500;
+  --z-overlay:  600;
+  --breakpoint-lg: 1100px;
+  --breakpoint-md: 760px;
 }
 
 [data-theme="dark"] {
@@ -177,6 +200,11 @@
   --shadow-modal: 0 20px 45px rgba(0, 0, 0, 0.5);
   --shadow-toast: 0 18px 45px rgba(0, 0, 0, 0.32);
   --shadow-empty-state: none;
+  --elevation-1: 0 2px 6px rgba(0, 0, 0, 0.22);
+  --elevation-2: var(--shadow-card);
+  --elevation-3: 0 8px 20px rgba(0, 0, 0, 0.38);
+  --elevation-4: var(--shadow-modal);
+  --elevation-5: var(--shadow-toast);
 
   --body-bg: var(--bg);
   --body-bg-image: none;
@@ -233,6 +261,14 @@
   --scrollbar-track: rgba(24, 24, 24, 0.6);
   --scrollbar-thumb-color: rgba(0, 122, 204, 0.5);
   --scrollbar-track-color: rgba(24, 24, 24, 0.6);
+  --badge-warning-bg: color-mix(in srgb, var(--warning) 12%, transparent);
+  --badge-warning-border: color-mix(in srgb, var(--warning) 28%, transparent);
+  --z-dropdown: 100;
+  --z-drawer:   200;
+  --z-modal:    300;
+  --z-toast:    400;
+  --z-tooltip:  500;
+  --z-overlay:  600;
 }
 
 [data-theme="light"] {
@@ -263,6 +299,11 @@
   --shadow-modal: 0 18px 32px rgba(0, 0, 0, 0.14);
   --shadow-toast: 0 14px 26px rgba(0, 0, 0, 0.12);
   --shadow-empty-state: none;
+  --elevation-1: 0 2px 6px rgba(0, 0, 0, 0.06);
+  --elevation-2: var(--shadow-card);
+  --elevation-3: 0 8px 20px rgba(0, 0, 0, 0.1);
+  --elevation-4: var(--shadow-modal);
+  --elevation-5: var(--shadow-toast);
 
   --body-bg: var(--bg);
   --body-bg-image: none;
@@ -319,4 +360,12 @@
   --scrollbar-track: rgba(200, 200, 200, 0.5);
   --scrollbar-thumb-color: rgba(0, 120, 212, 0.5);
   --scrollbar-track-color: rgba(200, 200, 200, 0.5);
+  --badge-warning-bg: color-mix(in srgb, var(--warning) 14%, transparent);
+  --badge-warning-border: color-mix(in srgb, var(--warning) 28%, transparent);
+  --z-dropdown: 100;
+  --z-drawer:   200;
+  --z-modal:    300;
+  --z-toast:    400;
+  --z-tooltip:  500;
+  --z-overlay:  600;
 }

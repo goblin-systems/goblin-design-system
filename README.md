@@ -1,58 +1,50 @@
 # @goblin-systems/goblin-design-system
 
-Sharp-edged design system for desktop apps. Ships built-in `goblin`, `dark`, and `light` themes with TypeScript helpers and a CSS custom property contract. No framework required. Optimised for Tauri.
+Sharp-edged desktop UI primitives for vanilla TypeScript apps. The package ships CSS tokens, component classes, built-in `goblin` / `dark` / `light` themes, and headless DOM helpers for the interactive pieces.
 
-- Zero runtime framework dependencies
-- Full TypeScript API with headless behaviour modules
-- 1,900+ Lucide icons included
-- Built-in `goblin`, `dark`, and `light` themes in one `style.css`
-- CSS custom property token system for app and theme extension
-- Tauri window control utilities (optional)
-
----
+- No framework runtime
+- Square visual language driven by CSS custom properties
+- Lucide-backed icon helpers
+- Headless TypeScript bindings for navigation, overlays, inputs, data display, and layout
+- Optional Tauri helpers for frameless window chrome
 
 ## Installation
 
 ```bash
 npm install @goblin-systems/goblin-design-system lucide
-# or
-bun add @goblin-systems/goblin-design-system lucide
 ```
 
-`lucide` is a required peer dependency.
-
----
+- `lucide` is a required peer dependency.
+- `@tauri-apps/api` is an optional peer dependency used only by `setupWindowControls()` and `setupContextMenuGuard()`.
 
 ## Quick start
 
 ```ts
-// 1. Import styles once in your app entry
 import "@goblin-systems/goblin-design-system/style.css";
 
-// 2. Import what you need
 import {
   applyIcons,
   applyTheme,
-  showToast,
-  bindTabs,
   bindNavigation,
   bindSearch,
-  bindRange,
-  bindRadial,
-  openModal,
-  confirmModal,
-  bindSplitPaneResize,
-  setupWindowControls,
+  bindTabs,
+  bindTooltips,
+  showToast,
 } from "@goblin-systems/goblin-design-system";
 
-// 3. Optional: switch the built-in theme
-applyTheme("dark");
+applyTheme("goblin");
 
-// 4. After any HTML containing <i data-lucide="..."> is in the DOM:
+bindTabs();
+bindNavigation();
+bindTooltips();
+
+// After any HTML containing <i data-lucide="..."> is in the DOM:
 applyIcons();
+
+showToast("Ready", "success");
 ```
 
-You can also switch themes without JavaScript:
+Built-in theme switching also works without JavaScript:
 
 ```html
 <html data-theme="light">
@@ -60,11 +52,9 @@ You can also switch themes without JavaScript:
 </html>
 ```
 
-Goblin remains the default theme, so omitting `data-theme` is equivalent to `goblin`.
+If `data-theme` is omitted, the package defaults to `goblin`.
 
-## Themes
-
-Built-in themes are exported as `goblin`, `dark`, and `light`.
+## Themes and tokens
 
 ```ts
 import {
@@ -73,20 +63,20 @@ import {
   applyTheme,
   getTheme,
   isBuiltinTheme,
+  setTheme,
   type BuiltinTheme,
 } from "@goblin-systems/goblin-design-system";
 
-const nextTheme: BuiltinTheme = "light";
+const nextTheme: BuiltinTheme = "dark";
 
 if (isBuiltinTheme(nextTheme)) {
-  applyTheme(nextTheme);
+  setTheme(nextTheme);
 }
 
-console.log(getTheme());
-console.log(BUILTIN_THEMES, THEME_LABELS);
+console.log(getTheme(), BUILTIN_THEMES, THEME_LABELS);
 ```
 
-To add a custom app theme, set `data-theme` on a parent element and override the design-system tokens after importing `style.css`:
+To add an app-specific theme, scope token overrides with `data-theme` after importing `style.css`:
 
 ```css
 @import "@goblin-systems/goblin-design-system/style.css";
@@ -110,20 +100,32 @@ To add a custom app theme, set `data-theme` on a parent element and override the
 }
 ```
 
-Most component visuals now inherit from theme tokens, so consumers should not need selector-level override hacks for built-in theme switching.
+## Public API overview
 
----
+Core exports from `src/lib/index.ts` are grouped as follows:
 
-## Documentation
+- Icons: `applyIcons`, `createIcon`, `ICON_SET`, `IconNode`
+- DOM helpers: `byId`, `byIdOptional`, `qs`, `qsAll`, `populateSelectOptions`, `setGroupDisabled`
+- Themes: `BUILTIN_THEMES`, `THEME_LABELS`, `applyTheme`, `getTheme`, `isBuiltinTheme`, `isUiTheme`, `setTheme`
+- Navigation and discovery: `bindTabs`, `bindNavigation`, `bindSearch`, `bindTooltips`, `bindPopover`, `bindContextMenu`
+- Feedback and overlays: `mountToast`, `showToast`, `openModal`, `closeModal`, `bindModal`, `confirmModal`, `openDrawer`, `closeDrawer`
+- Inputs and selection: `bindRange`, `bindRadial`, `bindSwitch`, `bindAccordion`, `bindPagination`, `bindStepper`, `bindToggleGroup`, `bindSelect`, `bindTransferList`, `bindRating`, `bindTree`
+- Data and layout: `bindTable`, `bindSplitPaneResize`
+- Platform and media: `setupWindowControls`, `setupContextMenuGuard`, `drawWaveform`, `createWaveProgressGradient`, waveform style/color helpers
 
-Documentation is provided as a Skill
----
+Every headless export is fully typed and keeps markup ownership with the consumer. For the full class list, markup patterns, behavior notes, and type names, see `skills/SKILL.md`.
 
-## Installing the skill
+## Consumer guidance
 
-This repo includes a standard skill in `skills/SKILL.md`.
+- Import `style.css` exactly once.
+- Use the documented class names and markup structure; bindings expect specific child elements for controls like range, radial, select, accordion, tree, and transfer list.
+- Call `applyIcons()` after rendering icon placeholders.
+- Prefer token overrides and `data-theme` over selector-specific restyling.
+- The system is intentionally square; do not add rounded corners when extending it.
 
-Install it with:
+## Skill documentation
+
+This repo includes the consumer-facing Skill in `skills/SKILL.md`.
 
 ```bash
 npx skills add goblin-systems/goblin-design-system
@@ -135,25 +137,14 @@ Or from a local checkout:
 npx skills add .
 ```
 
----
-
-## Running the demo app
-
-The repository includes a live demo Tauri app that showcases every component.
+## Demo and build commands
 
 ```bash
-git clone https://github.com/goblin-systems/goblin-design-system
-cd goblin-design-system
-bun install
-bun run dev         # start Vite dev server
-bun run tauri dev   # launch Tauri window (requires Rust toolchain)
+npm install
+npm run dev
+npm run build
+npm run build:lib
 ```
 
----
-
-## Building the library
-
-```bash
-bun run build:lib   # outputs to dist/
-bun run lint        # TypeScript type check
-```
+- `npm run build` builds the demo app.
+- `npm run build:lib` type-checks the library entry and emits the publishable package into `dist/`.

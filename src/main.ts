@@ -4,9 +4,23 @@ import { bindTabs } from "./lib/headless/tabs";
 import { showToast } from "./lib/headless/toast";
 import { openModal, closeModal, confirmModal } from "./lib/headless/modal";
 import { bindSearch } from "./lib/headless/search";
+import { bindTooltips } from "./lib/headless/tooltip";
 import { bindRange } from "./lib/headless/range";
 import { bindRadial } from "./lib/headless/radial";
 import { bindNavigation } from "./lib/headless/navigation";
+import { bindSwitch } from "./lib/headless/switch";
+import { bindToggleGroup } from "./lib/headless/toggle-group";
+import { bindAccordion } from "./lib/headless/accordion";
+import { openDrawer, closeDrawer } from "./lib/headless/drawer";
+import { bindPagination } from "./lib/headless/pagination";
+import { bindPopover } from "./lib/headless/popover";
+import { bindStepper } from "./lib/headless/stepper";
+import { bindTable } from "./lib/headless/table";
+import { bindSelect } from "./lib/headless/select";
+import { bindTransferList } from "./lib/headless/transfer-list";
+import { bindRating } from "./lib/headless/rating";
+import { bindTree } from "./lib/headless/tree";
+import { bindContextMenu } from "./lib/headless/context-menu";
 import { bindSplitPaneResize } from "./lib/headless/split-pane";
 import { THEME_LABELS, getTheme, isBuiltinTheme, setTheme } from "./lib/theme";
 import {
@@ -22,6 +36,8 @@ import {
 } from "./lib/waveform/waveform";
 
 // ── Shared waveform state ─────────────────────────────────────────────────────
+document.documentElement.dataset.js = "true";
+
 let currentStyle: WaveformStyle = "classic";
 let currentScheme: WaveformColorScheme = "aurora";
 let waveActive = true;
@@ -36,7 +52,11 @@ setupContextMenuGuard();
 // (called again below after panel build)
 
 // ── Top-level tabs ────────────────────────────────────────────────────────────
-bindTabs({ root: document });
+bindTabs({
+  root: document,
+  triggerSelector: ".top-tabs [data-tab-trigger]",
+  panelSelector: ".app-shell > .tab-panel",
+});
 
 // ── Built-in theme demo ───────────────────────────────────────────────────────
 const themeSelect = document.getElementById("theme-select") as HTMLSelectElement | null;
@@ -306,6 +326,7 @@ function buildWaveformPanels() {
 buildWaveformPanels();
 applyIcons();
 buildIconGallery();
+bindTooltips();
 
 // Main single preview
 const mainCanvas = document.getElementById("main-wave-canvas") as HTMLCanvasElement | null;
@@ -415,6 +436,184 @@ async function setOverlayVisible(visible: boolean) {
 
 document.getElementById("overlay-show-btn")?.addEventListener("click", () => setOverlayVisible(true));
 document.getElementById("overlay-hide-btn")?.addEventListener("click", () => setOverlayVisible(false));
+
+function logDemoEvent(message: string) {
+  const consoleEl = document.getElementById("demo-console");
+  if (!consoleEl) return;
+  const line = document.createElement("div");
+  line.textContent = `${new Date().toLocaleTimeString()} · ${message}`;
+  consoleEl.prepend(line);
+}
+
+document.querySelectorAll<HTMLElement>("#demo-alerts .alert-dismiss").forEach((button) => {
+  button.addEventListener("click", () => {
+    button.closest(".alert")?.remove();
+    logDemoEvent("Inline alert dismissed");
+  });
+});
+
+document.querySelectorAll<HTMLElement>(".copy-markup-btn").forEach((button) => {
+  button.addEventListener("click", async () => {
+    const markup = button.dataset["copyMarkup"] ?? "";
+    try {
+      await navigator.clipboard.writeText(markup);
+      showToast("Markup copied", "success", 1800);
+      logDemoEvent("Copied markup snippet");
+    } catch {
+      showToast("Copy failed", "error", 2200);
+    }
+  });
+});
+
+bindSwitch({
+  el: document.getElementById("switch-auto-correct") as HTMLElement,
+  onChange: (checked) => logDemoEvent(`Switch auto-correct: ${checked}`),
+});
+bindSwitch({
+  el: document.getElementById("switch-snap-grid") as HTMLElement,
+  onChange: (checked) => logDemoEvent(`Switch snap to grid: ${checked}`),
+});
+bindSwitch({ el: document.getElementById("switch-disabled") as HTMLElement });
+bindSwitch({
+  el: document.getElementById("keyboard-only-mode") as HTMLElement,
+  onChange: (checked) => {
+    document.body.style.cursor = checked ? "none" : "";
+    logDemoEvent(`Keyboard-only mode: ${checked ? "on" : "off"}`);
+  },
+});
+
+bindToggleGroup({
+  el: document.getElementById("demo-toggle-group") as HTMLElement,
+  multiple: true,
+  onChange: (selected) => logDemoEvent(`Toggle group: ${selected.join(", ") || "none"}`),
+});
+
+bindTable({
+  el: document.getElementById("demo-table") as HTMLTableElement,
+  onSort: (column, direction) => logDemoEvent(`Table sort col ${column + 1}: ${direction ?? "none"}`),
+});
+
+bindSelect({
+  el: document.getElementById("demo-select") as HTMLElement,
+  onChange: (value) => {
+    logDemoEvent(`Select changed: ${value}`);
+    applyIcons();
+  },
+});
+applyIcons();
+
+bindRating({
+  el: document.getElementById("demo-rating") as HTMLElement,
+  onChange: (value) => logDemoEvent(`Rating: ${value}/5`),
+});
+
+bindTransferList({ el: document.getElementById("demo-transfer-list") as HTMLElement });
+bindTree({ el: document.getElementById("demo-tree") as HTMLElement });
+
+document.querySelectorAll<HTMLElement>("#demo-chip-row .chip-remove").forEach((button) => {
+  button.addEventListener("click", () => {
+    button.closest(".chip")?.remove();
+    logDemoEvent("Chip removed");
+  });
+});
+document.querySelectorAll<HTMLElement>("#demo-chip-row .chip").forEach((chip) => {
+  chip.addEventListener("keydown", (event) => {
+    if (event.key === "Backspace") {
+      chip.querySelector<HTMLElement>(".chip-remove")?.click();
+    }
+  });
+});
+
+bindStepper({
+  el: document.getElementById("demo-stepper") as HTMLElement,
+  onChange: (index, state) => logDemoEvent(`Stepper: step ${index + 1} is ${state}`),
+});
+
+bindPagination({
+  el: document.getElementById("demo-pagination") as HTMLElement,
+  totalPages: 12,
+  currentPage: 6,
+  onChange: (page) => logDemoEvent(`Pagination page ${page}`),
+});
+
+bindAccordion({ el: document.getElementById("demo-accordion-single") as HTMLElement });
+bindAccordion({ el: document.getElementById("demo-accordion-multi") as HTMLElement, multiple: true });
+
+const leftDrawer = document.getElementById("demo-left-drawer") as HTMLElement | null;
+const rightDrawer = document.getElementById("demo-right-drawer") as HTMLElement | null;
+
+document.getElementById("demo-left-drawer-btn")?.addEventListener("click", () => {
+  if (!leftDrawer) return;
+  openDrawer({ drawer: leftDrawer, onOpen: () => logDemoEvent("Opened left drawer"), onClose: () => logDemoEvent("Closed left drawer") });
+});
+
+document.getElementById("demo-right-drawer-btn")?.addEventListener("click", () => {
+  if (!rightDrawer) return;
+  openDrawer({ drawer: rightDrawer, onOpen: () => logDemoEvent("Opened right drawer"), onClose: () => logDemoEvent("Closed right drawer") });
+});
+
+document.querySelectorAll<HTMLElement>("[data-drawer-close='left']").forEach((button) => {
+  button.addEventListener("click", () => leftDrawer && closeDrawer({ drawer: leftDrawer }));
+});
+document.querySelectorAll<HTMLElement>("[data-drawer-close='right']").forEach((button) => {
+  button.addEventListener("click", () => rightDrawer && closeDrawer({ drawer: rightDrawer }));
+});
+
+bindPopover({
+  anchor: document.getElementById("demo-popover-btn") as HTMLElement,
+  content: document.getElementById("demo-click-popover") as HTMLElement,
+  placement: "bottom",
+  onOpen: () => {
+    applyIcons();
+    logDemoEvent("Opened click popover");
+  },
+});
+bindPopover({
+  anchor: document.getElementById("demo-hover-popover-btn") as HTMLElement,
+  content: document.getElementById("demo-hover-popover") as HTMLElement,
+  placement: "right",
+  trigger: "hover",
+});
+
+bindContextMenu({
+  target: "#demo-rich-list",
+  items: [
+    { label: "Open", icon: "folder-open", shortcut: "Enter", onSelect: () => logDemoEvent("Context: open") },
+    { label: "Rename", icon: "pencil", shortcut: "F2", onSelect: () => logDemoEvent("Context: rename") },
+    { divider: true },
+    { label: "Retry", icon: "rotate-cw", shortcut: "R", onSelect: () => logDemoEvent("Context: retry") },
+    { label: "Delete", icon: "trash-2", disabled: true },
+  ],
+});
+
+document.getElementById("toast-action-btn")?.addEventListener("click", () => {
+  showToast("Draft archived.", "info", 5000, "app-toast", {
+    label: "Undo",
+    onClick: () => {
+      logDemoEvent("Toast action: undo");
+      showToast("Archive reverted.", "success", 1800);
+    },
+  });
+});
+
+document.getElementById("toast-error-assertive-btn")?.addEventListener("click", () => {
+  showToast("Critical sync failed.", "error", 2600);
+  logDemoEvent("Assertive error toast shown");
+});
+
+[
+  { id: "token-accent", variable: "--accent", format: (value: string) => value },
+  { id: "token-bg", variable: "--bg", format: (value: string) => value },
+  { id: "token-border", variable: "--border", format: (value: string) => value },
+  { id: "token-text", variable: "--text", format: (value: string) => value },
+  { id: "token-font-size", variable: "--font-size-base", format: (value: string) => `${value}px` },
+].forEach(({ id, variable, format }) => {
+  const input = document.getElementById(id) as HTMLInputElement | null;
+  input?.addEventListener("input", () => {
+    document.documentElement.style.setProperty(variable, format(input.value));
+    logDemoEvent(`Token override ${variable}`);
+  });
+});
 
 // ── Icon gallery ──────────────────────────────────────────────────────────────
 function buildIconGallery() {

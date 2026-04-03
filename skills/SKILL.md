@@ -13,7 +13,8 @@ Package: `@goblin-systems/goblin-design-system`
 npm install @goblin-systems/goblin-design-system lucide
 ```
 
-`lucide` is a required peer dependency.
+- `lucide` is a required peer dependency.
+- `@tauri-apps/api` is optional and only needed for the Tauri window helpers.
 
 ## Setup
 
@@ -24,20 +25,22 @@ import {
   applyIcons,
   applyTheme,
   bindNavigation,
-  bindRadial,
-  bindRange,
   bindSearch,
-  bindSplitPaneResize,
   bindTabs,
-  confirmModal,
-  openModal,
+  bindTooltips,
   showToast,
 } from "@goblin-systems/goblin-design-system";
 
-applyTheme("dark");
+applyTheme("goblin");
+bindTabs();
+bindNavigation();
+bindTooltips();
+
+applyIcons();
+showToast("Ready", "success");
 ```
 
-After any HTML containing `<i data-lucide="...">` is in the DOM, call `applyIcons()`.
+After any HTML containing `<i data-lucide="...">` is in the DOM, call `applyIcons()` again.
 
 Theme switching also works without JavaScript by setting `data-theme` on any ancestor element. Omitting `data-theme` uses the default `goblin` theme.
 
@@ -97,7 +100,9 @@ import {
   applyTheme,
   getTheme,
   isBuiltinTheme,
+  isUiTheme,
   setTheme,
+  type ApplyThemeOptions,
   type BuiltinTheme,
   type UiTheme,
 } from "@goblin-systems/goblin-design-system";
@@ -111,7 +116,8 @@ const current = getTheme();
 - `BuiltinTheme` and `UiTheme` are the built-in theme union: `goblin | dark | light`
 - `BUILTIN_THEMES` is the ordered built-in theme list
 - `THEME_LABELS` maps theme ids to display labels
-- `applyTheme(theme)` and `setTheme(theme, options?)` set `data-theme` on `document.documentElement` by default
+- `applyTheme(theme)` is an alias of `setTheme(theme, options?)`
+- `setTheme(theme, options?)` sets `data-theme` on `document.documentElement` by default
 - `getTheme(target?)` reads `data-theme` and falls back to `goblin`
 - `isBuiltinTheme()` and `isUiTheme()` validate unknown values
 
@@ -203,6 +209,27 @@ Returned handle:
 - `setSuggestions(items)`
 - `clearSuggestions()`
 - `destroy()`
+
+### Tooltips
+
+```ts
+import {
+  bindTooltips,
+  type TooltipHandle,
+  type TooltipOptions,
+} from "@goblin-systems/goblin-design-system";
+
+const tooltips = bindTooltips({
+  root: document,
+  showDelayMs: 400,
+  hideDelayMs: 80,
+});
+
+tooltips.destroy();
+```
+
+- Binds every `[data-tooltip]` element within `root`
+- Uses `data-tooltip-placement="top|bottom|left|right"` when present and flips when needed
 
 ### Double Range Slider
 
@@ -299,6 +326,137 @@ const ok = await confirmModal({
 });
 ```
 
+### Switch
+
+```ts
+import {
+  bindSwitch,
+  type SwitchHandle,
+  type SwitchOptions,
+} from "@goblin-systems/goblin-design-system";
+
+const toggle = bindSwitch({
+  el: document.getElementById("my-switch")!,
+  value: true,
+  onChange: (checked) => console.log(checked),
+});
+
+toggle.getValue();
+toggle.setValue(false);
+toggle.destroy();
+```
+
+Returned handle:
+
+- `getValue()`
+- `setValue(checked)`
+- `destroy()`
+
+### Accordion
+
+```ts
+import {
+  bindAccordion,
+  type AccordionHandle,
+  type AccordionOptions,
+} from "@goblin-systems/goblin-design-system";
+
+const accordion = bindAccordion({
+  el: document.getElementById("my-accordion")!,
+  multiple: false,
+  onChange: (item, open) => console.log(item, open),
+});
+
+accordion.toggle(document.querySelector(".accordion-item")!);
+```
+
+Returned handle:
+
+- `open(itemEl)`
+- `close(itemEl)`
+- `toggle(itemEl)`
+- `destroy()`
+
+### Drawer
+
+```ts
+import {
+  closeDrawer,
+  openDrawer,
+  type DrawerOptions,
+} from "@goblin-systems/goblin-design-system";
+
+const drawer = document.getElementById("my-drawer")!;
+
+openDrawer({
+  drawer,
+  closeOnBackdrop: true,
+  closeOnEscape: true,
+});
+
+closeDrawer({ drawer });
+```
+
+- `openDrawer()` traps focus, locks body scroll, and creates a backdrop when needed
+- `closeDrawer()` closes either an active managed drawer or a manually rendered one
+
+### Pagination
+
+```ts
+import {
+  bindPagination,
+  type PaginationHandle,
+  type PaginationOptions,
+} from "@goblin-systems/goblin-design-system";
+
+const pagination = bindPagination({
+  el: document.getElementById("my-pagination")!,
+  totalPages: 24,
+  currentPage: 3,
+  siblingCount: 1,
+  onChange: (page) => console.log(page),
+});
+
+pagination.setPage(4);
+pagination.setTotalPages(18);
+```
+
+Returned handle:
+
+- `setPage(page)`
+- `getPage()`
+- `setTotalPages(total)`
+- `destroy()`
+
+### Popover
+
+```ts
+import {
+  bindPopover,
+  type PopoverHandle,
+  type PopoverOptions,
+  type PopoverPlacement,
+  type PopoverTrigger,
+} from "@goblin-systems/goblin-design-system";
+
+const popover = bindPopover({
+  anchor: document.getElementById("popover-btn")!,
+  content: document.getElementById("popover-card")!,
+  placement: "bottom",
+  trigger: "click",
+});
+
+popover.open();
+popover.close();
+```
+
+Returned handle:
+
+- `open()`
+- `close()`
+- `toggle()`
+- `destroy()`
+
 ### Split Pane
 
 ```ts
@@ -319,6 +477,211 @@ bindSplitPaneResize({
   maxRight: 520,
 });
 ```
+
+### Stepper
+
+```ts
+import {
+  bindStepper,
+  type StepperHandle,
+  type StepperOptions,
+  type StepState,
+} from "@goblin-systems/goblin-design-system";
+
+const stepper = bindStepper({
+  el: document.getElementById("my-stepper")!,
+  currentStep: 1,
+  onChange: (index, state) => console.log(index, state),
+});
+
+stepper.next();
+stepper.setStepState(2, "error");
+```
+
+Returned handle:
+
+- `setStep(index)`
+- `setStepState(index, state)`
+- `getStep()`
+- `next()`
+- `prev()`
+- `destroy()`
+
+### Toggle Group
+
+```ts
+import {
+  bindToggleGroup,
+  type ToggleGroupHandle,
+  type ToggleGroupOptions,
+} from "@goblin-systems/goblin-design-system";
+
+const group = bindToggleGroup({
+  el: document.getElementById("my-toggle-group")!,
+  multiple: true,
+  value: ["snap", "guides"],
+  onChange: (selected) => console.log(selected),
+});
+
+group.getSelected();
+group.setSelected(["snap"]);
+```
+
+Returned handle:
+
+- `getSelected()`
+- `setSelected(values)`
+- `destroy()`
+
+### Table
+
+```ts
+import {
+  bindTable,
+  type TableHandle,
+  type TableOptions,
+  type TableSortDirection,
+} from "@goblin-systems/goblin-design-system";
+
+const table = bindTable({
+  el: document.getElementById("my-table") as HTMLTableElement,
+  onSort: (column, direction) => console.log(column, direction),
+});
+
+table.getSort();
+```
+
+- Sortable headers use `.table-sortable` inside `<thead>`
+- Sorting cycles `asc -> desc -> none`
+
+### Select
+
+```ts
+import {
+  bindSelect,
+  type SelectHandle,
+  type SelectOption,
+  type SelectOptions,
+} from "@goblin-systems/goblin-design-system";
+
+const select = bindSelect({
+  el: document.getElementById("my-select")!,
+  onChange: (value) => console.log(value),
+});
+
+select.open();
+select.setValue("vision");
+```
+
+Returned handle:
+
+- `getValue()`
+- `setValue(value)`
+- `open()`
+- `close()`
+- `destroy()`
+
+### Transfer List
+
+```ts
+import {
+  bindTransferList,
+  type TransferListHandle,
+  type TransferListOptions,
+} from "@goblin-systems/goblin-design-system";
+
+const transfer = bindTransferList({
+  el: document.getElementById("my-transfer-list")!,
+});
+
+transfer.getLeft();
+transfer.getRight();
+```
+
+Returned handle:
+
+- `getLeft()`
+- `getRight()`
+- `destroy()`
+
+### Rating
+
+```ts
+import {
+  bindRating,
+  type RatingHandle,
+  type RatingOptions,
+} from "@goblin-systems/goblin-design-system";
+
+const rating = bindRating({
+  el: document.getElementById("my-rating")!,
+  value: 3,
+  max: 5,
+  onChange: (value) => console.log(value),
+});
+
+rating.setValue(4);
+rating.getValue();
+```
+
+Returned handle:
+
+- `getValue()`
+- `setValue(value)`
+- `destroy()`
+
+### Tree
+
+```ts
+import {
+  bindTree,
+  type TreeHandle,
+  type TreeOptions,
+} from "@goblin-systems/goblin-design-system";
+
+const tree = bindTree({
+  el: document.getElementById("my-tree")!,
+});
+
+tree.expandAll();
+tree.collapseAll();
+```
+
+Returned handle:
+
+- `expand(item)`
+- `collapse(item)`
+- `expandAll()`
+- `collapseAll()`
+- `destroy()`
+
+### Context Menu
+
+```ts
+import {
+  bindContextMenu,
+  type ContextMenuHandle,
+  type ContextMenuItem,
+  type ContextMenuOptions,
+} from "@goblin-systems/goblin-design-system";
+
+const menu = bindContextMenu({
+  target: document.getElementById("target")!,
+  items: [
+    { id: "rename", label: "Rename", icon: "pencil", onSelect: () => console.log("rename") },
+    { divider: true },
+    { id: "delete", label: "Delete", icon: "trash-2", shortcut: "Del" },
+  ],
+});
+
+menu.open(120, 80);
+```
+
+Returned handle:
+
+- `open(x, y)`
+- `close()`
+- `destroy()`
 
 ### Tauri Helpers
 
@@ -593,6 +956,21 @@ Classes:
 - `is-open`
 - `is-active`
 
+### Tooltip Anchors
+
+```html
+<button data-tooltip="Refresh dataset" data-tooltip-placement="bottom">
+  <i data-lucide="refresh-cw"></i>
+</button>
+```
+
+Attributes managed by JS:
+
+- `data-tooltip`
+- `data-tooltip-placement`
+- `data-tooltip-visible`
+- `data-tooltip-side`
+
 ### Double Range Slider
 
 ```html
@@ -662,6 +1040,280 @@ Optional CSS variables for per-instance styling:
 - `--radial-control-track-color`
 - `--radial-control-thumb-stroke`
 - `--radial-control-focus-ring`
+
+### Switch
+
+```html
+<label id="my-switch" class="switch">
+  <input type="checkbox" />
+  <span class="switch-track"><span class="switch-thumb"></span></span>
+  <span class="switch-label">Auto-correct</span>
+</label>
+```
+
+Classes:
+
+- `switch`
+- `switch-track`
+- `switch-thumb`
+- `switch-label`
+
+### Accordion
+
+```html
+<div id="my-accordion" class="accordion">
+  <div class="accordion-item is-open">
+    <button class="accordion-trigger">
+      <span>Section</span>
+      <i data-lucide="chevron-down"></i>
+    </button>
+    <div class="accordion-panel">Panel body</div>
+  </div>
+</div>
+```
+
+Classes:
+
+- `accordion`
+- `accordion-item`
+- `accordion-trigger`
+- `accordion-panel`
+- `is-open`
+
+### Drawer
+
+```html
+<div id="my-drawer" class="drawer drawer-right" aria-hidden="true" hidden>
+  <div class="drawer-header">
+    <h3>Properties</h3>
+    <button class="icon-btn icon-btn-sm"><i data-lucide="x"></i></button>
+  </div>
+  <div class="drawer-body">...</div>
+  <div class="drawer-footer">...</div>
+</div>
+```
+
+Classes:
+
+- `drawer-backdrop`
+- `drawer`
+- `drawer-left`
+- `drawer-right`
+- `drawer-header`
+- `drawer-body`
+- `drawer-footer`
+- `drawer-open` on `body` while open
+- `is-open`
+
+### Pagination
+
+```html
+<nav id="my-pagination" class="pagination" aria-label="Pagination"></nav>
+```
+
+Classes:
+
+- `pagination`
+- `page-btn`
+- `page-ellipsis`
+- `is-active`
+
+### Popover
+
+```html
+<button id="popover-btn" class="secondary-btn">Open</button>
+
+<div id="popover-card" class="popover">
+  <div class="popover-title">Quick action</div>
+  <div>Body</div>
+</div>
+```
+
+Classes:
+
+- `popover`
+- `popover-title`
+- `is-open`
+
+Dataset applied by JS:
+
+- `data-placement`
+
+### Stepper
+
+```html
+<div id="my-stepper" class="stepper">
+  <div class="step step-complete"><span class="step-indicator">1</span><span class="step-label">One</span></div>
+  <div class="step step-active"><span class="step-indicator">2</span><span class="step-label">Two</span></div>
+  <div class="step"><span class="step-indicator">3</span><span class="step-label">Three</span></div>
+</div>
+```
+
+Classes:
+
+- `stepper`
+- `step`
+- `step-indicator`
+- `step-label`
+- `step-active`
+- `step-complete`
+- `step-error`
+
+### Toggle Group
+
+```html
+<div id="my-toggle-group" class="btn-group">
+  <button class="secondary-btn is-active" data-value="snap">Snap</button>
+  <button class="secondary-btn" data-value="guides">Guides</button>
+</div>
+```
+
+Toggle groups reuse `.btn-group` styling and JS manages `.is-active` plus `aria-pressed`.
+
+### Table
+
+```html
+<table id="my-table" class="table">
+  <thead>
+    <tr>
+      <th class="table-sortable">Name</th>
+      <th class="table-sortable">Size</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td>Banner.png</td><td>2.4 MB</td></tr>
+  </tbody>
+</table>
+```
+
+Classes:
+
+- `table`
+- `table-compact`
+- `table-sortable`
+- `sort-asc`
+- `sort-desc`
+
+### Custom Select
+
+```html
+<div id="my-select" class="custom-select">
+  <label for="my-select-native">Theme</label>
+  <select id="my-select-native" class="custom-select-native">
+    <option value="goblin" data-icon="sparkles">Goblin</option>
+  </select>
+  <button type="button" class="secondary-btn custom-select-trigger"></button>
+  <div class="custom-select-list">
+    <input class="custom-select-search" type="text" placeholder="Filter options..." />
+  </div>
+</div>
+```
+
+Classes:
+
+- `custom-select`
+- `custom-select-native`
+- `custom-select-trigger`
+- `custom-select-list`
+- `custom-select-search`
+- `custom-select-group`
+- `custom-select-group-label`
+- `custom-select-option`
+- `custom-select-option-icon`
+- `is-enhanced`
+- `is-open`
+- `is-active`
+- `is-selected`
+
+### Transfer List
+
+```html
+<div id="my-transfer-list" class="transfer-list">
+  <div class="transfer-list-column">
+    <div class="transfer-list-items" data-transfer-list="left">
+      <button type="button" class="transfer-list-item" data-value="title">Title</button>
+    </div>
+  </div>
+  <div class="transfer-list-actions">
+    <button class="secondary-btn slim-btn" data-transfer-action="to-right">&gt;</button>
+  </div>
+  <div class="transfer-list-column">
+    <div class="transfer-list-items" data-transfer-list="right"></div>
+  </div>
+</div>
+```
+
+Classes and attributes:
+
+- `transfer-list`
+- `transfer-list-column`
+- `transfer-list-items`
+- `transfer-list-item`
+- `transfer-list-actions`
+- `is-selected`
+- `data-transfer-list="left|right"`
+- `data-transfer-action="to-right|all-right|to-left|all-left"`
+
+### Rating
+
+```html
+<div id="my-rating" class="rating" data-rating-value="3" aria-label="Rating input">
+  <button class="rating-star" type="button"><i data-lucide="star"></i></button>
+  <button class="rating-star" type="button"><i data-lucide="star"></i></button>
+  <button class="rating-star" type="button"><i data-lucide="star"></i></button>
+</div>
+```
+
+Classes:
+
+- `rating`
+- `rating-star`
+- `is-active`
+
+### Tree
+
+```html
+<ul id="my-tree" class="tree" role="tree">
+  <li class="tree-item is-open" style="--tree-depth:0">
+    <div class="tree-row">
+      <button class="tree-toggle" type="button"><i data-lucide="chevron-right"></i> src</button>
+    </div>
+    <ul class="tree-branch">
+      <li class="tree-item" style="--tree-depth:1">
+        <div class="tree-row">
+          <button class="tree-leaf" type="button"><i data-lucide="file-code-2"></i> index.ts</button>
+        </div>
+      </li>
+    </ul>
+  </li>
+</ul>
+```
+
+Classes:
+
+- `tree`
+- `tree-item`
+- `tree-row`
+- `tree-toggle`
+- `tree-leaf`
+- `tree-branch`
+- `is-open`
+
+### Context Menu
+
+`bindContextMenu()` renders its menu for you and reuses existing nav dropdown styles.
+
+Classes used internally:
+
+- `context-menu`
+- `nav-dropdown`
+- `nav-option`
+- `nav-option--disabled`
+- `nav-option-icon`
+- `nav-option-label`
+- `nav-option-shortcut`
+- `nav-divider`
+- `is-open`
 
 ### Native Form Elements
 
@@ -1003,7 +1655,18 @@ Also available in the token set:
 - `bindRadial()` expects the documented SVG child structure to exist
 - `bindRadial()` sweeps clockwise from `startAngle` to `endAngle`; identical angles mean a full circle
 - `bindRadial().setValue()` updates the UI but does not call `onChange`
+- `bindSwitch()` expects an `input[type="checkbox"]` inside `.switch`
+- `bindAccordion()` wires ARIA ids for `.accordion-trigger` and `.accordion-panel`
 - `closeModal()` removes `body.modal-open`; stacked modals are not supported
+- `openDrawer()` moves the drawer to `document.body` if needed, traps focus, and manages a backdrop
+- `bindPagination()` renders its own buttons into `.pagination`
+- `bindPopover()` appends the popover to `document.body` and writes `data-placement`
+- `bindSelect()` expects `.custom-select-native`, `.custom-select-trigger`, and `.custom-select-list`
+- `bindSelect()` adds `.is-enhanced` and hides the native `<select>` from tab order
+- `bindTransferList()` expects `data-transfer-list` and `data-transfer-action` hooks exactly as documented
+- `bindRating()` treats the root as a slider and toggles `.is-active` on `.rating-star`
+- `bindTree()` expects `.tree-item`, `.tree-toggle` / `.tree-leaf`, and nested `.tree-branch`
+- `bindContextMenu()` creates and owns the menu DOM
 - `setupWindowControls()` is only for Tauri apps
 - `setupContextMenuGuard()` disables right-click and keyboard context-menu shortcuts globally
 - `drawWaveform()` is low-level canvas drawing; the caller owns animation, clearing, sizing, and DPR handling

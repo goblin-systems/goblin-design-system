@@ -5,7 +5,7 @@
   "identifier": "com.goblin-design-system",
   "build": {
     "beforeDevCommand": "bun run dev",
-    "devUrl": "http://localhost:1440",
+    "devUrl": "http://localhost:1442",
     "beforeBuildCommand": "bun run build",
     "frontendDist": "../dist"
   },
