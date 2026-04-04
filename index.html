@@ -20,18 +20,18 @@
           <div class="window-subtitle">Component library &amp; visual reference</div>
         </div>
 
-        <!-- Top-level section tabs -->
         <div class="top-tabs">
           <button class="top-tab is-active" data-tab-trigger="foundations">Foundations</button>
           <button class="top-tab" data-tab-trigger="primitives">Primitives</button>
-          <button class="top-tab" data-tab-trigger="feedback">Feedback</button>
+          <button class="top-tab" data-tab-trigger="forms">Forms</button>
+          <button class="top-tab" data-tab-trigger="data">Data</button>
           <button class="top-tab" data-tab-trigger="navigation">Navigation</button>
+          <button class="top-tab" data-tab-trigger="overlays">Overlays</button>
+          <button class="top-tab" data-tab-trigger="layout">Layout</button>
           <button class="top-tab" data-tab-trigger="waveform">Waveform</button>
           <button class="top-tab" data-tab-trigger="overlay">Overlay</button>
-          <button class="top-tab" data-tab-trigger="showcase">Showcase</button>
         </div>
 
-        <!-- Window controls -->
         <div class="window-actions">
           <button id="window-minimize-btn" class="icon-btn icon-btn-md" title="Minimize"><i data-lucide="minus"></i></button>
           <button id="window-maximize-btn" class="icon-btn icon-btn-md" title="Maximize"><i data-lucide="maximize-2"></i></button>
@@ -49,7 +49,6 @@
               <span id="theme-current-badge" class="badge default">Goblin</span>
             </div>
             <p class="hint">Switch the demo between the package's built-in theme presets.</p>
-
             <div class="mini-panel">
               <div class="field">
                 <div class="field-block">
@@ -70,7 +69,6 @@
               <h2>Color Tokens</h2>
               <span class="badge default">:root</span>
             </div>
-
             <div class="mini-panel">
               <h3>Semantic Surfaces</h3>
               <div class="demo-swatch-grid">
@@ -80,7 +78,6 @@
                 <div class="demo-swatch" style="background:var(--bg-deep)"><span>--bg-deep</span></div>
               </div>
             </div>
-
             <div class="mini-panel">
               <h3>Accent Palette</h3>
               <div class="demo-swatch-grid">
@@ -90,7 +87,6 @@
                 <div class="demo-swatch" style="background:var(--goblin-purple-200)"><span>purple-200</span></div>
               </div>
             </div>
-
             <div class="mini-panel">
               <h3>Semantic Colors</h3>
               <div class="demo-swatch-grid">
@@ -109,60 +105,59 @@
           <div class="settings-section">
             <h2>Typography</h2>
             <div class="demo-type-scale">
-              <div class="demo-type-row">
-                <span class="demo-type-label">--font-size-xs · 10px</span>
-                <span style="font-size:var(--font-size-xs)">The quick brown fox jumps over the lazy goblin</span>
-              </div>
-              <div class="demo-type-row">
-                <span class="demo-type-label">--font-size-sm · 11px</span>
-                <span style="font-size:var(--font-size-sm)">The quick brown fox jumps over the lazy goblin</span>
-              </div>
-              <div class="demo-type-row">
-                <span class="demo-type-label">--font-size-md · 12px</span>
-                <span style="font-size:var(--font-size-md)">The quick brown fox jumps over the lazy goblin</span>
-              </div>
-              <div class="demo-type-row">
-                <span class="demo-type-label">--font-size-base · 13px</span>
-                <span style="font-size:var(--font-size-base)">The quick brown fox jumps over the lazy goblin</span>
-              </div>
-              <div class="demo-type-row">
-                <span class="demo-type-label">--font-size-lg · 14px</span>
-                <span style="font-size:var(--font-size-lg)">The quick brown fox jumps over the lazy goblin</span>
-              </div>
-              <div class="demo-type-row">
-                <span class="demo-type-label">--font-size-xl · 15px</span>
-                <span style="font-size:var(--font-size-xl)">The quick brown fox jumps over the lazy goblin</span>
-              </div>
-              <div class="demo-type-row">
-                <span class="demo-type-label">--font-size-2xl · 16px</span>
-                <span style="font-size:var(--font-size-2xl)">The quick brown fox jumps over the lazy goblin</span>
-              </div>
-              <div class="demo-type-row">
-                <span class="demo-type-label">--font-mono</span>
-                <span style="font-family:var(--font-mono); font-size:var(--font-size-base)">0123456789 abcdef HELLO WORLD</span>
-              </div>
+              <div class="demo-type-row"><span class="demo-type-label">--font-size-xs · 10px</span><span style="font-size:var(--font-size-xs)">The quick brown fox jumps over the lazy goblin</span></div>
+              <div class="demo-type-row"><span class="demo-type-label">--font-size-sm · 11px</span><span style="font-size:var(--font-size-sm)">The quick brown fox jumps over the lazy goblin</span></div>
+              <div class="demo-type-row"><span class="demo-type-label">--font-size-md · 12px</span><span style="font-size:var(--font-size-md)">The quick brown fox jumps over the lazy goblin</span></div>
+              <div class="demo-type-row"><span class="demo-type-label">--font-size-base · 13px</span><span style="font-size:var(--font-size-base)">The quick brown fox jumps over the lazy goblin</span></div>
+              <div class="demo-type-row"><span class="demo-type-label">--font-size-lg · 14px</span><span style="font-size:var(--font-size-lg)">The quick brown fox jumps over the lazy goblin</span></div>
+              <div class="demo-type-row"><span class="demo-type-label">--font-size-xl · 15px</span><span style="font-size:var(--font-size-xl)">The quick brown fox jumps over the lazy goblin</span></div>
+              <div class="demo-type-row"><span class="demo-type-label">--font-size-2xl · 16px</span><span style="font-size:var(--font-size-2xl)">The quick brown fox jumps over the lazy goblin</span></div>
+              <div class="demo-type-row"><span class="demo-type-label">--font-mono</span><span style="font-family:var(--font-mono); font-size:var(--font-size-base)">0123456789 abcdef HELLO WORLD</span></div>
             </div>
           </div>
 
+          <div class="settings-section">
+            <h2>Shadows &amp; Elevation</h2>
+            <div class="demo-grid">
+              <div class="mini-panel" style="box-shadow:var(--shadow-card)"><h3>Card shadow</h3><span class="hint">--shadow-card</span></div>
+              <div class="mini-panel" style="box-shadow:var(--shadow-modal)"><h3>Modal shadow</h3><span class="hint">--shadow-modal</span></div>
+              <div class="mini-panel" style="box-shadow:var(--shadow-toast)"><h3>Toast shadow</h3><span class="hint">--shadow-toast</span></div>
+              <div class="mini-panel" style="box-shadow:var(--shadow-inset)"><h3>Inset highlight</h3><span class="hint">--shadow-inset</span></div>
+              <div class="mini-panel" style="box-shadow:var(--elevation-1)"><span class="hint">--elevation-1</span></div>
+              <div class="mini-panel" style="box-shadow:var(--elevation-2)"><span class="hint">--elevation-2</span></div>
+              <div class="mini-panel" style="box-shadow:var(--elevation-3)"><span class="hint">--elevation-3</span></div>
+              <div class="mini-panel" style="box-shadow:var(--elevation-4)"><span class="hint">--elevation-4</span></div>
+              <div class="mini-panel" style="box-shadow:var(--elevation-5)"><span class="hint">--elevation-5</span></div>
+            </div>
+          </div>
 
           <div class="settings-section">
-            <h2>Shadows</h2>
-            <div class="demo-grid">
-              <div class="mini-panel" style="box-shadow:var(--shadow-card)">
-                <h3>Card shadow</h3>
-                <span class="hint">--shadow-card</span>
+            <div class="section-heading-row"><h2>Token Override</h2></div>
+            <div class="demo-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+              <div class="card">
+                <div class="card-header"><h3>Live overrides</h3></div>
+                <div class="card-body token-panel">
+                  <label>Accent<input id="token-accent" type="color" value="#6c63ff" /></label>
+                  <label>Background<input id="token-bg" type="color" value="#0d1324" /></label>
+                  <label>Border<input id="token-border" type="color" value="#2a2a4a" /></label>
+                  <label>Text<input id="token-text" type="color" value="#e0e0e0" /></label>
+                  <label>Base font size<input id="token-font-size" type="range" min="12" max="18" value="13" /></label>
+                </div>
+                <div class="card-footer row gap-3 justify-between align-center" style="flex-wrap:wrap">
+                  <span class="hint">Breakpoints: <code>--breakpoint-lg</code> = 1100px</span>
+                  <span class="hint"><code>--breakpoint-md</code> = 760px</span>
+                </div>
               </div>
-              <div class="mini-panel" style="box-shadow:var(--shadow-modal)">
-                <h3>Modal shadow</h3>
-                <span class="hint">--shadow-modal</span>
-              </div>
-              <div class="mini-panel" style="box-shadow:var(--shadow-toast)">
-                <h3>Toast shadow</h3>
-                <span class="hint">--shadow-toast</span>
-              </div>
-              <div class="mini-panel" style="box-shadow:var(--shadow-inset)">
-                <h3>Inset highlight</h3>
-                <span class="hint">--shadow-inset</span>
+              <div class="card">
+                <div class="card-header"><h3>Accessibility</h3></div>
+                <div class="card-body stack gap-3">
+                  <div class="row gap-3 align-center"><span class="badge default">Tabs</span><span class="hint">Arrow keys, Home, End</span></div>
+                  <div class="row gap-3 align-center"><span class="badge default">Search</span><span class="hint">Combobox with live result announcements</span></div>
+                  <div class="row gap-3 align-center"><span class="badge default">Navigation</span><span class="hint">Arrow traversal, submenu open with Right</span></div>
+                  <div class="row gap-3 align-center"><span class="badge default">Accordion</span><span class="hint">Enter, Space, ArrowUp, ArrowDown</span></div>
+                  <div class="row gap-3 align-center"><span class="badge default">Tree</span><span class="hint">Arrow keys, Enter, *</span></div>
+                  <div class="hint">Use OS reduced-motion mode to verify all animations collapse to near-instant state.</div>
+                </div>
               </div>
             </div>
           </div>
@@ -170,15 +165,22 @@
         </div>
       </div>
 
-      <!-- ─────────────────────── PRIMITIVES ─────────────────────────────── -->
+      <!-- ─────────────────────── PRIMITIVES ──────────────────────────────── -->
       <div class="tab-panel" data-tab-panel="primitives">
         <div class="demo-section">
 
           <div class="settings-section">
             <h2>Buttons</h2>
-            <div class="section-heading-row" style="margin-bottom:2px">
-              <span class="hint">Text actions</span>
+            <div class="section-heading-row" style="margin-bottom:2px"><span class="hint">Primary actions</span></div>
+            <div class="demo-row">
+              <button class="primary-btn"><i data-lucide="sparkles"></i> Save changes</button>
+              <button class="primary-btn slim-btn">Run</button>
+              <button class="danger-btn"><i data-lucide="trash-2"></i> Delete</button>
+              <button class="danger-btn slim-btn">Nuke</button>
+              <button class="primary-btn" disabled>Disabled</button>
+              <button class="text-btn">Cancel</button>
             </div>
+            <div class="section-heading-row" style="margin-top:6px; margin-bottom:2px"><span class="hint">Secondary + icon buttons</span></div>
             <div class="demo-row">
               <button class="secondary-btn"><i data-lucide="download"></i> Download</button>
               <button class="secondary-btn"><i data-lucide="upload"></i> Upload</button>
@@ -186,33 +188,26 @@
               <button class="secondary-btn slim-btn"><i data-lucide="plus"></i></button>
               <button class="secondary-btn" disabled><i data-lucide="lock"></i> Disabled</button>
             </div>
-
-            <div class="section-heading-row" style="margin-top:6px; margin-bottom:2px">
-              <span class="hint">Icon buttons — sm / md / lg</span>
-            </div>
+            <div class="section-heading-row" style="margin-top:6px; margin-bottom:2px"><span class="hint">Icon buttons — sm / md / lg</span></div>
             <div class="demo-row">
-              <button class="icon-btn icon-btn-sm" title="Search"><i data-lucide="search"></i></button>
+              <button class="icon-btn icon-btn-sm" title="Search" data-tooltip="Search" data-tooltip-placement="bottom"><i data-lucide="search"></i></button>
               <button class="icon-btn icon-btn-sm" title="Filter"><i data-lucide="filter"></i></button>
               <button class="icon-btn icon-btn-sm" title="Settings"><i data-lucide="settings"></i></button>
-
               <button class="icon-btn icon-btn-md" title="Edit"><i data-lucide="pencil"></i></button>
               <button class="icon-btn icon-btn-md" title="Copy"><i data-lucide="copy"></i></button>
               <button class="icon-btn icon-btn-md" title="Delete"><i data-lucide="trash-2"></i></button>
-              <button class="icon-btn icon-btn-md" title="Eye"><i data-lucide="eye"></i></button>
-              <button class="icon-btn icon-btn-md" title="Layers"><i data-lucide="layers"></i></button>
-
+              <button class="icon-btn icon-btn-md" data-tooltip="Refresh dataset" data-tooltip-placement="bottom"><i data-lucide="refresh-cw"></i></button>
               <button class="icon-btn icon-btn-lg" title="Wand"><i data-lucide="wand-2"></i></button>
               <button class="icon-btn icon-btn-lg" title="Palette"><i data-lucide="palette"></i></button>
               <button class="icon-btn icon-btn-lg" title="Sliders"><i data-lucide="sliders-horizontal"></i></button>
-
-              <button class="icon-btn icon-btn-md" title="Minimize (window)" id="window-minimize-btn-demo"><i data-lucide="minus"></i></button>
-              <button class="icon-btn icon-btn-md" title="Close (window)"><i data-lucide="x"></i></button>
             </div>
-
-            <div class="section-heading-row" style="margin-top:6px; margin-bottom:2px">
-              <span class="hint">Help &amp; close inline variants</span>
-            </div>
+            <div class="section-heading-row" style="margin-top:6px; margin-bottom:2px"><span class="hint">Button groups</span></div>
             <div class="demo-row">
+              <div class="btn-group">
+                <button class="secondary-btn is-active">List</button>
+                <button class="secondary-btn">Grid</button>
+                <button class="secondary-btn">Canvas</button>
+              </div>
               <button class="icon-btn help-btn"><i data-lucide="info"></i></button>
               <button class="icon-btn modal-close-btn"><i data-lucide="x"></i></button>
               <button class="icon-btn icon-btn-sm" disabled title="Disabled"><i data-lucide="mic-off"></i></button>
@@ -236,34 +231,19 @@
           </div>
 
           <div class="settings-section">
-            <h2>Badges</h2>
-            <div class="demo-row">
+            <h2>Badges &amp; Status</h2>
+            <div class="demo-row" style="margin-bottom:8px">
               <span class="badge default">Default</span>
               <span class="badge beta">Beta</span>
               <span class="badge success">Success</span>
               <span class="badge error">Error</span>
+              <span class="badge warning">Warning</span>
             </div>
-          </div>
-
-          <div class="settings-section">
-            <h2>Status Indicators</h2>
             <div class="demo-grid">
-              <div class="status-indicator connected">
-                <span class="status-dot"></span>
-                <span>Connected</span>
-              </div>
-              <div class="status-indicator untested">
-                <span class="status-dot"></span>
-                <span>Untested</span>
-              </div>
-              <div class="status-indicator disconnected">
-                <span class="status-dot"></span>
-                <span>Disconnected</span>
-              </div>
-              <div class="status-indicator error">
-                <span class="status-dot"></span>
-                <span>Error</span>
-              </div>
+              <div class="status-indicator connected" data-tooltip="Tooltip on status indicators"><span class="status-dot"></span><span>Connected</span></div>
+              <div class="status-indicator untested"><span class="status-dot"></span><span>Untested</span></div>
+              <div class="status-indicator disconnected"><span class="status-dot"></span><span>Disconnected</span></div>
+              <div class="status-indicator error"><span class="status-dot"></span><span>Error</span></div>
             </div>
             <div class="demo-row" style="padding-top:4px">
               <button class="secondary-btn slim-btn" id="cycle-status-btn">Cycle state →</button>
@@ -271,39 +251,109 @@
           </div>
 
           <div class="settings-section">
-            <h2>Hint Text &amp; Kbd</h2>
-            <div class="demo-row" style="align-items:flex-start; flex-direction:column; gap:8px">
+            <h2>Avatar, Chips &amp; Link</h2>
+            <div class="demo-row" style="flex-wrap:wrap" id="demo-chip-row">
+              <span class="chip" tabindex="0"><span>gpt-4o</span><button class="chip-remove"><i data-lucide="x"></i></button></span>
+              <span class="chip chip-accent is-selected">Active</span>
+              <span class="chip is-disabled">Disabled</span>
+              <span class="avatar avatar-sm">GS</span>
+              <span class="avatar avatar-md">SP</span>
+              <span class="avatar avatar-lg"><img src="https://placehold.co/96x96/png" alt="Goblin user" /></span>
+            </div>
+            <div class="demo-row" style="margin-top:8px">
+              <p>Read the <a href="#" class="link">documentation</a> to get started.</p>
+              <p><a href="#" class="link link-muted">Muted link</a></p>
+              <p>A <a href="#" class="link link-inherit">inherit-color link</a> inline.</p>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h2>Hints, Kbd &amp; Stat Cards</h2>
+            <div class="demo-row" style="align-items:flex-start; flex-direction:column; gap:8px; margin-bottom:12px">
               <p class="hint">This is a hint text block. It provides contextual help below a field or section heading using a muted tone and compact line-height.</p>
               <div style="display:flex;align-items:center;gap:6px">
                 <kbd>Ctrl</kbd><span style="color:var(--text-muted)">+</span><kbd>Shift</kbd><span style="color:var(--text-muted)">+</span><kbd>G</kbd>
               </div>
             </div>
+            <div class="stat-grid">
+              <div class="stat-card"><span>Sessions today</span><strong>42</strong></div>
+              <div class="stat-card"><span>Avg latency</span><strong>180ms</strong></div>
+              <div class="stat-card"><span>Errors</span><strong style="color:var(--error)">3</strong></div>
+              <div class="stat-card"><span>Uptime</span><strong style="color:var(--success)">99.8%</strong></div>
+            </div>
           </div>
 
           <div class="settings-section">
-            <h2>Stat Cards</h2>
-            <div class="stat-grid">
-              <div class="stat-card">
-                <span>Sessions today</span>
-                <strong>42</strong>
+            <h2>Alerts</h2>
+            <div class="stack gap-3" id="demo-alerts">
+              <div class="alert alert-info"><span class="alert-icon"><i data-lucide="info"></i></span><span class="alert-message">Workspace syncing with cloud draft.</span><button class="alert-dismiss icon-btn icon-btn-sm"><i data-lucide="x"></i></button></div>
+              <div class="alert alert-success"><span class="alert-icon"><i data-lucide="check-circle-2"></i></span><span class="alert-message">Preset saved to your library.</span><button class="alert-dismiss icon-btn icon-btn-sm"><i data-lucide="x"></i></button></div>
+              <div class="alert alert-warning"><span class="alert-icon"><i data-lucide="alert-triangle"></i></span><span class="alert-message">Provider key expires in 3 days.</span><button class="alert-dismiss icon-btn icon-btn-sm"><i data-lucide="x"></i></button></div>
+              <div class="alert alert-error"><span class="alert-icon"><i data-lucide="circle-x"></i></span><span class="alert-message">Upload failed. Check your connection.</span><button class="alert-dismiss icon-btn icon-btn-sm"><i data-lucide="x"></i></button></div>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h2>Progress, Loaders &amp; Skeleton</h2>
+            <div class="demo-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+              <div class="mini-panel stack gap-3">
+                <h3>Progress</h3>
+                <div class="progress-bar" style="--progress: 0%"><div class="progress-fill"></div></div>
+                <div class="progress-bar" style="--progress: 50%"><div class="progress-fill"></div></div>
+                <div class="progress-bar" style="--progress: 100%"><div class="progress-fill"></div></div>
+                <div class="progress-bar indeterminate"><div class="progress-fill"></div></div>
               </div>
-              <div class="stat-card">
-                <span>Avg latency</span>
-                <strong>180ms</strong>
+              <div class="mini-panel stack gap-3">
+                <h3>Spinners</h3>
+                <div class="row gap-3 align-center"><span class="spinner spinner-sm"></span><span class="spinner spinner-md"></span><span class="spinner spinner-lg"></span></div>
+                <button class="primary-btn"><span class="spinner spinner-sm spinner-inherit"></span> Saving...</button>
               </div>
-              <div class="stat-card">
-                <span>Errors</span>
-                <strong style="color:var(--error)">3</strong>
-              </div>
-              <div class="stat-card">
-                <span>Uptime</span>
-                <strong style="color:var(--success)">99.8%</strong>
+              <div class="mini-panel stack gap-3">
+                <h3>Skeleton</h3>
+                <div class="skeleton" style="width:100%;height:60px"></div>
+                <div class="skeleton-text" style="width:80%"></div>
+                <div class="skeleton-text" style="width:62%"></div>
+                <div class="row gap-3 align-center"><span class="skeleton-circle" style="--size:32px"></span><span class="badge warning">loading</span></div>
               </div>
             </div>
           </div>
 
           <div class="settings-section">
-            <h2>Form Controls</h2>
+            <h2>Disabled States</h2>
+            <div class="demo-grid">
+              <div style="opacity:0.45; pointer-events:none; display:flex; flex-direction:column; gap:8px">
+                <input type="text" value="Disabled field" />
+                <select><option>Disabled select</option></select>
+                <button class="secondary-btn" disabled>Disabled button</button>
+              </div>
+              <div class="field-block">
+                <label>Normal for contrast</label>
+                <input type="text" placeholder="Active field" />
+                <button class="secondary-btn">Active button</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h2>Empty State</h2>
+            <div class="empty-state">
+              <div class="empty-state-card">
+                <span class="badge default">No results</span>
+                <p style="color:var(--text-muted); font-size:var(--font-size-base)">Nothing to show here yet. Add some content to get started.</p>
+                <button class="secondary-btn" style="align-self:center">Get started</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ─────────────────────── FORMS ────────────────────────────────────── -->
+      <div class="tab-panel" data-tab-panel="forms">
+        <div class="demo-section">
+
+          <div class="settings-section">
+            <h2>Inputs</h2>
             <div class="demo-grid">
               <div class="field-block">
                 <label>Text input</label>
@@ -328,135 +378,222 @@
                 </select>
               </div>
             </div>
+            <div class="demo-row" style="margin-top:8px; flex-wrap:wrap; gap:16px">
+              <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="demo-radio" checked /><span>Option A</span><span class="badge default" style="margin-left:auto">Default</span></label>
+                <label class="radio-label"><input type="radio" name="demo-radio" /><span>Option B</span><span class="badge beta" style="margin-left:auto">Beta</span></label>
+                <label class="checkbox-label"><input type="checkbox" checked /><span>Enable feature</span></label>
+                <label class="checkbox-label"><input type="checkbox" /><span>Another toggle</span></label>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h2>Range &amp; Radial</h2>
             <div class="field-block">
               <label>Single range</label>
               <input id="demo-single-range" type="range" min="0" max="100" value="60" />
             </div>
-            <div class="field-block" style="max-width:400px">
+            <div class="field-block" style="max-width:400px; margin-top:8px">
               <label>Price range (double)</label>
               <div id="demo-range" class="range-slider">
-                <div class="range-track">
-                  <div class="range-fill"></div>
-                  <div class="range-thumb" data-thumb="lo"></div>
-                  <div class="range-thumb" data-thumb="hi"></div>
-                </div>
-                <div class="range-labels">
-                  <span class="range-label-lo"></span>
-                  <span class="range-label-hi"></span>
-                </div>
+                <div class="range-track"><div class="range-fill"></div><div class="range-thumb" data-thumb="lo"></div><div class="range-thumb" data-thumb="hi"></div></div>
+                <div class="range-labels"><span class="range-label-lo"></span><span class="range-label-hi"></span></div>
               </div>
             </div>
-            <div class="field-block" style="max-width:400px">
+            <div class="field-block" style="max-width:400px; margin-top:8px">
               <label>Year range (step 5)</label>
               <div id="demo-range-2" class="range-slider">
-                <div class="range-track">
-                  <div class="range-fill"></div>
-                  <div class="range-thumb" data-thumb="lo"></div>
-                  <div class="range-thumb" data-thumb="hi"></div>
-                </div>
-                <div class="range-labels">
-                  <span class="range-label-lo"></span>
-                  <span class="range-label-hi"></span>
-                </div>
+                <div class="range-track"><div class="range-fill"></div><div class="range-thumb" data-thumb="lo"></div><div class="range-thumb" data-thumb="hi"></div></div>
+                <div class="range-labels"><span class="range-label-lo"></span><span class="range-label-hi"></span></div>
               </div>
             </div>
-            <div class="field-block" style="max-width:400px">
+            <div class="field-block" style="max-width:400px; margin-top:8px">
               <label>Exclusion range — inverted (step 10)</label>
               <div id="demo-range-inv" class="range-slider">
-                <div class="range-track">
-                  <div class="range-fill"></div>
-                  <div class="range-fill-end"></div>
-                  <div class="range-thumb" data-thumb="lo"></div>
-                  <div class="range-thumb" data-thumb="hi"></div>
-                </div>
-                <div class="range-labels">
-                  <span class="range-label-lo"></span>
-                  <span class="range-label-hi"></span>
-                </div>
+                <div class="range-track"><div class="range-fill"></div><div class="range-fill-end"></div><div class="range-thumb" data-thumb="lo"></div><div class="range-thumb" data-thumb="hi"></div></div>
+                <div class="range-labels"><span class="range-label-lo"></span><span class="range-label-hi"></span></div>
               </div>
             </div>
+            <div id="range-log" style="font-size:var(--font-size-sm);color:var(--text-muted);margin-top:4px"></div>
             <div class="demo-row" style="align-items:start; gap:20px; flex-wrap:wrap; margin-top:16px">
               <div class="field-block">
                 <label>Direction radial (0-360)</label>
                 <div id="demo-radial" class="radial-control">
                   <svg class="radial-control-visual" viewBox="0 0 100 100" aria-hidden="true">
-                    <path class="radial-control-track"></path>
-                    <path class="radial-control-fill"></path>
+                    <path class="radial-control-track"></path><path class="radial-control-fill"></path>
                     <line class="radial-control-pointer" x1="50" y1="50" x2="50" y2="22"></line>
                     <circle class="radial-control-thumb" cx="50" cy="12" r="5"></circle>
                   </svg>
-                  <div class="radial-control-readout">
-                    <span class="radial-control-value"></span>
-                    <span class="radial-control-caption">Heading</span>
-                  </div>
+                  <div class="radial-control-readout"><span class="radial-control-value"></span><span class="radial-control-caption">Heading</span></div>
                 </div>
               </div>
               <div class="field-block">
                 <label>Limited sweep (20-160)</label>
                 <div id="demo-radial-sweep" class="radial-control radial-control-sm">
                   <svg class="radial-control-visual" viewBox="0 0 100 100" aria-hidden="true">
-                    <path class="radial-control-track"></path>
-                    <path class="radial-control-fill"></path>
+                    <path class="radial-control-track"></path><path class="radial-control-fill"></path>
                     <line class="radial-control-pointer" x1="50" y1="50" x2="50" y2="22"></line>
                     <circle class="radial-control-thumb" cx="50" cy="12" r="5"></circle>
                   </svg>
-                  <div class="radial-control-readout">
-                    <span class="radial-control-value"></span>
-                    <span class="radial-control-caption">Cone</span>
-                  </div>
+                  <div class="radial-control-readout"><span class="radial-control-value"></span><span class="radial-control-caption">Cone</span></div>
                 </div>
               </div>
               <div class="field-block">
                 <label>Fine trim (-12 to +12)</label>
-                <div
-                  id="demo-radial-fine"
-                  class="radial-control radial-control-xs"
-                  style="--radial-control-fill-color:color-mix(in srgb, var(--warning) 62%, var(--text-heading));--radial-control-fill-shadow:color-mix(in srgb, var(--warning) 28%, transparent);--radial-control-thumb-stroke:color-mix(in srgb, var(--warning) 68%, var(--text-heading));--radial-control-focus-ring:color-mix(in srgb, var(--warning) 28%, transparent)"
-                >
+                <div id="demo-radial-fine" class="radial-control radial-control-xs" style="--radial-control-fill-color:color-mix(in srgb, var(--warning) 62%, var(--text-heading));--radial-control-fill-shadow:color-mix(in srgb, var(--warning) 28%, transparent);--radial-control-thumb-stroke:color-mix(in srgb, var(--warning) 68%, var(--text-heading));--radial-control-focus-ring:color-mix(in srgb, var(--warning) 28%, transparent)">
                   <svg class="radial-control-visual" viewBox="0 0 100 100" aria-hidden="true">
-                    <path class="radial-control-track"></path>
-                    <path class="radial-control-fill"></path>
+                    <path class="radial-control-track"></path><path class="radial-control-fill"></path>
                     <line class="radial-control-pointer" x1="50" y1="50" x2="50" y2="22"></line>
                     <circle class="radial-control-thumb" cx="50" cy="12" r="5"></circle>
                   </svg>
-                  <div class="radial-control-readout">
-                    <span class="radial-control-value"></span>
-                    <span class="radial-control-caption">Trim</span>
-                  </div>
+                  <div class="radial-control-readout"><span class="radial-control-value"></span><span class="radial-control-caption">Trim</span></div>
                 </div>
               </div>
             </div>
-            <div id="range-log" style="font-size:var(--font-size-sm);color:var(--text-muted);margin-top:4px"></div>
             <div id="radial-log" style="font-size:var(--font-size-sm);color:var(--text-muted);margin-top:4px"></div>
-            <div class="radio-group">
-              <label class="radio-label">
-                <input type="radio" name="demo-radio" checked />
-                <span>Option A</span>
-                <span class="badge default" style="margin-left:auto">Default</span>
-              </label>
-              <label class="radio-label">
-                <input type="radio" name="demo-radio" />
-                <span>Option B</span>
-                <span class="badge beta" style="margin-left:auto">Beta</span>
-              </label>
-              <label class="checkbox-label">
-                <input type="checkbox" checked />
-                <span>Enable feature</span>
-              </label>
-              <label class="checkbox-label">
+          </div>
+
+          <div class="settings-section">
+            <h2>Switch &amp; Toggle</h2>
+            <div class="row gap-5 align-center" style="flex-wrap:wrap">
+              <label id="switch-auto-correct" class="switch">
                 <input type="checkbox" />
-                <span>Another toggle</span>
+                <span class="switch-track"><span class="switch-thumb"></span></span>
+                <span class="switch-label">Auto-correct</span>
               </label>
+              <label id="switch-snap-grid" class="switch">
+                <input type="checkbox" checked />
+                <span class="switch-track"><span class="switch-thumb"></span></span>
+                <span class="switch-label">Snap to grid</span>
+              </label>
+              <label id="switch-disabled" class="switch">
+                <input type="checkbox" disabled />
+                <span class="switch-track"><span class="switch-thumb"></span></span>
+                <span class="switch-label">Disabled</span>
+              </label>
+            </div>
+            <div class="row gap-2 justify-between align-center" style="margin-top:4px">
+              <span class="hint">Keyboard-only mode</span>
+              <label id="keyboard-only-mode" class="switch"><input type="checkbox" /><span class="switch-track"><span class="switch-thumb"></span></span><span class="switch-label">Hide cursor</span></label>
+            </div>
+            <div class="demo-row" style="margin-top:12px">
+              <div id="demo-toggle-group" class="btn-group">
+                <button class="secondary-btn is-active" data-value="snap">Snap</button>
+                <button class="secondary-btn" data-value="guides">Guides</button>
+                <button class="secondary-btn is-active" data-value="safe-area">Safe area</button>
+              </div>
             </div>
           </div>
 
           <div class="settings-section">
-            <h2>Empty State</h2>
-            <div class="empty-state">
-              <div class="empty-state-card">
-                <span class="badge default">No results</span>
-                <p style="color:var(--text-muted); font-size:var(--font-size-base)">Nothing to show here yet. Add some content to get started.</p>
-                <button class="secondary-btn" style="align-self:center">Get started</button>
+            <h2>Field</h2>
+            <div class="demo-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+              <div class="card">
+                <div class="card-header"><h3>Validation states</h3></div>
+                <div class="card-body stack gap-4">
+                  <div class="field is-error">
+                    <div class="field-block"><label>Email</label><input type="email" value="not-an-email" /></div>
+                    <span class="field-hint">Enter a valid email address</span>
+                  </div>
+                  <div class="field is-success">
+                    <div class="field-block"><label>Username</label><input type="text" value="goblin_dev" /></div>
+                    <span class="field-hint">Username is available</span>
+                  </div>
+                  <div class="field">
+                    <div class="field-block"><label>Bio</label><input type="text" /></div>
+                    <span class="field-hint">Optional — shown on your profile</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header"><h3>Floating label</h3></div>
+                <div class="card-body stack gap-4">
+                  <div class="text-field" data-bind>
+                    <input type="text" id="demo-tf-name" />
+                    <label for="demo-tf-name">Full name</label>
+                  </div>
+                  <div class="text-field" data-bind>
+                    <input type="email" id="demo-tf-email" />
+                    <label for="demo-tf-email">Email address</label>
+                  </div>
+                  <div class="text-field" data-bind>
+                    <input type="text" id="demo-tf-prefilled" value="Goblin" />
+                    <label for="demo-tf-prefilled">Project name</label>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header"><h3>Floating label + validation</h3></div>
+                <div class="card-body stack gap-4">
+                  <div class="text-field" id="demo-field-email">
+                    <input type="email" id="demo-field-email-input" />
+                    <label for="demo-field-email-input">Email address</label>
+                    <span class="field-hint"></span>
+                  </div>
+                  <div class="text-field" id="demo-field-username">
+                    <input type="text" id="demo-field-username-input" />
+                    <label for="demo-field-username-input">Username</label>
+                    <span class="field-hint"></span>
+                  </div>
+                  <div class="text-field" id="demo-field-project">
+                    <input type="text" id="demo-field-project-input" value="Goblin" />
+                    <label for="demo-field-project-input">Project name</label>
+                    <span class="field-hint">Optional — rename anytime</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h2>Advanced Inputs</h2>
+            <div class="demo-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+              <div class="card">
+                <div class="card-header"><h3>Input Adornments</h3></div>
+                <div class="card-body stack gap-4">
+                  <div class="field-block">
+                    <label>Search</label>
+                    <div class="input-wrap input-wrap-start">
+                      <div class="input-adornment input-adornment-start"><i data-lucide="search"></i></div>
+                      <input type="text" placeholder="Find anything…" />
+                    </div>
+                  </div>
+                  <div class="field-block">
+                    <label>Password</label>
+                    <div class="input-wrap input-wrap-end" id="demo-pw-wrap">
+                      <input type="password" id="demo-pw-input" placeholder="Enter password" />
+                      <div class="input-adornment input-adornment-end"><button type="button" id="demo-pw-toggle" aria-label="Toggle password"><i data-lucide="eye"></i></button></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header"><h3>Multi-select</h3></div>
+                <div class="card-body stack gap-3">
+                  <div id="demo-multi-select" class="custom-select">
+                    <label for="demo-multi-select-native">Frameworks</label>
+                    <select id="demo-multi-select-native" multiple class="custom-select-native">
+                      <option value="react">React</option>
+                      <option value="vue">Vue</option>
+                      <option value="angular">Angular</option>
+                      <option value="svelte">Svelte</option>
+                      <option value="solid">Solid</option>
+                      <option value="qwik">Qwik</option>
+                    </select>
+                    <div class="custom-select-trigger"></div>
+                    <div class="custom-select-list"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-header"><h3>Date Picker</h3></div>
+                <div class="card-body stack gap-4">
+                  <div class="field-block">
+                    <label for="demo-date-picker">Start date</label>
+                    <input id="demo-date-picker" type="text" style="width:100%" />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -464,73 +601,105 @@
         </div>
       </div>
 
-      <!-- ─────────────────────── FEEDBACK ────────────────────────────────── -->
-      <div class="tab-panel" data-tab-panel="feedback">
+      <!-- ─────────────────────── DATA ─────────────────────────────────────── -->
+      <div class="tab-panel" data-tab-panel="data">
         <div class="demo-section">
 
           <div class="settings-section">
-            <h2>Toast</h2>
-            <div class="section-heading-row">
-              <span class="hint">Click a button to trigger an animated toast notification.</span>
-            </div>
-            <div class="demo-row">
-              <button class="secondary-btn" id="toast-success-btn">Toast Success</button>
-              <button class="secondary-btn" id="toast-error-btn">Toast Error</button>
-              <button class="secondary-btn" id="toast-info-btn">Toast Info</button>
-            </div>
-          </div>
-
-          <div class="settings-section">
-            <h2>Modal</h2>
-            <div class="demo-row">
-              <button class="secondary-btn" id="open-modal-btn">Open Modal</button>
-              <button class="secondary-btn" id="confirm-modal-btn">Confirm Modal</button>
-              <button class="secondary-btn" id="confirm-danger-btn">Danger Confirm</button>
-              <button class="secondary-btn" id="no-backdrop-modal-btn">No Backdrop</button>
-              <button class="secondary-btn" id="draggable-modal-btn">Draggable</button>
-            </div>
-            <div id="modal-result-log" style="font-size:var(--font-size-sm);color:var(--text-muted);min-height:20px"></div>
-          </div>
-
-          <div class="settings-section">
-            <h2>Disabled States</h2>
-            <div class="demo-grid">
-              <div style="opacity:0.45; pointer-events:none; display:flex; flex-direction:column; gap:8px">
-                <input type="text" value="Disabled field" />
-                <select><option>Disabled select</option></select>
-                <button class="secondary-btn" disabled>Disabled button</button>
+            <h2>Table &amp; Select</h2>
+            <div class="demo-grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
+              <div class="stack gap-4">
+                <table id="demo-table" class="table">
+                  <thead><tr><th class="table-sortable sort-asc">Name</th><th class="table-sortable">Size</th><th class="table-sortable">Modified</th></tr></thead>
+                  <tbody>
+                    <tr><td>Banner.png</td><td>2.4 MB</td><td>2 hours ago</td></tr>
+                    <tr><td>Archive.zip</td><td>18.1 MB</td><td>5 hours ago</td></tr>
+                    <tr><td>Notes.txt</td><td>12 KB</td><td>Today</td></tr>
+                    <tr><td>Video.mov</td><td>105 MB</td><td>Yesterday</td></tr>
+                    <tr><td>Draft.fig</td><td>9.8 MB</td><td>3 days ago</td></tr>
+                  </tbody>
+                </table>
+                <table class="table table-compact"><thead><tr><th>Status</th><th>Job</th></tr></thead><tbody><tr><td>Queued</td><td>Export icons</td></tr><tr><td>Done</td><td>Generate palette</td></tr></tbody></table>
               </div>
-              <div class="field-block">
-                <label>Normal for contrast</label>
-                <input type="text" placeholder="Active field" />
-                <button class="secondary-btn">Active button</button>
+              <div id="demo-select" class="custom-select">
+                <label for="demo-select-native">Searchable custom select</label>
+                <select id="demo-select-native" class="custom-select-native">
+                  <option value="goblin" data-icon="sparkles">Goblin</option>
+                  <optgroup label="Built-in">
+                    <option value="waveform" data-icon="audio-waveform">Waveform</option>
+                    <option value="overlay" data-icon="panel-top">Overlay</option>
+                  </optgroup>
+                  <optgroup label="Experimental">
+                    <option value="vision" data-icon="eye">Vision</option>
+                    <option value="agent" data-icon="bot">Agent</option>
+                  </optgroup>
+                </select>
+                <button type="button" class="secondary-btn custom-select-trigger" aria-expanded="false"></button>
+                <div class="custom-select-list">
+                  <input class="custom-select-search" type="text" placeholder="Filter options..." />
+                </div>
               </div>
             </div>
           </div>
 
           <div class="settings-section">
-            <h2>Recording Dot States</h2>
-            <div class="demo-row">
-              <div style="display:flex;align-items:center;gap:6px">
-                <span class="recording-dot loading"></span>
-                <span class="hint">Loading</span>
+            <h2>List &amp; Rating</h2>
+            <span class="hint" style="margin-bottom:8px">Right-click the list to open the context menu.</span>
+            <div class="demo-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+              <ul class="list" id="demo-rich-list">
+                <li class="list-item is-selected"><span class="list-item-icon"><i data-lucide="file-text"></i></span><span class="list-item-text"><span>Prompt draft</span><span class="list-item-secondary">Modified 2 hours ago</span></span><button class="list-item-action icon-btn icon-btn-sm"><i data-lucide="trash-2"></i></button></li>
+                <li class="list-item"><span class="list-item-icon"><i data-lucide="image"></i></span><span class="list-item-text"><span>Banner.png</span><span class="list-item-secondary">2.4 MB</span></span><button class="list-item-action icon-btn icon-btn-sm"><i data-lucide="download"></i></button></li>
+                <li class="list-divider"></li>
+                <li class="list-item"><span class="list-item-icon"><i data-lucide="mic"></i></span><span class="list-item-text"><span>Meeting note</span><span class="list-item-secondary">Processed just now</span></span><button class="list-item-action icon-btn icon-btn-sm"><i data-lucide="more-horizontal"></i></button></li>
+                <li class="list-item"><span class="list-item-icon"><i data-lucide="folder"></i></span><span class="list-item-text"><span>Assets</span><span class="list-item-secondary">14 items</span></span><button class="list-item-action icon-btn icon-btn-sm"><i data-lucide="chevron-right"></i></button></li>
+                <li class="list-item"><span class="list-item-icon"><i data-lucide="bot"></i></span><span class="list-item-text"><span>Agent run</span><span class="list-item-secondary">Retry available</span></span><button class="list-item-action icon-btn icon-btn-sm"><i data-lucide="rotate-cw"></i></button></li>
+              </ul>
+              <div class="stack gap-4">
+                <div class="rating" id="demo-rating" data-rating-value="3" aria-label="Rating input">
+                  <button class="rating-star" type="button"><i data-lucide="star"></i></button>
+                  <button class="rating-star" type="button"><i data-lucide="star"></i></button>
+                  <button class="rating-star" type="button"><i data-lucide="star"></i></button>
+                  <button class="rating-star" type="button"><i data-lucide="star"></i></button>
+                  <button class="rating-star" type="button"><i data-lucide="star"></i></button>
+                </div>
+                <ul class="timeline">
+                  <li class="timeline-item"><div class="timeline-spine"><div class="timeline-dot success"></div><div class="timeline-connector"></div></div><div class="timeline-content"><div class="timeline-label">9:00 AM</div><div class="timeline-title">Deployed to production</div><div class="timeline-body">All checks passed.</div></div></li>
+                  <li class="timeline-item"><div class="timeline-spine"><div class="timeline-dot warning"></div><div class="timeline-connector"></div></div><div class="timeline-content"><div class="timeline-label">8:45 AM</div><div class="timeline-title">Build warnings</div><div class="timeline-body">3 deprecation notices.</div></div></li>
+                  <li class="timeline-item"><div class="timeline-spine"><div class="timeline-dot muted"></div></div><div class="timeline-content"><div class="timeline-label">8:30 AM</div><div class="timeline-title">Pipeline started</div></div></li>
+                </ul>
               </div>
-              <div style="display:flex;align-items:center;gap:6px">
-                <span class="recording-dot listening"></span>
-                <span class="hint">Listening</span>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h2>Tree</h2>
+            <div class="demo-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+              <div class="stack gap-3">
+                <span class="hint">Browse tree</span>
+                <ul id="demo-tree" class="tree" role="tree">
+                  <li class="tree-item is-open" style="--tree-depth:0"><div class="tree-row"><button class="tree-toggle" type="button"><i data-lucide="chevron-right"></i> src</button></div><ul class="tree-branch"><li class="tree-item is-open" style="--tree-depth:1"><div class="tree-row"><button class="tree-toggle" type="button"><i data-lucide="chevron-right"></i> lib</button></div><ul class="tree-branch"><li class="tree-item" style="--tree-depth:2"><div class="tree-row"><button class="tree-leaf" type="button"><i data-lucide="file-code-2"></i> components.css</button></div></li><li class="tree-item" style="--tree-depth:2"><div class="tree-row"><button class="tree-leaf" type="button"><i data-lucide="file-code-2"></i> index.ts</button></div></li></ul></li><li class="tree-item" style="--tree-depth:1"><div class="tree-row"><button class="tree-leaf" type="button"><i data-lucide="file-text"></i> main.ts</button></div></li></ul></li>
+                </ul>
               </div>
-              <div style="display:flex;align-items:center;gap:6px">
-                <span class="recording-dot transcribing"></span>
-                <span class="hint">Transcribing</span>
+              <div class="stack gap-3">
+                <span class="hint">Checkbox tree</span>
+                <div class="radio-group">
+                  <label class="radio-label"><input type="radio" name="tree-dot-pos" value="tree--dot-right" checked> Right (aligned)</label>
+                  <label class="radio-label"><input type="radio" name="tree-dot-pos" value=""> Inline</label>
+                  <label class="radio-label"><input type="radio" name="tree-dot-pos" value="tree--dot-left"> Left</label>
+                </div>
+                <ul id="demo-tree-checkbox" class="tree tree--dot-right" role="tree">
+                  <li class="tree-item is-open" style="--tree-depth:0" data-value="src"><div class="tree-row"><input type="checkbox" class="tree-check"><button class="tree-toggle" type="button"><i data-lucide="chevron-right"></i> src</button><span class="status-indicator connected" data-tooltip="Tracked"><span class="status-dot"></span></span></div><ul class="tree-branch"><li class="tree-item is-open" style="--tree-depth:1" data-value="src/lib"><div class="tree-row"><input type="checkbox" class="tree-check"><button class="tree-toggle" type="button"><i data-lucide="chevron-right"></i> lib</button><span class="status-indicator untested" data-tooltip="Modified"><span class="status-dot"></span></span></div><ul class="tree-branch"><li class="tree-item" style="--tree-depth:2" data-value="src/lib/headless"><div class="tree-row"><input type="checkbox" class="tree-check"><button class="tree-toggle" type="button"><i data-lucide="chevron-right"></i> headless</button></div><ul class="tree-branch"><li class="tree-item" style="--tree-depth:3" data-value="src/lib/headless/toast.ts"><div class="tree-row"><input type="checkbox" class="tree-check"><button class="tree-leaf" type="button"><i data-lucide="file-code-2"></i> toast.ts</button></div></li><li class="tree-item" style="--tree-depth:3" data-value="src/lib/headless/tree.ts"><div class="tree-row"><input type="checkbox" class="tree-check"><button class="tree-leaf" type="button"><i data-lucide="file-code-2"></i> tree.ts</button></div></li></ul></li><li class="tree-item" style="--tree-depth:2" data-value="src/lib/components.css"><div class="tree-row"><input type="checkbox" class="tree-check"><button class="tree-leaf" type="button"><i data-lucide="file-code-2"></i> components.css</button><span class="status-indicator error" data-tooltip="Conflict"><span class="status-dot"></span></span></div></li></ul></li></ul></li>
+                </ul>
               </div>
-              <div style="display:flex;align-items:center;gap:6px">
-                <span class="recording-dot correcting"></span>
-                <span class="hint">Correcting</span>
-              </div>
-              <div style="display:flex;align-items:center;gap:6px">
-                <span class="recording-dot done"></span>
-                <span class="hint">Done</span>
-              </div>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h2>Transfer List</h2>
+            <div id="demo-transfer-list" class="transfer-list">
+              <div class="transfer-list-column"><div class="hint">Available</div><div class="transfer-list-items" data-transfer-list="left"><button type="button" class="transfer-list-item" data-value="title">Title</button><button type="button" class="transfer-list-item" data-value="summary">Summary</button><button type="button" class="transfer-list-item" data-value="status">Status</button></div></div>
+              <div class="transfer-list-actions"><button class="secondary-btn slim-btn" data-transfer-action="to-right">&gt;</button><button class="secondary-btn slim-btn" data-transfer-action="all-right">&gt;&gt;</button><button class="secondary-btn slim-btn" data-transfer-action="to-left">&lt;</button><button class="secondary-btn slim-btn" data-transfer-action="all-left">&lt;&lt;</button></div>
+              <div class="transfer-list-column"><div class="hint">Visible columns</div><div class="transfer-list-items" data-transfer-list="right"><button type="button" class="transfer-list-item" data-value="owner">Owner</button><button type="button" class="transfer-list-item" data-value="updated">Updated</button></div></div>
             </div>
           </div>
 
@@ -541,191 +710,83 @@
       <div class="tab-panel" data-tab-panel="navigation">
         <div class="demo-section">
 
-          <!-- ── Header nav with dropdowns & sub-menus ── -->
           <div class="settings-section">
             <h2>Header Navigation</h2>
             <span class="hint">Click a trigger to open its dropdown. Hover items with arrows for sub-menus.</span>
-
             <nav class="nav-bar" id="demo-nav" style="margin-top:4px">
-
-              <!-- File -->
               <div class="nav-item">
                 <button class="nav-trigger">File <i data-lucide="chevron-down"></i></button>
                 <div class="nav-dropdown">
-                  <button class="nav-option" data-nav-id="new-file">
-                    <span class="nav-option-icon"><i data-lucide="plus"></i></span>
-                    <span class="nav-option-label">New File</span>
-                    <span class="nav-option-shortcut">Ctrl N</span>
-                  </button>
-                  <button class="nav-option" data-nav-id="open-file">
-                    <span class="nav-option-icon"><i data-lucide="folder-open"></i></span>
-                    <span class="nav-option-label">Open…</span>
-                    <span class="nav-option-shortcut">Ctrl O</span>
-                  </button>
-                  <button class="nav-option" data-nav-id="save-file">
-                    <span class="nav-option-icon"><i data-lucide="download"></i></span>
-                    <span class="nav-option-label">Save</span>
-                    <span class="nav-option-shortcut">Ctrl S</span>
-                  </button>
+                  <button class="nav-option" data-nav-id="new-file"><span class="nav-option-icon"><i data-lucide="plus"></i></span><span class="nav-option-label">New File</span><span class="nav-option-shortcut">Ctrl N</span></button>
+                  <button class="nav-option" data-nav-id="open-file"><span class="nav-option-icon"><i data-lucide="folder-open"></i></span><span class="nav-option-label">Open…</span><span class="nav-option-shortcut">Ctrl O</span></button>
+                  <button class="nav-option" data-nav-id="save-file"><span class="nav-option-icon"><i data-lucide="download"></i></span><span class="nav-option-label">Save</span><span class="nav-option-shortcut">Ctrl S</span></button>
                   <div class="nav-divider"></div>
                   <div class="nav-option nav-option--has-sub" data-nav-id="export">
-                    <span class="nav-option-icon"><i data-lucide="upload"></i></span>
-                    <span class="nav-option-label">Export As</span>
-                    <span class="nav-option-arrow"><i data-lucide="chevron-right"></i></span>
+                    <span class="nav-option-icon"><i data-lucide="upload"></i></span><span class="nav-option-label">Export As</span><span class="nav-option-arrow"><i data-lucide="chevron-right"></i></span>
                     <div class="nav-submenu">
-                      <button class="nav-option" data-nav-id="export-png">
-                        <span class="nav-option-label">PNG Image</span>
-                        <span class="nav-option-shortcut">⇧ E P</span>
-                      </button>
-                      <button class="nav-option" data-nav-id="export-svg">
-                        <span class="nav-option-label">SVG Vector</span>
-                        <span class="nav-option-shortcut">⇧ E S</span>
-                      </button>
-                      <button class="nav-option" data-nav-id="export-pdf">
-                        <span class="nav-option-label">PDF Document</span>
-                      </button>
+                      <button class="nav-option" data-nav-id="export-png"><span class="nav-option-label">PNG Image</span><span class="nav-option-shortcut">⇧ E P</span></button>
+                      <button class="nav-option" data-nav-id="export-svg"><span class="nav-option-label">SVG Vector</span><span class="nav-option-shortcut">⇧ E S</span></button>
+                      <button class="nav-option" data-nav-id="export-pdf"><span class="nav-option-label">PDF Document</span></button>
                       <div class="nav-divider"></div>
-                      <button class="nav-option nav-option--disabled" data-nav-id="export-raw">
-                        <span class="nav-option-label">Raw Data</span>
-                        <span class="nav-option-shortcut">Pro</span>
-                      </button>
+                      <button class="nav-option nav-option--disabled" data-nav-id="export-raw"><span class="nav-option-label">Raw Data</span><span class="nav-option-shortcut">Pro</span></button>
                     </div>
                   </div>
                   <div class="nav-divider"></div>
-                  <button class="nav-option" data-nav-id="close-file">
-                    <span class="nav-option-icon"><i data-lucide="x"></i></span>
-                    <span class="nav-option-label">Close</span>
-                    <span class="nav-option-shortcut">Ctrl W</span>
-                  </button>
+                  <button class="nav-option" data-nav-id="close-file"><span class="nav-option-icon"><i data-lucide="x"></i></span><span class="nav-option-label">Close</span><span class="nav-option-shortcut">Ctrl W</span></button>
                 </div>
               </div>
-
-              <!-- Edit -->
               <div class="nav-item">
                 <button class="nav-trigger">Edit <i data-lucide="chevron-down"></i></button>
                 <div class="nav-dropdown">
-                  <button class="nav-option" data-nav-id="undo">
-                    <span class="nav-option-icon"><i data-lucide="rotate-ccw"></i></span>
-                    <span class="nav-option-label">Undo</span>
-                    <span class="nav-option-shortcut">Ctrl Z</span>
-                  </button>
-                  <button class="nav-option" data-nav-id="redo">
-                    <span class="nav-option-icon"><i data-lucide="refresh-cw"></i></span>
-                    <span class="nav-option-label">Redo</span>
-                    <span class="nav-option-shortcut">Ctrl Y</span>
-                  </button>
+                  <button class="nav-option" data-nav-id="undo"><span class="nav-option-icon"><i data-lucide="rotate-ccw"></i></span><span class="nav-option-label">Undo</span><span class="nav-option-shortcut">Ctrl Z</span></button>
+                  <button class="nav-option" data-nav-id="redo"><span class="nav-option-icon"><i data-lucide="refresh-cw"></i></span><span class="nav-option-label">Redo</span><span class="nav-option-shortcut">Ctrl Y</span></button>
                   <div class="nav-divider"></div>
-                  <button class="nav-option" data-nav-id="cut">
-                    <span class="nav-option-label">Cut</span>
-                    <span class="nav-option-shortcut">Ctrl X</span>
-                  </button>
-                  <button class="nav-option" data-nav-id="copy">
-                    <span class="nav-option-icon"><i data-lucide="copy"></i></span>
-                    <span class="nav-option-label">Copy</span>
-                    <span class="nav-option-shortcut">Ctrl C</span>
-                  </button>
-                  <button class="nav-option" data-nav-id="paste">
-                    <span class="nav-option-label">Paste</span>
-                    <span class="nav-option-shortcut">Ctrl V</span>
-                  </button>
+                  <button class="nav-option" data-nav-id="cut"><span class="nav-option-label">Cut</span><span class="nav-option-shortcut">Ctrl X</span></button>
+                  <button class="nav-option" data-nav-id="copy"><span class="nav-option-icon"><i data-lucide="copy"></i></span><span class="nav-option-label">Copy</span><span class="nav-option-shortcut">Ctrl C</span></button>
+                  <button class="nav-option" data-nav-id="paste"><span class="nav-option-label">Paste</span><span class="nav-option-shortcut">Ctrl V</span></button>
                   <div class="nav-divider"></div>
-                  <button class="nav-option" data-nav-id="select-all">
-                    <span class="nav-option-label">Select All</span>
-                    <span class="nav-option-shortcut">Ctrl A</span>
-                  </button>
+                  <button class="nav-option" data-nav-id="select-all"><span class="nav-option-label">Select All</span><span class="nav-option-shortcut">Ctrl A</span></button>
                 </div>
               </div>
-
-              <!-- View -->
               <div class="nav-item">
                 <button class="nav-trigger">View <i data-lucide="chevron-down"></i></button>
                 <div class="nav-dropdown">
-                  <button class="nav-option" data-nav-id="zoom-in">
-                    <span class="nav-option-icon"><i data-lucide="zoom-in"></i></span>
-                    <span class="nav-option-label">Zoom In</span>
-                    <span class="nav-option-shortcut">Ctrl +</span>
-                  </button>
-                  <button class="nav-option" data-nav-id="zoom-out">
-                    <span class="nav-option-icon"><i data-lucide="zoom-out"></i></span>
-                    <span class="nav-option-label">Zoom Out</span>
-                    <span class="nav-option-shortcut">Ctrl −</span>
-                  </button>
-                  <button class="nav-option" data-nav-id="zoom-fit">
-                    <span class="nav-option-label">Fit to Window</span>
-                    <span class="nav-option-shortcut">Ctrl 0</span>
-                  </button>
+                  <button class="nav-option" data-nav-id="zoom-in"><span class="nav-option-icon"><i data-lucide="zoom-in"></i></span><span class="nav-option-label">Zoom In</span><span class="nav-option-shortcut">Ctrl +</span></button>
+                  <button class="nav-option" data-nav-id="zoom-out"><span class="nav-option-icon"><i data-lucide="zoom-out"></i></span><span class="nav-option-label">Zoom Out</span><span class="nav-option-shortcut">Ctrl −</span></button>
+                  <button class="nav-option" data-nav-id="zoom-fit"><span class="nav-option-label">Fit to Window</span><span class="nav-option-shortcut">Ctrl 0</span></button>
                   <div class="nav-divider"></div>
                   <div class="nav-option nav-option--has-sub">
-                    <span class="nav-option-icon"><i data-lucide="panel-left"></i></span>
-                    <span class="nav-option-label">Panels</span>
-                    <span class="nav-option-arrow"><i data-lucide="chevron-right"></i></span>
+                    <span class="nav-option-icon"><i data-lucide="panel-left"></i></span><span class="nav-option-label">Panels</span><span class="nav-option-arrow"><i data-lucide="chevron-right"></i></span>
                     <div class="nav-submenu">
-                      <button class="nav-option" data-nav-id="panel-left">
-                        <span class="nav-option-icon"><i data-lucide="panel-left"></i></span>
-                        <span class="nav-option-label">Left Panel</span>
-                      </button>
-                      <button class="nav-option" data-nav-id="panel-right">
-                        <span class="nav-option-icon"><i data-lucide="panel-right"></i></span>
-                        <span class="nav-option-label">Right Panel</span>
-                      </button>
-                      <button class="nav-option" data-nav-id="panel-status">
-                        <span class="nav-option-label">Status Bar</span>
-                      </button>
+                      <button class="nav-option" data-nav-id="panel-left"><span class="nav-option-icon"><i data-lucide="panel-left"></i></span><span class="nav-option-label">Left Panel</span></button>
+                      <button class="nav-option" data-nav-id="panel-right"><span class="nav-option-icon"><i data-lucide="panel-right"></i></span><span class="nav-option-label">Right Panel</span></button>
+                      <button class="nav-option" data-nav-id="panel-status"><span class="nav-option-label">Status Bar</span></button>
                     </div>
                   </div>
                   <div class="nav-divider"></div>
-                  <button class="nav-option" data-nav-id="fullscreen">
-                    <span class="nav-option-icon"><i data-lucide="maximize-2"></i></span>
-                    <span class="nav-option-label">Full Screen</span>
-                    <span class="nav-option-shortcut">F11</span>
-                  </button>
+                  <button class="nav-option" data-nav-id="fullscreen"><span class="nav-option-icon"><i data-lucide="maximize-2"></i></span><span class="nav-option-label">Full Screen</span><span class="nav-option-shortcut">F11</span></button>
                 </div>
               </div>
-
-              <!-- Tools -->
               <div class="nav-item">
                 <button class="nav-trigger">Tools <i data-lucide="chevron-down"></i></button>
                 <div class="nav-dropdown">
                   <div class="nav-option nav-option--has-sub">
-                    <span class="nav-option-icon"><i data-lucide="wand-2"></i></span>
-                    <span class="nav-option-label">Transform</span>
-                    <span class="nav-option-arrow"><i data-lucide="chevron-right"></i></span>
+                    <span class="nav-option-icon"><i data-lucide="wand-2"></i></span><span class="nav-option-label">Transform</span><span class="nav-option-arrow"><i data-lucide="chevron-right"></i></span>
                     <div class="nav-submenu">
-                      <button class="nav-option" data-nav-id="rotate-cw">
-                        <span class="nav-option-icon"><i data-lucide="refresh-cw"></i></span>
-                        <span class="nav-option-label">Rotate 90° CW</span>
-                      </button>
-                      <button class="nav-option" data-nav-id="rotate-ccw">
-                        <span class="nav-option-icon"><i data-lucide="rotate-ccw"></i></span>
-                        <span class="nav-option-label">Rotate 90° CCW</span>
-                      </button>
+                      <button class="nav-option" data-nav-id="rotate-cw"><span class="nav-option-icon"><i data-lucide="refresh-cw"></i></span><span class="nav-option-label">Rotate 90° CW</span></button>
+                      <button class="nav-option" data-nav-id="rotate-ccw"><span class="nav-option-icon"><i data-lucide="rotate-ccw"></i></span><span class="nav-option-label">Rotate 90° CCW</span></button>
                       <div class="nav-divider"></div>
-                      <button class="nav-option" data-nav-id="flip-h">
-                        <span class="nav-option-label">Flip Horizontal</span>
-                      </button>
-                      <button class="nav-option" data-nav-id="flip-v">
-                        <span class="nav-option-label">Flip Vertical</span>
-                      </button>
+                      <button class="nav-option" data-nav-id="flip-h"><span class="nav-option-label">Flip Horizontal</span></button>
+                      <button class="nav-option" data-nav-id="flip-v"><span class="nav-option-label">Flip Vertical</span></button>
                     </div>
                   </div>
-                  <button class="nav-option" data-nav-id="palette">
-                    <span class="nav-option-icon"><i data-lucide="palette"></i></span>
-                    <span class="nav-option-label">Color Picker</span>
-                  </button>
+                  <button class="nav-option" data-nav-id="palette"><span class="nav-option-icon"><i data-lucide="palette"></i></span><span class="nav-option-label">Color Picker</span></button>
                   <div class="nav-divider"></div>
-                  <button class="nav-option" data-nav-id="settings">
-                    <span class="nav-option-icon"><i data-lucide="settings"></i></span>
-                    <span class="nav-option-label">Settings</span>
-                    <span class="nav-option-shortcut">Ctrl ,</span>
-                  </button>
+                  <button class="nav-option" data-nav-id="settings"><span class="nav-option-icon"><i data-lucide="settings"></i></span><span class="nav-option-label">Settings</span><span class="nav-option-shortcut">Ctrl ,</span></button>
                 </div>
               </div>
-
             </nav>
-
-            <div id="nav-action-log" class="hint" style="padding: 6px 8px; border:1px solid var(--border); font-family:var(--font-mono); min-height:28px">
-              — select an action —
-            </div>
+            <div id="nav-action-log" class="hint" style="padding:6px 8px; border:1px solid var(--border); font-family:var(--font-mono); min-height:28px">— select an action —</div>
           </div>
 
           <div class="settings-section">
@@ -753,36 +814,127 @@
             </div>
           </div>
 
+          <div class="settings-section">
+            <h2>Breadcrumbs &amp; Dividers</h2>
+            <div class="stack gap-4">
+              <nav class="breadcrumbs" aria-label="Breadcrumb">
+                <a class="breadcrumb-item" href="#">Settings</a>
+                <a class="breadcrumb-item" href="#">Audio</a>
+                <span class="breadcrumb-item" aria-current="page">Noise reduction</span>
+              </nav>
+              <div class="divider"><span class="divider-label">or</span></div>
+              <div class="row gap-3 align-center"><span>Left panel</span><span class="divider-vertical"></span><span>Right panel</span></div>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h2>Stepper &amp; Pagination</h2>
+            <div class="stack gap-6">
+              <div id="demo-stepper" class="stepper">
+                <div class="step step-complete"><span class="step-indicator">1</span><span class="step-label">Provider</span></div>
+                <div class="step step-active"><span class="step-indicator">2</span><span class="step-label">Model</span></div>
+                <div class="step step-error"><span class="step-indicator">3</span><span class="step-label">Test</span></div>
+                <div class="step"><span class="step-indicator">4</span><span class="step-label">Finish</span></div>
+              </div>
+              <nav id="demo-pagination" class="pagination" aria-label="Pagination"></nav>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h2>Accordion</h2>
+            <div class="demo-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+              <div id="demo-accordion-single" class="accordion">
+                <div class="accordion-item is-open"><button class="accordion-trigger"><span>Audio Settings</span><i data-lucide="chevron-down"></i></button><div class="accordion-panel"><div class="stack gap-2"><span class="hint">Single expand mode</span><label class="checkbox-label"><input type="checkbox" checked /><span>Noise suppression</span></label></div></div></div>
+                <div class="accordion-item"><button class="accordion-trigger"><span>Playback</span><i data-lucide="chevron-down"></i></button><div class="accordion-panel"><div class="stack gap-2"><span class="hint">Arrow keys move between triggers</span></div></div></div>
+                <div class="accordion-item"><button class="accordion-trigger"><span>Diagnostics</span><i data-lucide="chevron-down"></i></button><div class="accordion-panel"><div><span class="hint">CPU and latency metrics</span></div></div></div>
+              </div>
+              <div id="demo-accordion-multi" class="accordion">
+                <div class="accordion-item is-open"><button class="accordion-trigger"><span>Models</span><i data-lucide="chevron-down"></i></button><div class="accordion-panel"><div><span class="hint">Multi expand mode</span></div></div></div>
+                <div class="accordion-item is-open"><button class="accordion-trigger"><span>Providers</span><i data-lucide="chevron-down"></i></button><div class="accordion-panel"><div><span class="hint">Keep several panels open</span></div></div></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ─────────────────────── OVERLAYS ─────────────────────────────────── -->
+      <div class="tab-panel" data-tab-panel="overlays">
+        <div class="demo-section">
+
+          <div class="settings-section">
+            <h2>Toast</h2>
+            <div class="demo-row" style="flex-wrap:wrap">
+              <button class="secondary-btn" id="toast-success-btn">Success</button>
+              <button class="secondary-btn" id="toast-error-btn">Error</button>
+              <button class="secondary-btn" id="toast-info-btn">Info</button>
+              <button class="secondary-btn" id="toast-action-btn">With action</button>
+              <button class="secondary-btn" id="toast-error-assertive-btn">Assertive error</button>
+            </div>
+            <div class="section-heading-row" style="margin-top:8px"><span class="hint">Queue — toasts stack and coexist</span></div>
+            <div class="demo-row">
+              <button id="demo-queue-success" class="secondary-btn slim-btn">Queue success</button>
+              <button id="demo-queue-error" class="secondary-btn slim-btn">Queue error</button>
+              <button id="demo-queue-info" class="secondary-btn slim-btn">Queue info + action</button>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h2>Modal</h2>
+            <div class="demo-row" style="flex-wrap:wrap">
+              <button class="secondary-btn" id="open-modal-btn">Open Modal</button>
+              <button class="secondary-btn" id="confirm-modal-btn">Confirm</button>
+              <button class="secondary-btn" id="confirm-danger-btn">Danger Confirm</button>
+              <button class="secondary-btn" id="no-backdrop-modal-btn">No Backdrop</button>
+              <button class="secondary-btn" id="draggable-modal-btn">Draggable</button>
+            </div>
+            <div id="modal-result-log" style="font-size:var(--font-size-sm);color:var(--text-muted);min-height:20px;margin-top:4px"></div>
+          </div>
+
+          <div class="settings-section">
+            <h2>Drawer &amp; Popover</h2>
+            <div class="demo-row" style="flex-wrap:wrap">
+              <button id="demo-left-drawer-btn" class="secondary-btn">Left drawer</button>
+              <button id="demo-right-drawer-btn" class="secondary-btn">Right drawer</button>
+              <button id="demo-popover-btn" class="secondary-btn">Click popover</button>
+              <button id="demo-hover-popover-btn" class="secondary-btn">Hover popover</button>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h2>Recording Dot States</h2>
+            <div class="demo-row">
+              <div style="display:flex;align-items:center;gap:6px"><span class="recording-dot loading"></span><span class="hint">Loading</span></div>
+              <div style="display:flex;align-items:center;gap:6px"><span class="recording-dot listening"></span><span class="hint">Listening</span></div>
+              <div style="display:flex;align-items:center;gap:6px"><span class="recording-dot transcribing"></span><span class="hint">Transcribing</span></div>
+              <div style="display:flex;align-items:center;gap:6px"><span class="recording-dot correcting"></span><span class="hint">Correcting</span></div>
+              <div style="display:flex;align-items:center;gap:6px"><span class="recording-dot done"></span><span class="hint">Done</span></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ─────────────────────── LAYOUT ───────────────────────────────────── -->
+      <div class="tab-panel" data-tab-panel="layout">
+        <div class="demo-section">
 
           <div class="settings-section">
             <h2>Split Workspace</h2>
-            <span class="hint" style="margin-bottom:4px">Drag the resizer rails to resize the side panels.</span>
+            <span class="hint" style="margin-bottom:4px">Drag the resizer rails to resize side panels.</span>
             <div class="editor-workspace" id="split-workspace" style="min-height:420px">
-              <!-- Left panel + resizer -->
               <div class="editor-tools-pane">
                 <div class="mini-panel">
                   <h3>Left Panel</h3>
-                  <div class="compact-list">
-                    <span>Layer A</span>
-                    <span>Layer B</span>
-                    <span>Layer C</span>
-                  </div>
+                  <div class="compact-list"><span>Layer A</span><span>Layer B</span><span>Layer C</span></div>
                 </div>
                 <div class="mini-panel">
                   <h3>Properties</h3>
-                  <div class="field-block">
-                    <label>Width</label>
-                    <input type="number" value="800" />
-                  </div>
-                  <div class="field-block">
-                    <label>Height</label>
-                    <input type="number" value="600" />
-                  </div>
+                  <div class="field-block"><label>Width</label><input type="number" value="800" /></div>
+                  <div class="field-block"><label>Height</label><input type="number" value="600" /></div>
                 </div>
               </div>
               <div class="pane-resizer" id="left-pane-resizer"></div>
-
-              <!-- Center -->
               <div class="editor-canvas-pane">
                 <div class="section-heading-row">
                   <div class="toolbar-actions">
@@ -802,10 +954,7 @@
                   <span>1280 × 900</span>
                 </div>
               </div>
-
               <div class="pane-resizer" id="right-pane-resizer"></div>
-
-              <!-- Right panel -->
               <div class="editor-sidebar-pane">
                 <div class="mini-panel">
                   <h3>Inspector</h3>
@@ -818,13 +967,59 @@
                 </div>
                 <div class="mini-panel">
                   <h3>History</h3>
-                  <div class="compact-list">
-                    <span>Move layer</span>
-                    <span>Apply filter</span>
-                    <span>Resize canvas</span>
+                  <div class="compact-list"><span>Move layer</span><span>Apply filter</span><span>Resize canvas</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h2>Cards &amp; Stack Utilities</h2>
+            <div class="demo-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+              <div class="card">
+                <div class="card-header"><h3>Card with footer</h3></div>
+                <div class="card-body stack gap-4">
+                  <div class="stack gap-2 align-start"><span class="badge default">stack gap-2</span><span class="badge beta">flows vertically</span><span class="badge success">align-start</span></div>
+                  <div class="row gap-4 justify-between"><span>Left</span><span>Center</span><span>Right</span></div>
+                </div>
+                <div class="card-footer"><button class="text-btn">Cancel</button><button class="primary-btn slim-btn">Save</button></div>
+              </div>
+              <div class="card card-compact">
+                <div class="card-body stack gap-3">
+                  <span class="hint">Compact card</span>
+                  <div class="mini-panel"><span class="hint">mini-panel inside card</span></div>
+                  <div class="scroll-panel scroll-panel-sm" style="--scroll-panel-height:80px; font-family:var(--font-mono); font-size:var(--font-size-xs)">
+                    <div>scroll-panel-sm</div><div>line 2</div><div>line 3</div><div>line 4</div><div>line 5</div>
                   </div>
                 </div>
               </div>
+            </div>
+          </div>
+
+          <div class="settings-section">
+            <h2>Responsive Grid</h2>
+            <div class="stack gap-4">
+              <span class="hint">col-span</span>
+              <div class="grid grid-cols-3 grid-gap-sm">
+                <div class="mini-panel" style="padding:8px;text-align:center">1</div>
+                <div class="mini-panel" style="padding:8px;text-align:center">2</div>
+                <div class="mini-panel" style="padding:8px;text-align:center">3</div>
+                <div class="mini-panel col-span-2" style="padding:8px;text-align:center">col-span-2</div>
+                <div class="mini-panel" style="padding:8px;text-align:center">5</div>
+                <div class="mini-panel col-span-full" style="padding:8px;text-align:center">col-span-full</div>
+              </div>
+              <span class="hint">row-span</span>
+              <div class="grid grid-cols-3 grid-gap-sm">
+                <div class="mini-panel row-span-2" style="padding:8px;text-align:center;display:flex;align-items:center;justify-content:center">row-span-2</div>
+                <div class="mini-panel" style="padding:8px;text-align:center">B</div>
+                <div class="mini-panel" style="padding:8px;text-align:center">C</div>
+                <div class="mini-panel" style="padding:8px;text-align:center">D</div>
+                <div class="mini-panel col-span-2" style="padding:8px;text-align:center">col-span-2</div>
+              </div>
+              <div class="row gap-3 align-center hide-below-lg"><span class="badge default">Visible above lg</span><span class="badge beta">Wide layout</span></div>
+              <div class="hide-above-lg"><span class="badge warning">Visible below lg</span></div>
+              <div class="row gap-4 align-center hide-below-md"><span class="badge default">Visible above md</span><span class="badge success">Desktop</span></div>
+              <div class="hide-above-md"><span class="badge beta">Visible below md</span></div>
             </div>
           </div>
 
@@ -836,41 +1031,23 @@
         <div class="demo-section">
 
           <div class="settings-section">
-            <h2>Waveform Preview</h2>
+            <div class="section-heading-row">
+              <h2>Waveform Styles</h2>
+            </div>
             <div class="hint">All 5 styles × 5 colour schemes. Live animated.</div>
-          </div>
-
-          <!-- One panel per waveform style -->
-          <div id="waveform-panels" class="demo-grid" style="grid-template-columns:repeat(auto-fill,minmax(320px,1fr))"></div>
-
-          <div class="settings-section">
-            <h2>Controls</h2>
-            <div class="demo-row">
+            <div class="demo-row" style="margin-top:8px">
               <button class="secondary-btn" id="wave-style-btn">Style: Classic →</button>
               <button class="secondary-btn" id="wave-scheme-btn">Scheme: Aurora →</button>
               <button class="secondary-btn" id="wave-active-btn">Active: ON</button>
             </div>
           </div>
 
-          <!-- Focused single waveform -->
-          <div class="settings-section">
-            <h2>Single Preview</h2>
-            <div class="wave-panel">
-              <div class="wave-canvas-wrap" style="height:100px">
-                <canvas id="main-wave-canvas" height="100"></canvas>
-              </div>
-              <div class="wave-controls">
-                <span class="wave-label" id="main-wave-style-label">classic</span>
-                <span style="color:var(--border)">·</span>
-                <span class="wave-label" id="main-wave-scheme-label">aurora</span>
-              </div>
-            </div>
-          </div>
+          <div id="waveform-panels" class="demo-grid" style="grid-template-columns:repeat(auto-fill,minmax(320px,1fr))"></div>
 
         </div>
       </div>
 
-      <!-- ─────────────────────── OVERLAY ──────────────────────────────────── -->
+      <!-- ─────────────────────── OVERLAY (Tauri) ──────────────────────────── -->
       <div class="tab-panel" data-tab-panel="overlay">
         <div class="demo-section">
 
@@ -897,9 +1074,7 @@
                   <canvas id="overlay-demo-canvas" height="28"></canvas>
                 </div>
                 <div class="overlay-hud" id="demo-hud">
-                  <span>Classic</span>
-                  <span>·</span>
-                  <span>Aurora</span>
+                  <span>Classic</span><span>·</span><span>Aurora</span>
                 </div>
                 <div class="overlay-transcript visible" id="demo-transcript">Transcript preview text here…</div>
               </div>
@@ -926,478 +1101,12 @@
         </div>
       </div>
 
-      <div class="tab-panel" data-tab-panel="showcase">
-        <div class="demo-section stack gap-6">
-          <div class="settings-section stack gap-4">
-            <div class="section-heading-row">
-              <h2>Interactive Controls</h2>
-              <button class="secondary-btn slim-btn copy-markup-btn" data-copy-markup="<button class=&quot;primary-btn&quot;>Save changes</button>">Copy markup</button>
-            </div>
-            <div class="card">
-              <div class="card-header">
-                <h3>Buttons, Groups, Tooltips, Switches</h3>
-                <span class="badge warning">P1-P2</span>
-              </div>
-              <div class="card-body stack gap-5">
-                <div class="row gap-3 align-center" style="flex-wrap:wrap">
-                  <button class="primary-btn"><i data-lucide="sparkles"></i> Save changes</button>
-                  <button class="primary-btn slim-btn">Run</button>
-                  <button class="danger-btn"><i data-lucide="trash-2"></i> Delete</button>
-                  <button class="danger-btn slim-btn">Nuke</button>
-                  <button class="primary-btn" disabled>Disabled</button>
-                  <button class="text-btn">Cancel</button>
-                  <button class="icon-btn icon-btn-md" data-tooltip="Refresh dataset" data-tooltip-placement="bottom"><i data-lucide="refresh-cw"></i></button>
-                  <span class="status-indicator connected" data-tooltip="Tooltip on status indicators"><span class="status-dot"></span><span>Ready</span></span>
-                </div>
-                <div class="row gap-4 align-center" style="flex-wrap:wrap">
-                  <div class="btn-group">
-                    <button class="secondary-btn is-active">List</button>
-                    <button class="secondary-btn">Grid</button>
-                    <button class="secondary-btn">Canvas</button>
-                  </div>
-                  <div id="demo-toggle-group" class="btn-group">
-                    <button class="secondary-btn is-active" data-value="snap">Snap</button>
-                    <button class="secondary-btn" data-value="guides">Guides</button>
-                    <button class="secondary-btn is-active" data-value="safe-area">Safe area</button>
-                  </div>
-                </div>
-                <div class="row gap-5 align-center" style="flex-wrap:wrap">
-                  <label id="switch-auto-correct" class="switch">
-                    <input type="checkbox" />
-                    <span class="switch-track"><span class="switch-thumb"></span></span>
-                    <span class="switch-label">Auto-correct</span>
-                  </label>
-                  <label id="switch-snap-grid" class="switch">
-                    <input type="checkbox" checked />
-                    <span class="switch-track"><span class="switch-thumb"></span></span>
-                    <span class="switch-label">Snap to grid</span>
-                  </label>
-                  <label id="switch-disabled" class="switch">
-                    <input type="checkbox" disabled />
-                    <span class="switch-track"><span class="switch-thumb"></span></span>
-                    <span class="switch-label">Disabled</span>
-                  </label>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="settings-section stack gap-4">
-            <div class="section-heading-row">
-              <h2>Feedback and Status</h2>
-              <button class="secondary-btn slim-btn copy-markup-btn" data-copy-markup="<div class=&quot;alert alert-warning&quot;><span class=&quot;alert-message&quot;>Provider key expires in 3 days.</span></div>">Copy markup</button>
-            </div>
-            <div class="card">
-              <div class="card-body stack gap-5">
-                <div class="stack gap-3" id="demo-alerts">
-                  <div class="alert alert-info"><span class="alert-icon"><i data-lucide="info"></i></span><span class="alert-message">Workspace syncing with cloud draft.</span><button class="alert-dismiss icon-btn icon-btn-sm"><i data-lucide="x"></i></button></div>
-                  <div class="alert alert-success"><span class="alert-icon"><i data-lucide="check-circle-2"></i></span><span class="alert-message">Preset saved to your library.</span><button class="alert-dismiss icon-btn icon-btn-sm"><i data-lucide="x"></i></button></div>
-                  <div class="alert alert-warning"><span class="alert-icon"><i data-lucide="alert-triangle"></i></span><span class="alert-message">Provider key expires in 3 days.</span><button class="alert-dismiss icon-btn icon-btn-sm"><i data-lucide="x"></i></button></div>
-                  <div class="alert alert-error"><span class="alert-icon"><i data-lucide="circle-x"></i></span><span class="alert-message">Upload failed. Check your connection.</span><button class="alert-dismiss icon-btn icon-btn-sm"><i data-lucide="x"></i></button></div>
-                </div>
-                <div class="demo-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
-                  <div class="mini-panel stack gap-3">
-                    <h3>Progress</h3>
-                    <div class="progress-bar" style="--progress: 0%"><div class="progress-fill"></div></div>
-                    <div class="progress-bar" style="--progress: 50%"><div class="progress-fill"></div></div>
-                    <div class="progress-bar" style="--progress: 100%"><div class="progress-fill"></div></div>
-                    <div class="progress-bar indeterminate"><div class="progress-fill"></div></div>
-                  </div>
-                  <div class="mini-panel stack gap-3">
-                    <h3>Loaders</h3>
-                    <div class="row gap-3 align-center"><span class="spinner spinner-sm"></span><span class="spinner spinner-md"></span><span class="spinner spinner-lg"></span></div>
-                    <button class="primary-btn"><span class="spinner spinner-sm spinner-inherit"></span> Saving...</button>
-                    <div class="skeleton" style="width:100%;height:88px"></div>
-                    <div class="skeleton-text" style="width:80%"></div>
-                    <div class="skeleton-text" style="width:62%"></div>
-                    <div class="row gap-3 align-center"><span class="skeleton-circle" style="--size:32px"></span><span class="badge warning">warning</span></div>
-                  </div>
-                  <div class="mini-panel stack gap-3">
-                    <h3>Toast</h3>
-                    <div class="row gap-3 align-center" style="flex-wrap:wrap">
-                      <button class="secondary-btn" id="toast-action-btn">Toast action</button>
-                      <button class="secondary-btn" id="toast-error-assertive-btn">Assertive error</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="settings-section stack gap-4">
-            <div class="section-heading-row">
-              <h2>Data Display</h2>
-              <button class="secondary-btn slim-btn copy-markup-btn" data-copy-markup="<table class=&quot;table&quot;><thead><tr><th class=&quot;table-sortable&quot;>Name</th></tr></thead><tbody><tr><td>File.png</td></tr></tbody></table>">Copy markup</button>
-            </div>
-            <div class="demo-grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
-              <div class="card stack gap-0">
-                <div class="card-header"><h3>Tables and Select</h3></div>
-                <div class="card-body stack gap-4">
-                  <table id="demo-table" class="table">
-                    <thead><tr><th class="table-sortable sort-asc">Name</th><th class="table-sortable">Size</th><th class="table-sortable">Modified</th></tr></thead>
-                    <tbody>
-                      <tr><td>Banner.png</td><td>2.4 MB</td><td>2 hours ago</td></tr>
-                      <tr><td>Archive.zip</td><td>18.1 MB</td><td>5 hours ago</td></tr>
-                      <tr><td>Notes.txt</td><td>12 KB</td><td>Today</td></tr>
-                      <tr><td>Video.mov</td><td>105 MB</td><td>Yesterday</td></tr>
-                      <tr><td>Draft.fig</td><td>9.8 MB</td><td>3 days ago</td></tr>
-                    </tbody>
-                  </table>
-                  <table class="table table-compact"><thead><tr><th>Status</th><th>Job</th></tr></thead><tbody><tr><td>Queued</td><td>Export icons</td></tr><tr><td>Done</td><td>Generate palette</td></tr></tbody></table>
-                  <div id="demo-select" class="custom-select">
-                    <label for="demo-select-native">Searchable custom select</label>
-                    <select id="demo-select-native" class="custom-select-native">
-                      <option value="goblin" data-icon="sparkles">Goblin</option>
-                      <optgroup label="Built-in">
-                        <option value="waveform" data-icon="audio-waveform">Waveform</option>
-                        <option value="overlay" data-icon="panel-top">Overlay</option>
-                      </optgroup>
-                      <optgroup label="Experimental">
-                        <option value="vision" data-icon="eye">Vision</option>
-                        <option value="agent" data-icon="bot">Agent</option>
-                      </optgroup>
-                    </select>
-                    <button type="button" class="secondary-btn custom-select-trigger" aria-expanded="false"></button>
-                    <div class="custom-select-list">
-                      <input class="custom-select-search" type="text" placeholder="Filter options..." />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header"><h3>Lists, Chips, Avatar, Rating</h3></div>
-                <div class="card-body stack gap-4">
-                  <div class="row gap-3 align-center" style="flex-wrap:wrap" id="demo-chip-row">
-                    <span class="chip" tabindex="0"><span>gpt-4o</span><button class="chip-remove"><i data-lucide="x"></i></button></span>
-                    <span class="chip chip-accent is-selected">Active</span>
-                    <span class="chip is-disabled">Disabled</span>
-                    <span class="avatar avatar-sm">GS</span>
-                    <span class="avatar avatar-md">SP</span>
-                    <span class="avatar avatar-lg"><img src="https://placehold.co/96x96/png" alt="Goblin user" /></span>
-                  </div>
-                  <div class="rating" id="demo-rating" data-rating-value="3" aria-label="Rating input">
-                    <button class="rating-star" type="button"><i data-lucide="star"></i></button>
-                    <button class="rating-star" type="button"><i data-lucide="star"></i></button>
-                    <button class="rating-star" type="button"><i data-lucide="star"></i></button>
-                    <button class="rating-star" type="button"><i data-lucide="star"></i></button>
-                    <button class="rating-star" type="button"><i data-lucide="star"></i></button>
-                  </div>
-                  <ul class="list" id="demo-rich-list">
-                    <li class="list-item is-selected"><span class="list-item-icon"><i data-lucide="file-text"></i></span><span class="list-item-text"><span>Prompt draft</span><span class="list-item-secondary">Modified 2 hours ago</span></span><button class="list-item-action icon-btn icon-btn-sm"><i data-lucide="trash-2"></i></button></li>
-                    <li class="list-item"><span class="list-item-icon"><i data-lucide="image"></i></span><span class="list-item-text"><span>Banner.png</span><span class="list-item-secondary">2.4 MB</span></span><button class="list-item-action icon-btn icon-btn-sm"><i data-lucide="download"></i></button></li>
-                    <li class="list-divider"></li>
-                    <li class="list-item"><span class="list-item-icon"><i data-lucide="mic"></i></span><span class="list-item-text"><span>Meeting note</span><span class="list-item-secondary">Processed just now</span></span><button class="list-item-action icon-btn icon-btn-sm"><i data-lucide="more-horizontal"></i></button></li>
-                    <li class="list-item"><span class="list-item-icon"><i data-lucide="folder"></i></span><span class="list-item-text"><span>Assets</span><span class="list-item-secondary">14 items</span></span><button class="list-item-action icon-btn icon-btn-sm"><i data-lucide="chevron-right"></i></button></li>
-                    <li class="list-item"><span class="list-item-icon"><i data-lucide="bot"></i></span><span class="list-item-text"><span>Agent run</span><span class="list-item-secondary">Retry available</span></span><button class="list-item-action icon-btn icon-btn-sm"><i data-lucide="rotate-cw"></i></button></li>
-                  </ul>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header"><h3>Transfer List and Tree</h3></div>
-                <div class="card-body stack gap-4">
-                  <div id="demo-transfer-list" class="transfer-list">
-                    <div class="transfer-list-column"><div class="hint">Available</div><div class="transfer-list-items" data-transfer-list="left"><button type="button" class="transfer-list-item" data-value="title">Title</button><button type="button" class="transfer-list-item" data-value="summary">Summary</button><button type="button" class="transfer-list-item" data-value="status">Status</button></div></div>
-                    <div class="transfer-list-actions"><button class="secondary-btn slim-btn" data-transfer-action="to-right">&gt;</button><button class="secondary-btn slim-btn" data-transfer-action="all-right">&gt;&gt;</button><button class="secondary-btn slim-btn" data-transfer-action="to-left">&lt;</button><button class="secondary-btn slim-btn" data-transfer-action="all-left">&lt;&lt;</button></div>
-                    <div class="transfer-list-column"><div class="hint">Visible columns</div><div class="transfer-list-items" data-transfer-list="right"><button type="button" class="transfer-list-item" data-value="owner">Owner</button><button type="button" class="transfer-list-item" data-value="updated">Updated</button></div></div>
-                  </div>
-                  <ul id="demo-tree" class="tree" role="tree">
-                    <li class="tree-item is-open" style="--tree-depth:0"><div class="tree-row"><button class="tree-toggle" type="button"><i data-lucide="chevron-right"></i> src</button></div><ul class="tree-branch"><li class="tree-item is-open" style="--tree-depth:1"><div class="tree-row"><button class="tree-toggle" type="button"><i data-lucide="chevron-right"></i> lib</button></div><ul class="tree-branch"><li class="tree-item" style="--tree-depth:2"><div class="tree-row"><button class="tree-leaf" type="button"><i data-lucide="file-code-2"></i> components.css</button></div></li><li class="tree-item" style="--tree-depth:2"><div class="tree-row"><button class="tree-leaf" type="button"><i data-lucide="file-code-2"></i> index.ts</button></div></li></ul></li><li class="tree-item" style="--tree-depth:1"><div class="tree-row"><button class="tree-leaf" type="button"><i data-lucide="file-text"></i> main.ts</button></div></li></ul></li>
-                  </ul>
-                  <div class="radio-group">
-                    <label class="radio-label"><input type="radio" name="tree-dot-pos" value="tree--dot-right" checked> Right (aligned)</label>
-                    <label class="radio-label"><input type="radio" name="tree-dot-pos" value=""> Inline</label>
-                    <label class="radio-label"><input type="radio" name="tree-dot-pos" value="tree--dot-left"> Left</label>
-                  </div>
-                  <ul id="demo-tree-checkbox" class="tree tree--dot-right" role="tree">
-                    <li class="tree-item is-open" style="--tree-depth:0" data-value="src"><div class="tree-row"><input type="checkbox" class="tree-check"><button class="tree-toggle" type="button"><i data-lucide="chevron-right"></i> src</button><span class="status-indicator connected" data-tooltip="Tracked"><span class="status-dot"></span></span></div><ul class="tree-branch"><li class="tree-item is-open" style="--tree-depth:1" data-value="src/lib"><div class="tree-row"><input type="checkbox" class="tree-check"><button class="tree-toggle" type="button"><i data-lucide="chevron-right"></i> lib</button><span class="status-indicator untested" data-tooltip="Modified"><span class="status-dot"></span></span></div><ul class="tree-branch"><li class="tree-item is-open" style="--tree-depth:2" data-value="src/lib/headless"><div class="tree-row"><input type="checkbox" class="tree-check"><button class="tree-toggle" type="button"><i data-lucide="chevron-right"></i> headless</button><span class="status-indicator untested" data-tooltip="Modified"><span class="status-dot"></span></span></div><ul class="tree-branch"><li class="tree-item" style="--tree-depth:3" data-value="src/lib/headless/toast.ts"><div class="tree-row"><input type="checkbox" class="tree-check"><button class="tree-leaf" type="button"><i data-lucide="file-code-2"></i> toast.ts</button><span class="status-indicator untested" data-tooltip="Modified"><span class="status-dot"></span></span></div></li><li class="tree-item" style="--tree-depth:3" data-value="src/lib/headless/tree.ts"><div class="tree-row"><input type="checkbox" class="tree-check"><button class="tree-leaf" type="button"><i data-lucide="file-code-2"></i> tree.ts</button><span class="status-indicator connected" data-tooltip="Tracked"><span class="status-dot"></span></span></div></li></ul></li><li class="tree-item" style="--tree-depth:2" data-value="src/lib/components.css"><div class="tree-row"><input type="checkbox" class="tree-check"><button class="tree-leaf" type="button"><i data-lucide="file-code-2"></i> components.css</button><span class="status-indicator error" data-tooltip="Conflict"><span class="status-dot"></span></span></div></li><li class="tree-item" style="--tree-depth:2" data-value="src/lib/index.ts"><div class="tree-row"><input type="checkbox" class="tree-check"><button class="tree-leaf" type="button"><i data-lucide="file-code-2"></i> index.ts</button><span class="status-indicator connected" data-tooltip="Tracked"><span class="status-dot"></span></span></div></li></ul></li><li class="tree-item" style="--tree-depth:1" data-value="src/main.ts"><div class="tree-row"><input type="checkbox" class="tree-check"><button class="tree-leaf" type="button"><i data-lucide="file-text"></i> main.ts</button><span class="status-indicator disconnected" data-tooltip="Ignored"><span class="status-dot"></span></span></div></li></ul></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="settings-section stack gap-4">
-            <div class="section-heading-row">
-              <h2>Navigation and Overlays</h2>
-              <button class="secondary-btn slim-btn copy-markup-btn" data-copy-markup="<nav class=&quot;breadcrumbs&quot; aria-label=&quot;Breadcrumb&quot;><a class=&quot;breadcrumb-item&quot; href=&quot;#&quot;>Settings</a><span class=&quot;breadcrumb-item&quot; aria-current=&quot;page&quot;>Audio</span></nav>">Copy markup</button>
-            </div>
-            <div class="demo-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
-              <div class="card">
-                <div class="card-body stack gap-4">
-                  <nav class="breadcrumbs" aria-label="Breadcrumb">
-                    <a class="breadcrumb-item" href="#">Settings</a>
-                    <a class="breadcrumb-item" href="#">Audio</a>
-                    <span class="breadcrumb-item" aria-current="page">Noise reduction</span>
-                  </nav>
-                  <div class="divider"><span class="divider-label">or</span></div>
-                  <div class="row gap-3 align-center"><span>Left panel</span><span class="divider-vertical"></span><span>Right panel</span></div>
-                  <div id="demo-stepper" class="stepper">
-                    <div class="step step-complete"><span class="step-indicator">1</span><span class="step-label">Provider</span></div>
-                    <div class="step step-active"><span class="step-indicator">2</span><span class="step-label">Model</span></div>
-                    <div class="step step-error"><span class="step-indicator">3</span><span class="step-label">Test</span></div>
-                    <div class="step"><span class="step-indicator">4</span><span class="step-label">Finish</span></div>
-                  </div>
-                  <nav id="demo-pagination" class="pagination" aria-label="Pagination"></nav>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-body stack gap-4">
-                  <div class="row gap-3 align-center" style="flex-wrap:wrap">
-                    <button id="demo-left-drawer-btn" class="secondary-btn">Open left drawer</button>
-                    <button id="demo-right-drawer-btn" class="secondary-btn">Open right drawer</button>
-                    <button id="demo-popover-btn" class="secondary-btn">Click popover</button>
-                    <button id="demo-hover-popover-btn" class="secondary-btn">Hover popover</button>
-                  </div>
-                  <div id="demo-accordion-single" class="accordion">
-                    <div class="accordion-item is-open"><button class="accordion-trigger"><span>Audio Settings</span><i data-lucide="chevron-down"></i></button><div class="accordion-panel"><div class="stack gap-2"><span class="hint">Single expand mode</span><label class="checkbox-label"><input type="checkbox" checked /><span>Noise suppression</span></label></div></div></div>
-                    <div class="accordion-item"><button class="accordion-trigger"><span>Playback</span><i data-lucide="chevron-down"></i></button><div class="accordion-panel"><div class="stack gap-2"><span class="hint">Arrow keys move between triggers</span></div></div></div>
-                    <div class="accordion-item"><button class="accordion-trigger"><span>Diagnostics</span><i data-lucide="chevron-down"></i></button><div class="accordion-panel"><div><span class="hint">CPU and latency metrics</span></div></div></div>
-                  </div>
-                  <div id="demo-accordion-multi" class="accordion">
-                    <div class="accordion-item is-open"><button class="accordion-trigger"><span>Models</span><i data-lucide="chevron-down"></i></button><div class="accordion-panel"><div><span class="hint">Multi expand mode</span></div></div></div>
-                    <div class="accordion-item is-open"><button class="accordion-trigger"><span>Providers</span><i data-lucide="chevron-down"></i></button><div class="accordion-panel"><div><span class="hint">Keep several panels open</span></div></div></div>
-                  </div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-body stack gap-4">
-                  <div class="row gap-3 align-center hide-below-lg"><span class="badge default">Visible above lg</span><span class="badge beta">Wide layout</span></div>
-                  <div class="hide-above-lg"><span class="badge warning">Visible below lg</span></div>
-                  <div class="row gap-4 align-center hide-below-md"><span class="badge default">Visible above md</span><span class="badge success">Desktop</span></div>
-                  <div class="hide-above-md"><span class="badge beta">Visible below md</span></div>
-                  <div class="row gap-2 justify-between align-center">
-                    <span>Keyboard-only mode</span>
-                    <label id="keyboard-only-mode" class="switch"><input type="checkbox" /><span class="switch-track"><span class="switch-thumb"></span></span><span class="switch-label">Hide cursor</span></label>
-                  </div>
-                  <div class="hint">Right-click the rich list card to open the context menu. Tab order starts with the skip link, then top tabs, then active panel controls.</div>
-                  <div id="demo-console" class="scroll-panel scroll-panel-sm" style="--scroll-panel-height:120px; font-family:var(--font-mono); font-size:var(--font-size-xs)"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="settings-section stack gap-4">
-            <div class="section-heading-row">
-              <h2>Tokens and Foundations</h2>
-              <button class="secondary-btn slim-btn copy-markup-btn" data-copy-markup=":root { --accent: #ff7a18; --focus-ring: 0 0 0 2px #ff7a18; }">Copy markup</button>
-            </div>
-            <div class="demo-grid" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
-              <div class="card">
-                <div class="card-header"><h3>Card and stack utilities</h3></div>
-                <div class="card-body stack gap-4">
-                  <div class="stack gap-2 align-start"><span class="badge default">stack gap-2</span><span class="badge beta">flows vertically</span><span class="badge success">used in this page</span></div>
-                  <div class="row gap-4 justify-between"><span>Left</span><span>Center</span><span>Right</span></div>
-                </div>
-                <div class="card-footer"><button class="text-btn">Cancel</button><button class="primary-btn slim-btn">Save</button></div>
-              </div>
-              <div class="card card-compact">
-                <div class="card-body stack gap-3">
-                  <div class="hint">Elevation scale</div>
-                  <div class="mini-panel elevation-sample" style="box-shadow:var(--elevation-1)"><span class="hint">--elevation-1</span></div>
-                  <div class="mini-panel elevation-sample" style="box-shadow:var(--elevation-2)"><span class="hint">--elevation-2</span></div>
-                  <div class="mini-panel elevation-sample" style="box-shadow:var(--elevation-3)"><span class="hint">--elevation-3</span></div>
-                  <div class="mini-panel elevation-sample" style="box-shadow:var(--elevation-4)"><span class="hint">--elevation-4</span></div>
-                  <div class="mini-panel elevation-sample" style="box-shadow:var(--elevation-5)"><span class="hint">--elevation-5</span></div>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header"><h3>Token override panel</h3></div>
-                <div class="card-body token-panel">
-                  <label>Accent<input id="token-accent" type="color" value="#6c63ff" /></label>
-                  <label>Background<input id="token-bg" type="color" value="#0d1324" /></label>
-                  <label>Border<input id="token-border" type="color" value="#2a2a4a" /></label>
-                  <label>Text<input id="token-text" type="color" value="#e0e0e0" /></label>
-                  <label>Base font size<input id="token-font-size" type="range" min="12" max="18" value="13" /></label>
-                </div>
-                <div class="card-footer row gap-3 justify-between align-center" style="flex-wrap:wrap">
-                  <span class="hint">Breakpoints: <code>--breakpoint-lg</code> = 1100px</span>
-                  <span class="hint"><code>--breakpoint-md</code> = 760px</span>
-                </div>
-              </div>
-              <div class="card">
-                <div class="card-header"><h3>Accessibility audit</h3></div>
-                <div class="card-body stack gap-3">
-                  <div class="hint">Roles and shortcuts</div>
-                  <div class="row gap-3 align-center"><span class="badge default">Tabs</span><span class="hint">Arrow keys, Home, End</span></div>
-                  <div class="row gap-3 align-center"><span class="badge default">Search</span><span class="hint">Combobox with live result announcements</span></div>
-                  <div class="row gap-3 align-center"><span class="badge default">Navigation</span><span class="hint">Arrow traversal, submenu open with Right</span></div>
-                  <div class="row gap-3 align-center"><span class="badge default">Accordion</span><span class="hint">Enter, Space, ArrowUp, ArrowDown</span></div>
-                  <div class="row gap-3 align-center"><span class="badge default">Tree</span><span class="hint">Arrow keys, Enter, *</span></div>
-                  <div class="hint">Use OS reduced-motion mode to verify all animations collapse to near-instant state.</div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="settings-section stack gap-4">
-            <div class="section-heading-row"><h2>New Components</h2></div>
-            <div class="demo-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
-
-              <div class="card">
-                <div class="card-header"><h3>Link</h3></div>
-                <div class="card-body stack gap-3">
-                  <p>Read the <a href="#" class="link">documentation</a> to get started.</p>
-                  <p><a href="#" class="link link-muted">Muted link</a></p>
-                  <p>A <a href="#" class="link link-inherit">inherit-color link</a> inline.</p>
-                </div>
-              </div>
-
-              <div class="card">
-                <div class="card-header"><h3>Timeline</h3></div>
-                <div class="card-body">
-                  <ul class="timeline">
-                    <li class="timeline-item"><div class="timeline-spine"><div class="timeline-dot success"></div><div class="timeline-connector"></div></div><div class="timeline-content"><div class="timeline-label">9:00 AM</div><div class="timeline-title">Deployed to production</div><div class="timeline-body">All checks passed.</div></div></li>
-                    <li class="timeline-item"><div class="timeline-spine"><div class="timeline-dot warning"></div><div class="timeline-connector"></div></div><div class="timeline-content"><div class="timeline-label">8:45 AM</div><div class="timeline-title">Build warnings</div><div class="timeline-body">3 deprecation notices.</div></div></li>
-                    <li class="timeline-item"><div class="timeline-spine"><div class="timeline-dot muted"></div></div><div class="timeline-content"><div class="timeline-label">8:30 AM</div><div class="timeline-title">Pipeline started</div></div></li>
-                  </ul>
-                </div>
-              </div>
-
-              <div class="card">
-                <div class="card-header"><h3>Responsive Grid</h3></div>
-                <div class="card-body stack gap-3">
-                  <span class="hint">grid-cols-3</span>
-                  <div class="grid grid-cols-3 grid-gap-sm">
-                    <div class="mini-panel" style="padding:8px;text-align:center">1</div>
-                    <div class="mini-panel" style="padding:8px;text-align:center">2</div>
-                    <div class="mini-panel" style="padding:8px;text-align:center">3</div>
-                    <div class="mini-panel col-span-2" style="padding:8px;text-align:center">span 2</div>
-                    <div class="mini-panel" style="padding:8px;text-align:center">5</div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="card">
-                <div class="card-header"><h3>Input Adornments</h3></div>
-                <div class="card-body stack gap-4">
-                  <div class="field-block">
-                    <label>Search</label>
-                    <div class="input-wrap input-wrap-start">
-                      <div class="input-adornment input-adornment-start"><i data-lucide="search"></i></div>
-                      <input type="text" placeholder="Find anything…" />
-                    </div>
-                  </div>
-                  <div class="field-block">
-                    <label>Password</label>
-                    <div class="input-wrap input-wrap-end" id="demo-pw-wrap">
-                      <input type="password" id="demo-pw-input" placeholder="Enter password" />
-                      <div class="input-adornment input-adornment-end"><button type="button" id="demo-pw-toggle" aria-label="Toggle password"><i data-lucide="eye"></i></button></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="card">
-                <div class="card-header"><h3>Field Validation</h3></div>
-                <div class="card-body stack gap-4">
-                  <div class="field is-error">
-                    <div class="field-block"><label>Email</label><input type="email" value="not-an-email" /></div>
-                    <span class="field-hint">Enter a valid email address</span>
-                  </div>
-                  <div class="field is-success">
-                    <div class="field-block"><label>Username</label><input type="text" value="goblin_dev" /></div>
-                    <span class="field-hint">Username is available</span>
-                  </div>
-                  <div class="field">
-                    <div class="field-block"><label>Bio</label><input type="text" /></div>
-                    <span class="field-hint">Optional — shown on your profile</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="card">
-                <div class="card-header"><h3>Floating Label</h3></div>
-                <div class="card-body stack gap-4">
-                  <div class="text-field" data-bind>
-                    <input type="text" id="demo-tf-name" />
-                    <label for="demo-tf-name">Full name</label>
-                  </div>
-                  <div class="text-field" data-bind>
-                    <input type="email" id="demo-tf-email" />
-                    <label for="demo-tf-email">Email address</label>
-                  </div>
-                  <div class="text-field" data-bind>
-                    <input type="text" id="demo-tf-prefilled" value="Goblin" />
-                    <label for="demo-tf-prefilled">Project name</label>
-                  </div>
-                </div>
-              </div>
-
-              <div class="card">
-                <div class="card-header"><h3>Field</h3></div>
-                <div class="card-body stack gap-4">
-                  <span class="hint">Floating label + validation combined</span>
-                  <div class="text-field" id="demo-field-email">
-                    <input type="email" id="demo-field-email-input" />
-                    <label for="demo-field-email-input">Email address</label>
-                    <span class="field-hint"></span>
-                  </div>
-                  <div class="text-field" id="demo-field-username">
-                    <input type="text" id="demo-field-username-input" />
-                    <label for="demo-field-username-input">Username</label>
-                    <span class="field-hint"></span>
-                  </div>
-                  <div class="text-field" id="demo-field-project">
-                    <input type="text" id="demo-field-project-input" value="Goblin" />
-                    <label for="demo-field-project-input">Project name</label>
-                    <span class="field-hint">Optional — rename anytime</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="card">
-                <div class="card-header"><h3>Multi-select</h3></div>
-                <div class="card-body stack gap-3">
-                  <div id="demo-multi-select" class="custom-select">
-                    <label for="demo-multi-select-native">Frameworks</label>
-                    <select id="demo-multi-select-native" multiple class="custom-select-native">
-                      <option value="react">React</option>
-                      <option value="vue">Vue</option>
-                      <option value="angular">Angular</option>
-                      <option value="svelte">Svelte</option>
-                      <option value="solid">Solid</option>
-                      <option value="qwik">Qwik</option>
-                    </select>
-                    <div class="custom-select-trigger"></div>
-                    <div class="custom-select-list"></div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="card">
-                <div class="card-header"><h3>Toast Queue</h3></div>
-                <div class="card-body stack gap-3">
-                  <span class="hint">Toasts stack — multiple can coexist</span>
-                  <div class="row gap-2" style="flex-wrap:wrap">
-                    <button id="demo-queue-success" class="secondary-btn slim-btn">Success</button>
-                    <button id="demo-queue-error" class="secondary-btn slim-btn">Error</button>
-                    <button id="demo-queue-info" class="secondary-btn slim-btn">Info + action</button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="card">
-                <div class="card-header"><h3>Date Picker</h3></div>
-                <div class="card-body stack gap-4">
-                  <div class="field-block">
-                    <label for="demo-date-picker">Start date</label>
-                    <input id="demo-date-picker" type="text" style="width:100%" />
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-      </div>
-
     </div><!-- /app-shell -->
 
     <!-- Toast -->
     <div id="app-toast" class="app-toast" role="status" aria-live="polite"></div>
 
-    <!-- Modal -->
+    <!-- Modals -->
     <div id="demo-no-backdrop-modal" class="modal-backdrop" hidden>
       <div class="modal-card">
         <div class="modal-header">
@@ -1432,6 +1141,7 @@
       </div>
     </div>
 
+    <!-- Drawers -->
     <div id="demo-left-drawer" class="drawer drawer-left" aria-hidden="true" hidden>
       <div class="drawer-header"><h3>Left drawer</h3><button class="icon-btn icon-btn-sm" data-drawer-close="left"><i data-lucide="x"></i></button></div>
       <div class="drawer-body stack gap-3"><span class="hint">Slides from the left, traps focus, and locks body scroll.</span><button class="secondary-btn">Primary field</button></div>
@@ -1444,6 +1154,7 @@
       <div class="drawer-footer"><button class="text-btn" data-drawer-close="right">Close</button><button class="primary-btn slim-btn">Save</button></div>
     </div>
 
+    <!-- Popovers -->
     <div id="demo-click-popover" class="popover">
       <div class="popover-title">Quick action</div>
       <div class="stack gap-3"><label class="field-block"><span>Rename</span><input type="text" value="Prompt draft" /></label><button class="primary-btn slim-btn">Confirm</button></div>

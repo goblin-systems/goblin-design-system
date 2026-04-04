@@ -500,13 +500,16 @@ bindSwitch({
   onChange: (checked) => logDemoEvent(`Switch snap to grid: ${checked}`),
 });
 bindSwitch({ el: document.getElementById("switch-disabled") as HTMLElement });
-bindSwitch({
-  el: document.getElementById("keyboard-only-mode") as HTMLElement,
-  onChange: (checked) => {
-    document.body.style.cursor = checked ? "none" : "";
-    logDemoEvent(`Keyboard-only mode: ${checked ? "on" : "off"}`);
-  },
-});
+const keyboardOnlyEl = document.getElementById("keyboard-only-mode");
+if (keyboardOnlyEl) {
+  bindSwitch({
+    el: keyboardOnlyEl,
+    onChange: (checked) => {
+      document.body.style.cursor = checked ? "none" : "";
+      logDemoEvent(`Keyboard-only mode: ${checked ? "on" : "off"}`);
+    },
+  });
+}
 
 bindToggleGroup({
   el: document.getElementById("demo-toggle-group") as HTMLElement,
@@ -664,7 +667,12 @@ function buildIconGallery() {
   if (!container) return;
 
   const toKebab = (s: string) =>
-    s.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase();
+    s
+      .replace(/([A-Z])([A-Z][a-z])/g, "$1-$2")
+      .replace(/([a-z])([A-Z])/g, "$1-$2")
+      .replace(/([a-zA-Z])(\d)/g, "$1-$2")
+      .replace(/(\d)([A-Z])/g, "$1-$2")
+      .toLowerCase();
 
   const allNames = Object.keys(ICON_SET).map(toKebab).sort();
 

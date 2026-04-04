@@ -51,7 +51,7 @@ export function setupWindowControls(options: WindowControlOptions = {}) {
       } catch {
         // ignore
       }
-    });
+    }).catch(() => {});
   }
 
   closeBtn?.addEventListener("click", async () => {
