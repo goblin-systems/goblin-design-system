@@ -195,7 +195,7 @@ export function openDrawer(options: DrawerOptions): void {
   activeDrawers.set(drawer, { close, backdrop });
 
   if (closeOnBackdrop) {
-    backdrop.addEventListener("click", onBackdropClick);
+    backdrop?.addEventListener("click", onBackdropClick);
   }
 
   document.addEventListener("keydown", onKey);
