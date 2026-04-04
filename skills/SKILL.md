@@ -136,7 +136,7 @@ const tabs = bindTabs({
 tabs.activate("panel-a");
 ```
 
-`bindTabs()` toggles `.is-active` on matching triggers and panels.
+`bindTabs()` manages `.is-active`, `hidden`, ARIA roles, `aria-selected`, `aria-controls`, `aria-labelledby`, and roving tabindex on triggers.
 
 ### Navigation
 
@@ -457,6 +457,41 @@ Returned handle:
 - `toggle()`
 - `destroy()`
 
+### Date Range Picker
+
+```ts
+import {
+  bindDateRangePicker,
+  type DateRangePickerHandle,
+  type DateRangePickerOptions,
+} from "@goblin-systems/goblin-design-system";
+
+const rangePicker = bindDateRangePicker({
+  startInput: document.getElementById("start") as HTMLInputElement,
+  endInput: document.getElementById("end") as HTMLInputElement,
+  min: "2020-01-01",
+  max: "2030-12-31",
+  onChange: (range) => console.log(range.start, range.end),
+});
+
+rangePicker.getValue();
+rangePicker.setValue("2025-01-01", "2025-12-31");
+rangePicker.destroy();
+```
+
+- First click selects start date, second click selects end date
+- If end < start, dates are automatically swapped
+- Both inputs open the same calendar popover
+- `onChange` fires only after both dates are selected
+
+Returned handle:
+
+- `open()`
+- `close()`
+- `getValue()`
+- `setValue(start, end)`
+- `destroy()`
+
 ### Split Pane
 
 ```ts
@@ -546,13 +581,29 @@ import {
 const table = bindTable({
   el: document.getElementById("my-table") as HTMLTableElement,
   onSort: (column, direction) => console.log(column, direction),
+  selectable: "multi",       // "single" | "multi" | false (default false)
+  onSelectionChange: (indices) => console.log(indices),
+  resizable: true,           // default false
 });
 
 table.getSort();
+table.getSelection();
+table.setSelection([0, 2]);
 ```
 
 - Sortable headers use `.table-sortable` inside `<thead>`
 - Sorting cycles `asc -> desc -> none`
+- Row selection: `selectable` enables click-to-select rows with `.is-selected` class
+- Multi mode supports Shift+click (range) and Ctrl/Cmd+click (toggle)
+- Keyboard navigation: Arrow keys move between rows, Enter/Space toggle selection
+- Resizable columns: when `resizable: true`, drag handles appear on `.table-resizable` header cells
+
+Returned handle:
+
+- `getSort()`
+- `getSelection()`
+- `setSelection(indices)`
+- `destroy()`
 
 ### Select
 
@@ -1139,6 +1190,21 @@ Dataset applied by JS:
 
 - `data-placement`
 
+### Date Range Picker
+
+```html
+<div class="date-range-picker">
+  <input id="start" type="text" placeholder="Start date" />
+  <input id="end" type="text" placeholder="End date" />
+</div>
+```
+
+Range-specific classes applied by JS on calendar day cells:
+
+- `is-range-start`
+- `is-range-end`
+- `is-in-range`
+
 ### Stepper
 
 ```html
@@ -1149,12 +1215,40 @@ Dataset applied by JS:
 </div>
 ```
 
+Vertical variant:
+
+```html
+<div id="my-stepper" class="stepper stepper-vertical">
+  <div class="step step-complete">
+    <span class="step-indicator">1</span>
+    <div class="step-content">
+      <span class="step-label">Setup</span>
+      <span class="step-description">Configure providers</span>
+    </div>
+  </div>
+  <div class="step step-active">
+    <span class="step-indicator">2</span>
+    <div class="step-content">
+      <span class="step-label">Configure</span>
+      <span class="step-description">Select model & params</span>
+    </div>
+  </div>
+  <div class="step">
+    <span class="step-indicator">3</span>
+    <div class="step-content"><span class="step-label">Review</span></div>
+  </div>
+</div>
+```
+
 Classes:
 
 - `stepper`
+- `stepper-vertical`
 - `step`
 - `step-indicator`
 - `step-label`
+- `step-content`
+- `step-description`
 - `step-active`
 - `step-complete`
 - `step-error`
@@ -1173,11 +1267,11 @@ Toggle groups reuse `.btn-group` styling and JS manages `.is-active` plus `aria-
 ### Table
 
 ```html
-<table id="my-table" class="table">
+<table id="my-table" class="table table-sticky">
   <thead>
     <tr>
-      <th class="table-sortable">Name</th>
-      <th class="table-sortable">Size</th>
+      <th class="table-sortable table-resizable">Name</th>
+      <th class="table-sortable table-resizable">Size</th>
     </tr>
   </thead>
   <tbody>
@@ -1190,9 +1284,14 @@ Classes:
 
 - `table`
 - `table-compact`
+- `table-sticky`
 - `table-sortable`
+- `table-resizable`
+- `table-resizer` (injected by JS)
+- `table-resizing` (active during drag)
 - `sort-asc`
 - `sort-desc`
+- `is-selected` (on selected rows)
 
 ### Custom Select
 
@@ -1646,7 +1745,7 @@ Also available in the token set:
 - `applyIcons()` only affects icon placeholders already in the DOM; call it again after injecting HTML
 - `createIcon()` returns `null` for unknown icon names
 - `byId()` and `qs()` throw when elements are missing
-- `bindTabs()` only toggles `.is-active`; it does not manage ARIA, focus, or `hidden`
+- `bindTabs()` manages `.is-active`, `hidden`, ARIA roles (`tablist`, `tab`, `tabpanel`), `aria-selected`, `aria-controls`, `aria-labelledby`, and roving tabindex on triggers
 - `.search-suggestions` must live inside the same `.search-field` as the bound input
 - `showToast()` silently does nothing if the toast element does not exist
 - `bindRange()` expects the documented child structure to exist
@@ -1666,6 +1765,8 @@ Also available in the token set:
 - `bindTransferList()` expects `data-transfer-list` and `data-transfer-action` hooks exactly as documented
 - `bindRating()` treats the root as a slider and toggles `.is-active` on `.rating-star`
 - `bindTree()` expects `.tree-item`, `.tree-toggle` / `.tree-leaf`, and nested `.tree-branch`
+- `bindTree()` sets `role="treeitem"`, `role="group"`, `aria-expanded`, `aria-level`, `aria-setsize`, `aria-posinset`, and implements roving tabindex for keyboard navigation
+- `bindTable()` with selection enabled sets `aria-selected` on rows, `aria-multiselectable` on the table in multi mode, and adds keyboard row navigation (ArrowUp/Down, Enter/Space)
 - `bindContextMenu()` creates and owns the menu DOM
 - `setupWindowControls()` is only for Tauri apps
 - `setupContextMenuGuard()` disables right-click and keyboard context-menu shortcuts globally

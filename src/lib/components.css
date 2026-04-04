@@ -2168,6 +2168,62 @@ a.breadcrumb-item:hover { color: var(--text); }
 .table.table-compact thead th,
 .table.table-compact tbody td { padding: var(--space-2) var(--space-4); }
 
+/* ── Table: sticky header ────────────────────────────────────────────────── */
+.table.table-sticky thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--bg-deep);
+}
+
+/* ── Table: row selection ────────────────────────────────────────────────── */
+.table tbody tr.is-selected td {
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+}
+
+.table tbody tr.is-selected:hover td {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+}
+
+/* ── Table: column resize ────────────────────────────────────────────────── */
+.table-resizer {
+  position: absolute;
+  top: 0;
+  right: -4px;
+  width: 8px;
+  height: 100%;
+  cursor: col-resize;
+  background: transparent;
+  z-index: 1;
+}
+
+.table-resizer::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 100%;
+  background: var(--border);
+  transition: background var(--duration-fast), width var(--duration-fast);
+}
+
+.table-resizer:hover::after,
+.table-resizing .table-resizer::after {
+  background: var(--accent);
+  width: 2px;
+}
+
+.table-resizable {
+  position: relative;
+}
+
+.table.table-resizing {
+  cursor: col-resize;
+  user-select: none;
+}
+
 /* ── Tooltip ──────────────────────────────────────────────────────────────────── */
 [data-tooltip] {
   position: relative;
@@ -2837,6 +2893,55 @@ a.breadcrumb-item:hover { color: var(--text); }
 .step.step-active .step-label { color: var(--text-heading); font-weight: 600; }
 .step.step-complete .step-label { color: var(--text); }
 .step.step-error .step-label { color: var(--error); }
+
+.step-description {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  margin-top: 2px;
+  line-height: 1.3;
+}
+
+/* ── Stepper: vertical variant ───────────────────────────────────────────────── */
+.stepper.stepper-vertical {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+}
+
+.stepper.stepper-vertical .step {
+  flex-direction: row;
+  align-items: flex-start;
+  flex: unset;
+  width: 100%;
+}
+
+.stepper.stepper-vertical .step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 28px;
+  left: 13px;
+  width: 1px;
+  height: calc(100% - 28px);
+  right: unset;
+  background: var(--border);
+  transition: background var(--duration-base);
+}
+
+.stepper.stepper-vertical .step.step-complete:not(:last-child)::after {
+  background: var(--accent);
+}
+
+.stepper.stepper-vertical .step-content {
+  display: flex;
+  flex-direction: column;
+  margin-left: var(--space-4);
+  padding-bottom: var(--space-6);
+}
+
+.stepper.stepper-vertical .step-label {
+  margin-top: 0;
+  text-align: left;
+}
 
 /* ── Popover ──────────────────────────────────────────────────────────────────── */
 .popover {
@@ -3814,4 +3919,41 @@ a.breadcrumb-item:hover { color: var(--text); }
   gap: var(--space-3);
   border-top: 1px solid var(--border);
   padding-top: var(--space-4);
+}
+
+/* ── Date Picker: range mode ───────────────────────────────────────────── */
+
+.date-picker-cell.is-range-start {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.date-picker-cell.is-range-start:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.date-picker-cell.is-range-end {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.date-picker-cell.is-range-end:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.date-picker-cell.is-in-range {
+  background: color-mix(in srgb, var(--accent) 15%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 25%, transparent);
+}
+
+.date-picker-cell.is-in-range:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--accent) 30%, transparent);
+}
+
+.date-picker-cell.is-in-range.is-today {
+  color: var(--accent);
 }

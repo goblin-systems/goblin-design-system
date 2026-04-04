@@ -60,8 +60,8 @@ export { bindTextField } from "./headless/text-field";
 export type { TextFieldOptions, TextFieldHandle, ValidationResult } from "./headless/text-field";
 export { bindMultiSelect } from "./headless/multi-select";
 export type { MultiSelectOptions, MultiSelectHandle, MultiSelectOption } from "./headless/multi-select";
-export { bindDatePicker } from "./headless/date-picker";
-export type { DatePickerOptions, DatePickerHandle } from "./headless/date-picker";
+export { bindDatePicker, bindDateRangePicker } from "./headless/date-picker";
+export type { DatePickerOptions, DatePickerHandle, DateRangePickerOptions, DateRangePickerHandle } from "./headless/date-picker";
 
 // ── Platform adapters ─────────────────────────────────────────────────────────
 export { setupWindowControls, setupContextMenuGuard } from "./platform/tauri-window";

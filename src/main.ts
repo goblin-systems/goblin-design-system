@@ -23,7 +23,7 @@ import { bindTree, bindCheckboxTree } from "./lib/headless/tree";
 import { bindContextMenu } from "./lib/headless/context-menu";
 import { bindTextField } from "./lib/headless/text-field";
 import { bindMultiSelect } from "./lib/headless/multi-select";
-import { bindDatePicker } from "./lib/headless/date-picker";
+import { bindDatePicker, bindDateRangePicker } from "./lib/headless/date-picker";
 import { createToastQueue } from "./lib/headless/toast";
 import { bindSplitPaneResize } from "./lib/headless/split-pane";
 import { THEME_LABELS, getTheme, isBuiltinTheme, setTheme } from "./lib/theme";
@@ -520,6 +520,9 @@ bindToggleGroup({
 bindTable({
   el: document.getElementById("demo-table") as HTMLTableElement,
   onSort: (column, direction) => logDemoEvent(`Table sort col ${column + 1}: ${direction ?? "none"}`),
+  selectable: "multi",
+  onSelectionChange: (indices) => logDemoEvent(`Table selection: [${indices.join(", ")}]`),
+  resizable: true,
 });
 
 bindSelect({
@@ -569,6 +572,11 @@ document.querySelectorAll<HTMLElement>("#demo-chip-row .chip").forEach((chip) =>
 bindStepper({
   el: document.getElementById("demo-stepper") as HTMLElement,
   onChange: (index, state) => logDemoEvent(`Stepper: step ${index + 1} is ${state}`),
+});
+
+bindStepper({
+  el: document.getElementById("demo-stepper-vertical") as HTMLElement,
+  onChange: (index, state) => logDemoEvent(`Vertical stepper: step ${index + 1} is ${state}`),
 });
 
 bindPagination({
@@ -855,6 +863,16 @@ if (datePickerInput) {
   bindDatePicker({
     input: datePickerInput,
     onChange: (value) => logDemoEvent(`Date picker: ${value}`),
+  });
+}
+
+const dateRangeStartInput = document.getElementById("demo-date-range-start") as HTMLInputElement | null;
+const dateRangeEndInput = document.getElementById("demo-date-range-end") as HTMLInputElement | null;
+if (dateRangeStartInput && dateRangeEndInput) {
+  bindDateRangePicker({
+    startInput: dateRangeStartInput,
+    endInput: dateRangeEndInput,
+    onChange: (range) => logDemoEvent(`Date range: ${range.start} → ${range.end}`),
   });
 }
 

@@ -595,6 +595,18 @@
                   </div>
                 </div>
               </div>
+              <div class="card">
+                <div class="card-header"><h3>Date Range Picker</h3></div>
+                <div class="card-body stack gap-4">
+                  <div class="field-block">
+                    <label>Date range</label>
+                    <div class="row gap-3">
+                      <input id="demo-date-range-start" type="text" placeholder="Start" style="width:100%" />
+                      <input id="demo-date-range-end" type="text" placeholder="End" style="width:100%" />
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -609,8 +621,9 @@
             <h2>Table &amp; Select</h2>
             <div class="demo-grid" style="grid-template-columns:repeat(auto-fit,minmax(300px,1fr))">
               <div class="stack gap-4">
-                <table id="demo-table" class="table">
-                  <thead><tr><th class="table-sortable sort-asc">Name</th><th class="table-sortable">Size</th><th class="table-sortable">Modified</th></tr></thead>
+                <div class="scroll-panel scroll-panel-sm">
+                <table id="demo-table" class="table table-sticky">
+                  <thead><tr><th class="table-sortable table-resizable sort-asc">Name</th><th class="table-sortable table-resizable">Size</th><th class="table-sortable table-resizable">Modified</th></tr></thead>
                   <tbody>
                     <tr><td>Banner.png</td><td>2.4 MB</td><td>2 hours ago</td></tr>
                     <tr><td>Archive.zip</td><td>18.1 MB</td><td>5 hours ago</td></tr>
@@ -619,6 +632,7 @@
                     <tr><td>Draft.fig</td><td>9.8 MB</td><td>3 days ago</td></tr>
                   </tbody>
                 </table>
+                </div>
                 <table class="table table-compact"><thead><tr><th>Status</th><th>Job</th></tr></thead><tbody><tr><td>Queued</td><td>Export icons</td></tr><tr><td>Done</td><td>Generate palette</td></tr></tbody></table>
               </div>
               <div id="demo-select" class="custom-select">
@@ -829,14 +843,34 @@
 
           <div class="settings-section">
             <h2>Stepper &amp; Pagination</h2>
-            <div class="stack gap-6">
-              <div id="demo-stepper" class="stepper">
-                <div class="step step-complete"><span class="step-indicator">1</span><span class="step-label">Provider</span></div>
-                <div class="step step-active"><span class="step-indicator">2</span><span class="step-label">Model</span></div>
-                <div class="step step-error"><span class="step-indicator">3</span><span class="step-label">Test</span></div>
-                <div class="step"><span class="step-indicator">4</span><span class="step-label">Finish</span></div>
+            <div class="demo-grid" style="grid-template-columns: 1fr 200px">
+              <div class="stack gap-6">
+                <div id="demo-stepper" class="stepper">
+                  <div class="step step-complete"><span class="step-indicator">1</span><span class="step-label">Provider</span></div>
+                  <div class="step step-active"><span class="step-indicator">2</span><span class="step-label">Model</span></div>
+                  <div class="step step-error"><span class="step-indicator">3</span><span class="step-label">Test</span></div>
+                  <div class="step"><span class="step-indicator">4</span><span class="step-label">Finish</span></div>
+                </div>
+                <nav id="demo-pagination" class="pagination" aria-label="Pagination"></nav>
               </div>
-              <nav id="demo-pagination" class="pagination" aria-label="Pagination"></nav>
+              <div id="demo-stepper-vertical" class="stepper stepper-vertical">
+                <div class="step step-complete">
+                  <span class="step-indicator">1</span>
+                  <div class="step-content"><span class="step-label">Setup</span><span class="step-description">Configure providers</span></div>
+                </div>
+                <div class="step step-active">
+                  <span class="step-indicator">2</span>
+                  <div class="step-content"><span class="step-label">Configure</span><span class="step-description">Select model &amp; params</span></div>
+                </div>
+                <div class="step">
+                  <span class="step-indicator">3</span>
+                  <div class="step-content"><span class="step-label">Review</span></div>
+                </div>
+                <div class="step">
+                  <span class="step-indicator">4</span>
+                  <div class="step-content"><span class="step-label">Deploy</span></div>
+                </div>
+              </div>
             </div>
           </div>
 

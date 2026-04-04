@@ -66,8 +66,11 @@ export function bindTabs(options: TabsOptions = {}) {
       const isActive = p.dataset["tabPanel"] === tabId;
       p.classList.toggle("is-active", isActive);
       p.toggleAttribute("hidden", !isActive);
-      p.setAttribute("aria-hidden", String(!isActive));
-      p.setAttribute("tabindex", isActive ? "0" : "-1");
+      if (isActive) {
+        p.setAttribute("tabindex", "0");
+      } else {
+        p.removeAttribute("tabindex");
+      }
     });
     onChange?.(tabId);
   }
