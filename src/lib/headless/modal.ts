@@ -5,6 +5,10 @@ import { trapFocus, FOCUSABLE } from "./focus-trap";
 export interface ModalOptions {
   /** The modal backdrop element (contains the card). */
   backdrop: HTMLElement;
+  /** Render the dark overlay behind the card. Default true. */
+  showBackdrop?: boolean;
+  /** Allow the card to be repositioned by dragging its header. Default false. */
+  draggable?: boolean;
   /** Close when clicking the backdrop outside the card. Default true. */
   closeOnBackdrop?: boolean;
   /** Close on Escape key. Default true. */
@@ -36,10 +40,57 @@ export interface ConfirmOptions {
    * - "danger"   — error red (destructive actions)
    */
   variant?: "default" | "danger";
+  /** Render the dark overlay behind the card. Default true. */
+  showBackdrop?: boolean;
+  /** Allow the card to be repositioned by dragging its header. Default false. */
+  draggable?: boolean;
   /** Close when clicking outside the card. Default true. */
   closeOnBackdrop?: boolean;
   /** Close on Escape (counts as reject). Default true. */
   closeOnEscape?: boolean;
+}
+
+// ── Drag helper ───────────────────────────────────────────────────────────────
+
+function makeDraggable(card: HTMLElement, handle: HTMLElement): () => void {
+  card.classList.add("modal-card--draggable");
+
+  let dx = 0;
+  let dy = 0;
+  let startX = 0;
+  let startY = 0;
+
+  function onMouseMove(e: MouseEvent) {
+    dx = e.clientX - startX;
+    dy = e.clientY - startY;
+    card.style.transform = `translate(${dx}px, ${dy}px)`;
+  }
+
+  function onMouseUp() {
+    card.classList.remove("is-dragging");
+    document.removeEventListener("mousemove", onMouseMove);
+    document.removeEventListener("mouseup", onMouseUp);
+  }
+
+  function onMouseDown(e: MouseEvent) {
+    // Ignore clicks on interactive children (buttons, inputs)
+    if ((e.target as HTMLElement).closest("button, input, select, textarea, a")) return;
+    startX = e.clientX - dx;
+    startY = e.clientY - dy;
+    card.classList.add("is-dragging");
+    document.addEventListener("mousemove", onMouseMove);
+    document.addEventListener("mouseup", onMouseUp, { once: true });
+  }
+
+  handle.addEventListener("mousedown", onMouseDown);
+
+  return () => {
+    handle.removeEventListener("mousedown", onMouseDown);
+    document.removeEventListener("mousemove", onMouseMove);
+    document.removeEventListener("mouseup", onMouseUp);
+    card.style.transform = "";
+    card.classList.remove("modal-card--draggable", "is-dragging");
+  };
 }
 
 // ── Core open / close ─────────────────────────────────────────────────────────
@@ -47,6 +98,8 @@ export interface ConfirmOptions {
 export function openModal(options: ModalOptions) {
   const {
     backdrop,
+    showBackdrop = true,
+    draggable = false,
     closeOnBackdrop = true,
     closeOnEscape = true,
     onClose,
@@ -57,30 +110,37 @@ export function openModal(options: ModalOptions) {
   } = options;
 
   backdrop.removeAttribute("hidden");
-  document.body.classList.add("modal-open");
+
+  if (!showBackdrop) {
+    backdrop.classList.add("modal-backdrop--none");
+  } else {
+    backdrop.classList.remove("modal-backdrop--none");
+    document.body.classList.add("modal-open");
+  }
 
   const card = backdrop.querySelector<HTMLElement>(".modal-card");
   const releaseTrap = card ? trapFocus(card) : () => {};
 
-  // Focus the first focusable element inside the card
+  let releaseDrag: (() => void) | undefined;
+  if (draggable && card) {
+    const handle = card.querySelector<HTMLElement>(".modal-header") ?? card;
+    releaseDrag = makeDraggable(card, handle);
+  }
+
   requestAnimationFrame(() => {
     const first = card?.querySelector<HTMLElement>(FOCUSABLE);
     first?.focus();
   });
 
-  const accept = () => {
+  const close = () => {
     releaseTrap();
+    releaseDrag?.();
     closeModal({ backdrop, onClose });
-    onAccept?.();
   };
 
-  const reject = () => {
-    releaseTrap();
-    closeModal({ backdrop, onClose });
-    onReject?.();
-  };
+  const accept = () => { close(); onAccept?.(); };
+  const reject = () => { close(); onReject?.(); };
 
-  // Wire buttons found inside the backdrop
   backdrop
     .querySelectorAll<HTMLElement>(acceptBtnSelector)
     .forEach((btn) => btn.addEventListener("click", accept, { once: true }));
@@ -89,7 +149,7 @@ export function openModal(options: ModalOptions) {
     .querySelectorAll<HTMLElement>(rejectBtnSelector)
     .forEach((btn) => btn.addEventListener("click", reject, { once: true }));
 
-  if (closeOnBackdrop) {
+  if (closeOnBackdrop && showBackdrop) {
     backdrop.addEventListener(
       "click",
       (e) => { if (e.target === backdrop) reject(); },
@@ -111,16 +171,14 @@ export function openModal(options: ModalOptions) {
 export function closeModal(options: { backdrop: HTMLElement; onClose?: () => void }) {
   const { backdrop, onClose } = options;
   backdrop.setAttribute("hidden", "");
-  document.body.classList.remove("modal-open");
+  if (!backdrop.classList.contains("modal-backdrop--none")) {
+    document.body.classList.remove("modal-open");
+  }
   onClose?.();
 }
 
 // ── Declarative helper ────────────────────────────────────────────────────────
 
-/**
- * Wire a trigger button and optional close/reject/accept buttons to a modal
- * backdrop by element ids.
- */
 export function bindModal(
   triggerId: string,
   backdropId: string,
@@ -141,14 +199,6 @@ const CLOSE_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16
   <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
 </svg>`;
 
-/**
- * Show a self-contained confirm modal and return a Promise that resolves to
- * `true` (accept) or `false` (reject / dismiss).
- *
- * @example
- *   const ok = await confirmModal({ title: "Delete file?", variant: "danger" });
- *   if (ok) deleteFile();
- */
 export function confirmModal(options: ConfirmOptions): Promise<boolean> {
   const {
     title,
@@ -156,6 +206,8 @@ export function confirmModal(options: ConfirmOptions): Promise<boolean> {
     acceptLabel = "Confirm",
     rejectLabel = "Cancel",
     variant = "default",
+    showBackdrop = true,
+    draggable = false,
     closeOnBackdrop = true,
     closeOnEscape = true,
   } = options;
@@ -164,12 +216,13 @@ export function confirmModal(options: ConfirmOptions): Promise<boolean> {
     const backdrop = document.createElement("div");
     backdrop.className = "modal-backdrop";
 
+    if (!showBackdrop) backdrop.classList.add("modal-backdrop--none");
+
     const card = document.createElement("div");
     card.className = "modal-card";
     card.setAttribute("role", "dialog");
     card.setAttribute("aria-modal", "true");
 
-    // Header
     const header = document.createElement("div");
     header.className = "modal-header";
 
@@ -184,7 +237,6 @@ export function confirmModal(options: ConfirmOptions): Promise<boolean> {
     header.append(heading, xBtn);
     card.appendChild(header);
 
-    // Body
     if (message) {
       const body = document.createElement("p");
       body.className = "modal-body-text";
@@ -192,7 +244,6 @@ export function confirmModal(options: ConfirmOptions): Promise<boolean> {
       card.appendChild(body);
     }
 
-    // Footer
     const footer = document.createElement("div");
     footer.className = "modal-footer";
 
@@ -208,17 +259,21 @@ export function confirmModal(options: ConfirmOptions): Promise<boolean> {
     card.appendChild(footer);
     backdrop.appendChild(card);
     document.body.appendChild(backdrop);
-    document.body.classList.add("modal-open");
+
+    if (showBackdrop) document.body.classList.add("modal-open");
 
     const releaseTrap = trapFocus(card);
 
-    // Focus the safe-default button (reject) when opened
+    let releaseDrag: (() => void) | undefined;
+    if (draggable) releaseDrag = makeDraggable(card, header);
+
     requestAnimationFrame(() => rejectBtn.focus());
 
     const teardown = () => {
       releaseTrap();
+      releaseDrag?.();
       backdrop.remove();
-      document.body.classList.remove("modal-open");
+      if (showBackdrop) document.body.classList.remove("modal-open");
     };
 
     const accept = () => { teardown(); resolve(true); };
@@ -229,7 +284,7 @@ export function confirmModal(options: ConfirmOptions): Promise<boolean> {
       .querySelectorAll<HTMLElement>(".modal-btn-reject")
       .forEach((btn) => btn.addEventListener("click", reject, { once: true }));
 
-    if (closeOnBackdrop) {
+    if (closeOnBackdrop && showBackdrop) {
       backdrop.addEventListener(
         "click",
         (e) => { if (e.target === backdrop) reject(); },

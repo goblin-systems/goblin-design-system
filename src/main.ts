@@ -144,6 +144,28 @@ document.getElementById("confirm-danger-btn")?.addEventListener("click", async (
   showToast(ok ? "Item deleted" : "Cancelled", ok ? "error" : "info");
 });
 
+const noBackdropModal = document.getElementById("demo-no-backdrop-modal")!;
+document.getElementById("no-backdrop-modal-btn")?.addEventListener("click", () => {
+  openModal({
+    backdrop: noBackdropModal,
+    showBackdrop: false,
+    onReject: () => {
+      if (modalResultLog) modalResultLog.textContent = "No-backdrop modal closed";
+    },
+  });
+});
+
+document.getElementById("draggable-modal-btn")?.addEventListener("click", async () => {
+  const ok = await confirmModal({
+    title: "Draggable Modal",
+    message: "Drag this modal by its header to reposition it.",
+    acceptLabel: "Got it",
+    rejectLabel: "Dismiss",
+    draggable: true,
+  });
+  if (modalResultLog) modalResultLog.textContent = `Draggable result: ${ok ? "accepted" : "dismissed"}`;
+});
+
 // ── Status indicator cycle ────────────────────────────────────────────────────
 const statusStates = ["connected", "untested", "disconnected", "error"] as const;
 let statusIdx = 0;
@@ -784,6 +806,32 @@ document.getElementById("demo-pw-toggle")?.addEventListener("click", () => {
 document.querySelectorAll<HTMLElement>(".text-field[data-bind]").forEach((el) => {
   bindTextField({ el });
 });
+
+// ── Field demos (floating label + validation) ─────────────────────────────────
+bindTextField({
+  el: document.getElementById("demo-field-email") as HTMLElement,
+  validate: (value) => {
+    if (!value) return null;
+    const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+    return ok
+      ? { valid: true, message: "Looks good" }
+      : { valid: false, message: "Enter a valid email address" };
+  },
+  validateOn: "blur",
+});
+
+bindTextField({
+  el: document.getElementById("demo-field-username") as HTMLElement,
+  validate: (value) => {
+    if (!value) return null;
+    if (value.length < 3) return { valid: false, message: "At least 3 characters" };
+    if (!/^[a-z0-9_]+$/.test(value)) return { valid: false, message: "Lowercase, numbers, underscores only" };
+    return { valid: true, message: "Username is available" };
+  },
+  validateOn: "input",
+});
+
+bindTextField({ el: document.getElementById("demo-field-project") as HTMLElement });
 
 const multiSelectEl = document.getElementById("demo-multi-select");
 if (multiSelectEl) {

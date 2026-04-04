@@ -486,6 +486,8 @@
               <button class="secondary-btn" id="open-modal-btn">Open Modal</button>
               <button class="secondary-btn" id="confirm-modal-btn">Confirm Modal</button>
               <button class="secondary-btn" id="confirm-danger-btn">Danger Confirm</button>
+              <button class="secondary-btn" id="no-backdrop-modal-btn">No Backdrop</button>
+              <button class="secondary-btn" id="draggable-modal-btn">Draggable</button>
             </div>
             <div id="modal-result-log" style="font-size:var(--font-size-sm);color:var(--text-muted);min-height:20px"></div>
           </div>
@@ -1322,6 +1324,28 @@
               </div>
 
               <div class="card">
+                <div class="card-header"><h3>Field</h3></div>
+                <div class="card-body stack gap-4">
+                  <span class="hint">Floating label + validation combined</span>
+                  <div class="text-field" id="demo-field-email">
+                    <input type="email" id="demo-field-email-input" />
+                    <label for="demo-field-email-input">Email address</label>
+                    <span class="field-hint"></span>
+                  </div>
+                  <div class="text-field" id="demo-field-username">
+                    <input type="text" id="demo-field-username-input" />
+                    <label for="demo-field-username-input">Username</label>
+                    <span class="field-hint"></span>
+                  </div>
+                  <div class="text-field" id="demo-field-project">
+                    <input type="text" id="demo-field-project-input" value="Goblin" />
+                    <label for="demo-field-project-input">Project name</label>
+                    <span class="field-hint">Optional — rename anytime</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
                 <div class="card-header"><h3>Multi-select</h3></div>
                 <div class="card-body stack gap-3">
                   <div id="demo-multi-select" class="custom-select">
@@ -1374,6 +1398,19 @@
     <div id="app-toast" class="app-toast" role="status" aria-live="polite"></div>
 
     <!-- Modal -->
+    <div id="demo-no-backdrop-modal" class="modal-backdrop" hidden>
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3>No Backdrop</h3>
+          <button class="icon-btn modal-close-btn modal-btn-reject" aria-label="Close"><i data-lucide="x"></i></button>
+        </div>
+        <p class="modal-body-text">The dark overlay is hidden. The rest of the page stays interactive.</p>
+        <div class="modal-footer">
+          <button class="secondary-btn modal-btn-reject">Close</button>
+        </div>
+      </div>
+    </div>
+
     <div id="demo-modal" class="modal-backdrop" hidden>
       <div class="modal-card">
         <div class="modal-header">

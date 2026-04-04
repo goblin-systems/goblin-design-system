@@ -57,7 +57,7 @@ export type { TreeOptions, TreeHandle, CheckboxTreeOptions } from "./headless/tr
 export { bindContextMenu } from "./headless/context-menu";
 export type { ContextMenuOptions, ContextMenuHandle, ContextMenuItem } from "./headless/context-menu";
 export { bindTextField } from "./headless/text-field";
-export type { TextFieldOptions, TextFieldHandle } from "./headless/text-field";
+export type { TextFieldOptions, TextFieldHandle, ValidationResult } from "./headless/text-field";
 export { bindMultiSelect } from "./headless/multi-select";
 export type { MultiSelectOptions, MultiSelectHandle, MultiSelectOption } from "./headless/multi-select";
 export { bindDatePicker } from "./headless/date-picker";

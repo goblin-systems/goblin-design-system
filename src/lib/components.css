@@ -518,6 +518,15 @@ body.modal-open {
   display: none;
 }
 
+.modal-backdrop.modal-backdrop--none {
+  background: transparent;
+  pointer-events: none;
+}
+
+.modal-backdrop.modal-backdrop--none .modal-card {
+  pointer-events: auto;
+}
+
 .modal-card {
   width: min(420px, 100%);
   border: 1px solid var(--border);
@@ -527,6 +536,21 @@ body.modal-open {
   padding: 14px;
   -webkit-user-select: text;
   user-select: text;
+}
+
+.modal-card--draggable .modal-header {
+  cursor: grab;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.modal-card--draggable.is-dragging .modal-header {
+  cursor: grabbing;
+}
+
+.modal-card--draggable.is-dragging {
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 .modal-header {
@@ -3518,6 +3542,50 @@ a.breadcrumb-item:hover { color: var(--text); }
 .text-field.has-value:has(textarea) label {
   top: 6px;
   transform: translateY(0) scale(0.78);
+}
+
+.text-field .field-hint {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: var(--space-2);
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.text-field:has(.field-hint) {
+  margin-bottom: calc(var(--font-size-xs) * 1.4 + var(--space-2));
+}
+
+.text-field.is-error .field-hint  { color: var(--error); }
+.text-field.is-success .field-hint { color: var(--success); }
+
+.text-field.is-error input,
+.text-field.is-error textarea {
+  border-color: var(--error);
+  outline-color: var(--error);
+}
+
+.text-field.is-error input:focus,
+.text-field.is-error textarea:focus {
+  border-color: var(--error);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--error) 20%, transparent);
+}
+
+.text-field.is-success input,
+.text-field.is-success textarea {
+  border-color: var(--success);
+}
+
+.text-field.is-error:focus-within label,
+.text-field.is-error.has-value label {
+  color: var(--error);
+}
+
+.text-field.is-success:focus-within label,
+.text-field.is-success.has-value label {
+  color: var(--success);
 }
 
 /* ── Multi-select ───────────────────────────────────────────────────────────── */
