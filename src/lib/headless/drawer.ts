@@ -3,8 +3,10 @@ import { trapFocus } from "./focus-trap";
 export interface DrawerOptions {
   /** The `.drawer` panel element. */
   drawer: HTMLElement;
-  /** Optional backdrop element. If not provided one is created automatically. */
+  /** Optional backdrop element. If not provided one is created automatically when overlay is true. */
   backdrop?: HTMLElement;
+  /** Show a backdrop overlay. Default true. When false no backdrop is rendered or managed. */
+  overlay?: boolean;
   /** Close on backdrop click. Default true. */
   closeOnBackdrop?: boolean;
   /** Close on Escape. Default true. */
@@ -16,7 +18,7 @@ export interface DrawerOptions {
 
 interface ActiveDrawerState {
   close: () => void;
-  backdrop: HTMLElement;
+  backdrop: HTMLElement | null;
 }
 
 const activeDrawers = new WeakMap<HTMLElement, ActiveDrawerState>();
@@ -46,27 +48,34 @@ function parseTimeMs(value: string): number {
   return 0;
 }
 
-function syncDrawerState(drawer: HTMLElement, backdrop: HTMLElement, isOpen: boolean) {
+function syncDrawerState(drawer: HTMLElement, backdrop: HTMLElement | null, isOpen: boolean) {
   if (!drawer.hasAttribute("role")) {
     drawer.setAttribute("role", "dialog");
   }
 
   if (isOpen) {
     drawer.hidden = false;
-    backdrop.hidden = false;
     drawer.setAttribute("aria-hidden", "false");
     drawer.setAttribute("aria-modal", "true");
-    backdrop.setAttribute("aria-hidden", "true");
+    if (backdrop) {
+      backdrop.hidden = false;
+      backdrop.setAttribute("aria-hidden", "true");
+    }
     return;
   }
 
   drawer.setAttribute("aria-hidden", "true");
   drawer.removeAttribute("aria-modal");
-  backdrop.setAttribute("aria-hidden", "true");
+  if (backdrop) {
+    backdrop.setAttribute("aria-hidden", "true");
+  }
 }
 
-function afterDrawerTransition(drawer: HTMLElement, backdrop: HTMLElement, callback: () => void) {
-  const timeoutMs = Math.max(getTransitionTimeMs(drawer), getTransitionTimeMs(backdrop));
+function afterDrawerTransition(drawer: HTMLElement, backdrop: HTMLElement | null, callback: () => void) {
+  const timeoutMs = Math.max(
+    getTransitionTimeMs(drawer),
+    backdrop ? getTransitionTimeMs(backdrop) : 0,
+  );
 
   if (timeoutMs <= 0) {
     callback();
@@ -82,7 +91,7 @@ function afterDrawerTransition(drawer: HTMLElement, backdrop: HTMLElement, callb
 
     settled = true;
     drawer.removeEventListener("transitionend", onTransitionEnd);
-    backdrop.removeEventListener("transitionend", onTransitionEnd);
+    backdrop?.removeEventListener("transitionend", onTransitionEnd);
     window.clearTimeout(timer);
     callback();
   };
@@ -96,21 +105,22 @@ function afterDrawerTransition(drawer: HTMLElement, backdrop: HTMLElement, callb
   const timer = window.setTimeout(finish, timeoutMs + 32);
 
   drawer.addEventListener("transitionend", onTransitionEnd);
-  backdrop.addEventListener("transitionend", onTransitionEnd);
+  backdrop?.addEventListener("transitionend", onTransitionEnd);
 }
 
 export function openDrawer(options: DrawerOptions): void {
   const {
     drawer,
+    overlay = true,
     closeOnBackdrop = true,
     closeOnEscape = true,
     onClose,
     onOpen,
   } = options;
 
-  let backdrop = options.backdrop;
+  let backdrop: HTMLElement | null = options.backdrop ?? null;
 
-  if (!backdrop) {
+  if (overlay && !backdrop) {
     backdrop = document.createElement("div");
     backdrop.className = "drawer-backdrop";
     document.body.appendChild(backdrop);
@@ -126,8 +136,10 @@ export function openDrawer(options: DrawerOptions): void {
   document.body.style.overflow = "hidden";
 
   // Force reflow before adding is-open so transition fires
-  void backdrop.offsetWidth;
-  backdrop.classList.add("is-open");
+  if (backdrop) {
+    void backdrop.offsetWidth;
+    backdrop.classList.add("is-open");
+  }
   drawer.classList.add("is-open");
 
   const releaseTrap = trapFocus(drawer);
@@ -161,16 +173,16 @@ export function openDrawer(options: DrawerOptions): void {
 
     isClosing = true;
     releaseTrap();
-    backdrop!.classList.remove("is-open");
+    backdrop?.classList.remove("is-open");
     drawer.classList.remove("is-open");
-    syncDrawerState(drawer, backdrop!, false);
-    backdrop!.removeEventListener("click", onBackdropClick);
+    syncDrawerState(drawer, backdrop, false);
+    backdrop?.removeEventListener("click", onBackdropClick);
     document.removeEventListener("keydown", onKey);
     activeDrawers.delete(drawer);
 
-    afterDrawerTransition(drawer, backdrop!, () => {
+    afterDrawerTransition(drawer, backdrop, () => {
       drawer.hidden = true;
-      backdrop!.hidden = true;
+      if (backdrop) backdrop.hidden = true;
       document.body.classList.remove("drawer-open");
       document.body.style.overflow = "";
       if (restoreFocusTo && document.contains(restoreFocusTo)) {

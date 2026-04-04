@@ -19,8 +19,12 @@ import { bindTable } from "./lib/headless/table";
 import { bindSelect } from "./lib/headless/select";
 import { bindTransferList } from "./lib/headless/transfer-list";
 import { bindRating } from "./lib/headless/rating";
-import { bindTree } from "./lib/headless/tree";
+import { bindTree, bindCheckboxTree } from "./lib/headless/tree";
 import { bindContextMenu } from "./lib/headless/context-menu";
+import { bindTextField } from "./lib/headless/text-field";
+import { bindMultiSelect } from "./lib/headless/multi-select";
+import { bindDatePicker } from "./lib/headless/date-picker";
+import { createToastQueue } from "./lib/headless/toast";
 import { bindSplitPaneResize } from "./lib/headless/split-pane";
 import { THEME_LABELS, getTheme, isBuiltinTheme, setTheme } from "./lib/theme";
 import {
@@ -509,6 +513,19 @@ bindRating({
 
 bindTransferList({ el: document.getElementById("demo-transfer-list") as HTMLElement });
 bindTree({ el: document.getElementById("demo-tree") as HTMLElement });
+bindCheckboxTree({
+  el: document.getElementById("demo-tree-checkbox") as HTMLElement,
+  onChange: (values) => logDemoEvent(`Tree selection: ${values.join(", ") || "none"}`),
+});
+
+const checkboxTreeEl = document.getElementById("demo-tree-checkbox");
+document.querySelectorAll<HTMLInputElement>('[name="tree-dot-pos"]').forEach((radio) => {
+  radio.addEventListener("change", () => {
+    if (!checkboxTreeEl) return;
+    checkboxTreeEl.classList.remove("tree--dot-left", "tree--dot-right");
+    if (radio.value) checkboxTreeEl.classList.add(radio.value);
+  });
+});
 
 document.querySelectorAll<HTMLElement>("#demo-chip-row .chip-remove").forEach((button) => {
   button.addEventListener("click", () => {
@@ -549,7 +566,7 @@ document.getElementById("demo-left-drawer-btn")?.addEventListener("click", () =>
 
 document.getElementById("demo-right-drawer-btn")?.addEventListener("click", () => {
   if (!rightDrawer) return;
-  openDrawer({ drawer: rightDrawer, onOpen: () => logDemoEvent("Opened right drawer"), onClose: () => logDemoEvent("Closed right drawer") });
+  openDrawer({ drawer: rightDrawer, overlay: false, onOpen: () => logDemoEvent("Opened right drawer"), onClose: () => logDemoEvent("Closed right drawer") });
 });
 
 document.querySelectorAll<HTMLElement>("[data-drawer-close='left']").forEach((button) => {
@@ -559,7 +576,7 @@ document.querySelectorAll<HTMLElement>("[data-drawer-close='right']").forEach((b
   button.addEventListener("click", () => rightDrawer && closeDrawer({ drawer: rightDrawer }));
 });
 
-bindPopover({
+const clickPopover = bindPopover({
   anchor: document.getElementById("demo-popover-btn") as HTMLElement,
   content: document.getElementById("demo-click-popover") as HTMLElement,
   placement: "bottom",
@@ -568,6 +585,8 @@ bindPopover({
     logDemoEvent("Opened click popover");
   },
 });
+document.getElementById("demo-click-popover")?.querySelector<HTMLElement>(".primary-btn")
+  ?.addEventListener("click", () => clickPopover.close());
 bindPopover({
   anchor: document.getElementById("demo-hover-popover-btn") as HTMLElement,
   content: document.getElementById("demo-hover-popover") as HTMLElement,
@@ -749,3 +768,47 @@ function tick() {
 }
 
 requestAnimationFrame(tick);
+
+// ── New components ────────────────────────────────────────────────────────────
+
+const pwInput = document.getElementById("demo-pw-input") as HTMLInputElement | null;
+document.getElementById("demo-pw-toggle")?.addEventListener("click", () => {
+  if (!pwInput) return;
+  const isPassword = pwInput.type === "password";
+  pwInput.type = isPassword ? "text" : "password";
+  const icon = document.querySelector<HTMLElement>("#demo-pw-toggle i");
+  if (icon) icon.setAttribute("data-lucide", isPassword ? "eye-off" : "eye");
+  applyIcons();
+});
+
+document.querySelectorAll<HTMLElement>(".text-field[data-bind]").forEach((el) => {
+  bindTextField({ el });
+});
+
+const multiSelectEl = document.getElementById("demo-multi-select");
+if (multiSelectEl) {
+  bindMultiSelect({
+    el: multiSelectEl,
+    placeholder: "Select frameworks…",
+    onChange: (values) => logDemoEvent(`Multi-select: ${values.join(", ") || "none"}`),
+  });
+}
+
+const datePickerInput = document.getElementById("demo-date-picker") as HTMLInputElement | null;
+if (datePickerInput) {
+  bindDatePicker({
+    input: datePickerInput,
+    onChange: (value) => logDemoEvent(`Date picker: ${value}`),
+  });
+}
+
+const toastQueue = createToastQueue();
+document.getElementById("demo-queue-success")?.addEventListener("click", () => {
+  toastQueue.push({ message: "Changes saved successfully", variant: "success", durationMs: 4000 });
+});
+document.getElementById("demo-queue-error")?.addEventListener("click", () => {
+  toastQueue.push({ message: "Failed to connect to server", variant: "error", durationMs: 4000 });
+});
+document.getElementById("demo-queue-info")?.addEventListener("click", () => {
+  toastQueue.push({ message: "New version available", variant: "info", durationMs: 4000, action: { label: "Update", onClick: () => logDemoEvent("Update clicked") } });
+});

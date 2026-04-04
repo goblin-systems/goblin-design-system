@@ -2,6 +2,10 @@ export interface TreeOptions {
   el: HTMLElement;
 }
 
+export interface CheckboxTreeOptions extends TreeOptions {
+  onChange?: (checkedValues: string[]) => void;
+}
+
 export interface TreeHandle {
   expand(item: HTMLElement): void;
   collapse(item: HTMLElement): void;
@@ -12,6 +16,84 @@ export interface TreeHandle {
 
 function getVisibleNodes(el: HTMLElement) {
   return Array.from(el.querySelectorAll<HTMLElement>(".tree-toggle, .tree-leaf"));
+}
+
+export function bindCheckboxTree(options: CheckboxTreeOptions): TreeHandle {
+  const { el, onChange } = options;
+  const treeHandle = bindTree({ el });
+
+  function getCheckbox(item: HTMLElement): HTMLInputElement | null {
+    return item.querySelector<HTMLInputElement>(":scope > .tree-row > .tree-check");
+  }
+
+  function getChildItems(item: HTMLElement): HTMLElement[] {
+    return Array.from(item.querySelectorAll<HTMLElement>(":scope > .tree-branch > .tree-item"));
+  }
+
+  function setDescendants(item: HTMLElement, checked: boolean) {
+    getChildItems(item).forEach((child) => {
+      const cb = getCheckbox(child);
+      if (cb) {
+        cb.checked = checked;
+        cb.indeterminate = false;
+      }
+      setDescendants(child, checked);
+    });
+  }
+
+  function updateAncestors(item: HTMLElement) {
+    const parentItem = item.parentElement?.closest<HTMLElement>(".tree-item");
+    if (!parentItem) return;
+
+    const parentCb = getCheckbox(parentItem);
+    if (!parentCb) return;
+
+    const childCbs = getChildItems(parentItem)
+      .map((child) => getCheckbox(child))
+      .filter((cb): cb is HTMLInputElement => cb !== null);
+
+    if (childCbs.length === 0) return;
+
+    const allChecked = childCbs.every((cb) => cb.checked && !cb.indeterminate);
+    const noneChecked = childCbs.every((cb) => !cb.checked && !cb.indeterminate);
+
+    if (allChecked) {
+      parentCb.checked = true;
+      parentCb.indeterminate = false;
+    } else if (noneChecked) {
+      parentCb.checked = false;
+      parentCb.indeterminate = false;
+    } else {
+      parentCb.checked = false;
+      parentCb.indeterminate = true;
+    }
+
+    updateAncestors(parentItem);
+  }
+
+  function getCheckedValues(): string[] {
+    return Array.from(el.querySelectorAll<HTMLInputElement>(".tree-check:checked"))
+      .filter((cb) => !cb.indeterminate)
+      .map((cb) => cb.closest<HTMLElement>(".tree-item")?.dataset["value"] ?? "")
+      .filter(Boolean);
+  }
+
+  Array.from(el.querySelectorAll<HTMLElement>(".tree-item")).forEach((item) => {
+    const cb = getCheckbox(item);
+    if (!cb) return;
+
+    cb.addEventListener("change", () => {
+      cb.indeterminate = false;
+      const isFolder = item.querySelector(":scope > .tree-branch") !== null;
+      if (isFolder) {
+        setDescendants(item, cb.checked);
+      }
+      updateAncestors(item);
+      onChange?.(getCheckedValues());
+    });
+  });
+
+  return treeHandle;
 }
 
 export function bindTree(options: TreeOptions): TreeHandle {

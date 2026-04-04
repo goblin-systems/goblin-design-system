@@ -14,8 +14,8 @@ export { BUILTIN_THEMES, THEME_LABELS, applyTheme, getTheme, isBuiltinTheme, isU
 export type { ApplyThemeOptions, BuiltinTheme, UiTheme } from "./theme";
 export { bindNavigation } from "./headless/navigation";
 export type { NavigationOptions, NavigationHandle } from "./headless/navigation";
-export { mountToast, showToast } from "./headless/toast";
-export type { ToastOptions, ToastVariant } from "./headless/toast";
+export { mountToast, showToast, createToastQueue } from "./headless/toast";
+export type { ToastOptions, ToastVariant, ToastQueueHandle } from "./headless/toast";
 export { bindSearch } from "./headless/search";
 export type { SearchOptions, SearchHandle } from "./headless/search";
 export { bindTooltips } from "./headless/tooltip";
@@ -52,10 +52,16 @@ export { bindTransferList } from "./headless/transfer-list";
 export type { TransferListOptions, TransferListHandle } from "./headless/transfer-list";
 export { bindRating } from "./headless/rating";
 export type { RatingOptions, RatingHandle } from "./headless/rating";
-export { bindTree } from "./headless/tree";
-export type { TreeOptions, TreeHandle } from "./headless/tree";
+export { bindTree, bindCheckboxTree } from "./headless/tree";
+export type { TreeOptions, TreeHandle, CheckboxTreeOptions } from "./headless/tree";
 export { bindContextMenu } from "./headless/context-menu";
 export type { ContextMenuOptions, ContextMenuHandle, ContextMenuItem } from "./headless/context-menu";
+export { bindTextField } from "./headless/text-field";
+export type { TextFieldOptions, TextFieldHandle } from "./headless/text-field";
+export { bindMultiSelect } from "./headless/multi-select";
+export type { MultiSelectOptions, MultiSelectHandle, MultiSelectOption } from "./headless/multi-select";
+export { bindDatePicker } from "./headless/date-picker";
+export type { DatePickerOptions, DatePickerHandle } from "./headless/date-picker";
 
 // ── Platform adapters ─────────────────────────────────────────────────────────
 export { setupWindowControls, setupContextMenuGuard } from "./platform/tauri-window";

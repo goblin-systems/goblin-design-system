@@ -75,6 +75,7 @@ select {
 
 /* ── Inputs (global base) ───────────────────────────────────────────────────── */
 input[type="text"],
+input[type="email"],
 input[type="password"],
 input[type="number"],
 select {

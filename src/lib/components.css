@@ -480,6 +480,7 @@ kbd {
 .app-toast.visible {
   opacity: 1;
   transform: translateY(0);
+  pointer-events: auto;
 }
 
 .app-toast.success {
@@ -2566,8 +2567,11 @@ a.breadcrumb-item:hover { color: var(--text); }
 
 .accordion-panel > * {
   min-height: 0;
-  padding: 0 var(--space-7) var(--space-7);
   overflow: hidden;
+}
+
+.accordion-item.is-open .accordion-panel > * {
+  padding: 0 var(--space-7) var(--space-7);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2601,7 +2605,7 @@ a.breadcrumb-item:hover { color: var(--text); }
   box-shadow: var(--shadow-modal);
   display: flex;
   flex-direction: column;
-  z-index: var(--z-drawer);
+  z-index: calc(var(--z-drawer) + 1);
   transform: translateX(-100%);
   transition: transform var(--duration-base);
 }
@@ -2917,6 +2921,10 @@ a.breadcrumb-item:hover { color: var(--text); }
   letter-spacing: 0.06em;
 }
 
+.custom-select-option[hidden] {
+  display: none;
+}
+
 .custom-select-option {
   width: 100%;
   display: flex;
@@ -3054,6 +3062,32 @@ a.breadcrumb-item:hover { color: var(--text); }
   align-items: center;
   gap: var(--space-2);
   padding-left: calc(var(--tree-depth, 0) * 16px);
+}
+
+.tree-check {
+  flex-shrink: 0;
+}
+
+.tree-row .status-indicator {
+  flex-shrink: 0;
+}
+
+/* dot pinned to the far right of the row */
+.tree--dot-right .tree-row .status-indicator {
+  margin-left: auto;
+}
+
+/* dot pinned to the far left, outside the depth indent */
+.tree--dot-left .tree-row {
+  position: relative;
+  padding-left: calc(var(--space-8) + var(--tree-depth, 0) * 16px);
+}
+
+.tree--dot-left .tree-row .status-indicator {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .tree-toggle,
@@ -3228,4 +3262,482 @@ a.breadcrumb-item:hover { color: var(--text); }
   .demo-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* ── Link ───────────────────────────────────────────────────────────────────── */
+.link {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: color var(--duration-fast);
+}
+.link:hover { color: var(--accent-hover); }
+.link-muted { color: var(--text-muted); }
+.link-muted:hover { color: var(--text); }
+.link-inherit { color: inherit; }
+.link-inherit:hover { color: var(--accent); }
+
+/* ── Timeline ───────────────────────────────────────────────────────────────── */
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline-item {
+  display: flex;
+  gap: var(--space-5);
+  position: relative;
+}
+
+.timeline-item:not(:last-child) {
+  padding-bottom: var(--space-8);
+}
+
+.timeline-spine {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 16px;
+}
+
+.timeline-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  z-index: 1;
+  margin-top: 3px;
+}
+
+.timeline-dot.success { background: var(--success); }
+.timeline-dot.warning { background: var(--warning); }
+.timeline-dot.error   { background: var(--error); }
+.timeline-dot.muted   { background: var(--text-muted); }
+
+.timeline-connector {
+  width: 2px;
+  flex: 1;
+  background: var(--border);
+  margin-top: var(--space-2);
+}
+
+.timeline-item:last-child .timeline-connector { display: none; }
+
+.timeline-content {
+  flex: 1;
+  padding-bottom: var(--space-2);
+}
+
+.timeline-label {
+  font-size: var(--font-size-md);
+  color: var(--text-muted);
+  margin-bottom: var(--space-2);
+}
+
+.timeline-title {
+  font-weight: 600;
+  color: var(--text-heading);
+  margin-bottom: var(--space-2);
+}
+
+.timeline-body {
+  font-size: var(--font-size-md);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+/* ── Responsive Grid ────────────────────────────────────────────────────────── */
+.grid {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.grid-cols-1  { grid-template-columns: repeat(1,  1fr); }
+.grid-cols-2  { grid-template-columns: repeat(2,  1fr); }
+.grid-cols-3  { grid-template-columns: repeat(3,  1fr); }
+.grid-cols-4  { grid-template-columns: repeat(4,  1fr); }
+.grid-cols-6  { grid-template-columns: repeat(6,  1fr); }
+.grid-cols-12 { grid-template-columns: repeat(12, 1fr); }
+
+.col-span-1  { grid-column: span 1; }
+.col-span-2  { grid-column: span 2; }
+.col-span-3  { grid-column: span 3; }
+.col-span-4  { grid-column: span 4; }
+.col-span-6  { grid-column: span 6; }
+.col-span-full { grid-column: 1 / -1; }
+
+.grid-gap-sm { gap: var(--space-3); }
+.grid-gap-md { gap: var(--space-5); }
+.grid-gap-lg { gap: var(--space-7); }
+
+@media (max-width: 768px) {
+  .md-cols-1 { grid-template-columns: repeat(1, 1fr); }
+  .md-cols-2 { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .sm-cols-1 { grid-template-columns: repeat(1, 1fr); }
+}
+
+/* ── Input Adornments ───────────────────────────────────────────────────────── */
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: stretch;
+}
+
+.input-wrap input {
+  width: 100%;
+  min-width: 0;
+}
+
+.input-wrap-start input { padding-left: 36px; }
+.input-wrap-end input   { padding-right: 36px; }
+.input-wrap-both input  { padding-left: 36px; padding-right: 36px; }
+
+.input-adornment {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.input-adornment-start { left: 0; }
+.input-adornment-end   { right: 0; }
+
+.input-adornment svg {
+  width: 14px;
+  height: 14px;
+}
+
+.input-adornment button,
+.input-adornment a {
+  pointer-events: auto;
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.input-adornment button:hover { color: var(--text); }
+
+/* ── Field Validation States ────────────────────────────────────────────────── */
+.field-hint {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  margin-top: var(--space-2);
+  line-height: 1.4;
+}
+
+.field.is-error   .field-hint { color: var(--error); }
+.field.is-success .field-hint { color: var(--success); }
+
+.field.is-error input,
+.field.is-error select,
+.field.is-error textarea {
+  border-color: var(--error);
+  outline-color: var(--error);
+}
+
+.field.is-error input:focus,
+.field.is-error select:focus,
+.field.is-error textarea:focus {
+  border-color: var(--error);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--error) 20%, transparent);
+}
+
+.field.is-success input,
+.field.is-success select,
+.field.is-success textarea {
+  border-color: var(--success);
+}
+
+/* ── Floating Label / TextField ─────────────────────────────────────────────── */
+.text-field {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.text-field input,
+.text-field textarea {
+  padding-top: 20px;
+  padding-bottom: 6px;
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.text-field label {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--font-size-md);
+  color: var(--text-muted);
+  pointer-events: none;
+  transition:
+    top var(--duration-fast),
+    font-size var(--duration-fast),
+    color var(--duration-fast),
+    transform var(--duration-fast);
+  transform-origin: left top;
+  white-space: nowrap;
+}
+
+.text-field textarea ~ label,
+.text-field:has(textarea) label {
+  top: 14px;
+  transform: none;
+}
+
+.text-field:focus-within label,
+.text-field.has-value label {
+  top: 6px;
+  transform: translateY(0) scale(0.78);
+  color: var(--border-focus);
+}
+
+.text-field textarea:focus ~ label,
+.text-field.has-value:has(textarea) label {
+  top: 6px;
+  transform: translateY(0) scale(0.78);
+}
+
+/* ── Multi-select ───────────────────────────────────────────────────────────── */
+.multi-select-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  align-items: center;
+  min-height: 24px;
+}
+
+.multi-select-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: 2px var(--space-2);
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  font-size: var(--font-size-xs);
+  color: var(--text);
+  line-height: 1.4;
+  max-width: 120px;
+}
+
+.multi-select-chip span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.multi-select-chip-remove {
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  line-height: 1;
+  font-size: 14px;
+}
+
+.multi-select-chip-remove:hover { color: var(--error); }
+
+.multi-select-placeholder {
+  color: var(--text-muted);
+  font-size: var(--font-size-md);
+}
+
+.multi-select-clear {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  padding: 0 var(--space-2);
+  cursor: pointer;
+  color: var(--text-muted);
+  font-size: 16px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.multi-select-clear:hover { color: var(--text); }
+
+.custom-select-option .custom-select-option-check {
+  width: 14px;
+  height: 14px;
+  border: 1px solid var(--border);
+  margin-right: var(--space-2);
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-select-option.is-selected .custom-select-option-check::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  background: var(--accent);
+  display: block;
+}
+
+/* ── Toast Region (Queue) ───────────────────────────────────────────────────── */
+.toast-region {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  z-index: var(--z-toast);
+  pointer-events: none;
+  max-width: min(360px, calc(100vw - 32px));
+}
+
+.toast-region .app-toast {
+  position: static;
+  max-width: none;
+}
+
+.toast-close {
+  background: transparent;
+  border: none;
+  padding: 0 0 0 var(--space-3);
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.toast-close:hover { color: var(--text); }
+
+/* ── Date Picker ────────────────────────────────────────────────────────────── */
+.date-picker-popover {
+  position: absolute;
+  z-index: var(--z-dropdown);
+  background: var(--surface-raised-overlay, var(--bg-section));
+  border: 1px solid var(--border);
+  box-shadow: var(--elevation-3, var(--shadow-card));
+  padding: var(--space-4);
+  width: 260px;
+  opacity: 0;
+  transform: translateY(4px);
+  transition:
+    opacity var(--duration-fast),
+    transform var(--duration-fast);
+  pointer-events: none;
+}
+
+.date-picker-popover.is-open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.date-picker-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+.date-picker-title,
+.date-picker-month-label {
+  font-weight: 600;
+  font-size: var(--font-size-md);
+  color: var(--text-heading);
+}
+
+.date-picker-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+/* row wrappers become transparent to the grid so children are direct grid items */
+.date-picker-row {
+  display: contents;
+}
+
+.date-picker-dow,
+.date-picker-weekday {
+  text-align: center;
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  padding: var(--space-2) 0;
+  font-weight: 600;
+}
+
+.date-picker-cell {
+  text-align: center;
+  font-size: var(--font-size-md);
+  padding: 5px 2px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text);
+  cursor: pointer;
+  transition: background var(--duration-fast), border-color var(--duration-fast);
+}
+
+.date-picker-cell:hover:not(:disabled):not(.date-picker-empty) {
+  background: var(--hover-subtle, var(--bg-input));
+  border-color: var(--border);
+}
+
+.date-picker-cell.is-today {
+  border-color: var(--border-focus);
+  color: var(--accent);
+}
+
+.date-picker-cell.is-selected {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.date-picker-cell.is-selected:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.date-picker-cell.is-disabled,
+.date-picker-cell:disabled {
+  color: var(--text-muted);
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.date-picker-cell.date-picker-empty {
+  cursor: default;
+  pointer-events: none;
+}
+
+.date-picker-footer {
+  margin-top: var(--space-4);
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  border-top: 1px solid var(--border);
+  padding-top: var(--space-4);
 }

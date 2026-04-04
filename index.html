@@ -1101,6 +1101,14 @@
                   <ul id="demo-tree" class="tree" role="tree">
                     <li class="tree-item is-open" style="--tree-depth:0"><div class="tree-row"><button class="tree-toggle" type="button"><i data-lucide="chevron-right"></i> src</button></div><ul class="tree-branch"><li class="tree-item is-open" style="--tree-depth:1"><div class="tree-row"><button class="tree-toggle" type="button"><i data-lucide="chevron-right"></i> lib</button></div><ul class="tree-branch"><li class="tree-item" style="--tree-depth:2"><div class="tree-row"><button class="tree-leaf" type="button"><i data-lucide="file-code-2"></i> components.css</button></div></li><li class="tree-item" style="--tree-depth:2"><div class="tree-row"><button class="tree-leaf" type="button"><i data-lucide="file-code-2"></i> index.ts</button></div></li></ul></li><li class="tree-item" style="--tree-depth:1"><div class="tree-row"><button class="tree-leaf" type="button"><i data-lucide="file-text"></i> main.ts</button></div></li></ul></li>
                   </ul>
+                  <div class="radio-group">
+                    <label class="radio-label"><input type="radio" name="tree-dot-pos" value="tree--dot-right" checked> Right (aligned)</label>
+                    <label class="radio-label"><input type="radio" name="tree-dot-pos" value=""> Inline</label>
+                    <label class="radio-label"><input type="radio" name="tree-dot-pos" value="tree--dot-left"> Left</label>
+                  </div>
+                  <ul id="demo-tree-checkbox" class="tree tree--dot-right" role="tree">
+                    <li class="tree-item is-open" style="--tree-depth:0" data-value="src"><div class="tree-row"><input type="checkbox" class="tree-check"><button class="tree-toggle" type="button"><i data-lucide="chevron-right"></i> src</button><span class="status-indicator connected" data-tooltip="Tracked"><span class="status-dot"></span></span></div><ul class="tree-branch"><li class="tree-item is-open" style="--tree-depth:1" data-value="src/lib"><div class="tree-row"><input type="checkbox" class="tree-check"><button class="tree-toggle" type="button"><i data-lucide="chevron-right"></i> lib</button><span class="status-indicator untested" data-tooltip="Modified"><span class="status-dot"></span></span></div><ul class="tree-branch"><li class="tree-item is-open" style="--tree-depth:2" data-value="src/lib/headless"><div class="tree-row"><input type="checkbox" class="tree-check"><button class="tree-toggle" type="button"><i data-lucide="chevron-right"></i> headless</button><span class="status-indicator untested" data-tooltip="Modified"><span class="status-dot"></span></span></div><ul class="tree-branch"><li class="tree-item" style="--tree-depth:3" data-value="src/lib/headless/toast.ts"><div class="tree-row"><input type="checkbox" class="tree-check"><button class="tree-leaf" type="button"><i data-lucide="file-code-2"></i> toast.ts</button><span class="status-indicator untested" data-tooltip="Modified"><span class="status-dot"></span></span></div></li><li class="tree-item" style="--tree-depth:3" data-value="src/lib/headless/tree.ts"><div class="tree-row"><input type="checkbox" class="tree-check"><button class="tree-leaf" type="button"><i data-lucide="file-code-2"></i> tree.ts</button><span class="status-indicator connected" data-tooltip="Tracked"><span class="status-dot"></span></span></div></li></ul></li><li class="tree-item" style="--tree-depth:2" data-value="src/lib/components.css"><div class="tree-row"><input type="checkbox" class="tree-check"><button class="tree-leaf" type="button"><i data-lucide="file-code-2"></i> components.css</button><span class="status-indicator error" data-tooltip="Conflict"><span class="status-dot"></span></span></div></li><li class="tree-item" style="--tree-depth:2" data-value="src/lib/index.ts"><div class="tree-row"><input type="checkbox" class="tree-check"><button class="tree-leaf" type="button"><i data-lucide="file-code-2"></i> index.ts</button><span class="status-indicator connected" data-tooltip="Tracked"><span class="status-dot"></span></span></div></li></ul></li><li class="tree-item" style="--tree-depth:1" data-value="src/main.ts"><div class="tree-row"><input type="checkbox" class="tree-check"><button class="tree-leaf" type="button"><i data-lucide="file-text"></i> main.ts</button><span class="status-indicator disconnected" data-tooltip="Ignored"><span class="status-dot"></span></span></div></li></ul></li>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -1218,6 +1226,145 @@
               </div>
             </div>
           </div>
+
+          <div class="settings-section stack gap-4">
+            <div class="section-heading-row"><h2>New Components</h2></div>
+            <div class="demo-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+
+              <div class="card">
+                <div class="card-header"><h3>Link</h3></div>
+                <div class="card-body stack gap-3">
+                  <p>Read the <a href="#" class="link">documentation</a> to get started.</p>
+                  <p><a href="#" class="link link-muted">Muted link</a></p>
+                  <p>A <a href="#" class="link link-inherit">inherit-color link</a> inline.</p>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header"><h3>Timeline</h3></div>
+                <div class="card-body">
+                  <ul class="timeline">
+                    <li class="timeline-item"><div class="timeline-spine"><div class="timeline-dot success"></div><div class="timeline-connector"></div></div><div class="timeline-content"><div class="timeline-label">9:00 AM</div><div class="timeline-title">Deployed to production</div><div class="timeline-body">All checks passed.</div></div></li>
+                    <li class="timeline-item"><div class="timeline-spine"><div class="timeline-dot warning"></div><div class="timeline-connector"></div></div><div class="timeline-content"><div class="timeline-label">8:45 AM</div><div class="timeline-title">Build warnings</div><div class="timeline-body">3 deprecation notices.</div></div></li>
+                    <li class="timeline-item"><div class="timeline-spine"><div class="timeline-dot muted"></div></div><div class="timeline-content"><div class="timeline-label">8:30 AM</div><div class="timeline-title">Pipeline started</div></div></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header"><h3>Responsive Grid</h3></div>
+                <div class="card-body stack gap-3">
+                  <span class="hint">grid-cols-3</span>
+                  <div class="grid grid-cols-3 grid-gap-sm">
+                    <div class="mini-panel" style="padding:8px;text-align:center">1</div>
+                    <div class="mini-panel" style="padding:8px;text-align:center">2</div>
+                    <div class="mini-panel" style="padding:8px;text-align:center">3</div>
+                    <div class="mini-panel col-span-2" style="padding:8px;text-align:center">span 2</div>
+                    <div class="mini-panel" style="padding:8px;text-align:center">5</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header"><h3>Input Adornments</h3></div>
+                <div class="card-body stack gap-4">
+                  <div class="field-block">
+                    <label>Search</label>
+                    <div class="input-wrap input-wrap-start">
+                      <div class="input-adornment input-adornment-start"><i data-lucide="search"></i></div>
+                      <input type="text" placeholder="Find anything…" />
+                    </div>
+                  </div>
+                  <div class="field-block">
+                    <label>Password</label>
+                    <div class="input-wrap input-wrap-end" id="demo-pw-wrap">
+                      <input type="password" id="demo-pw-input" placeholder="Enter password" />
+                      <div class="input-adornment input-adornment-end"><button type="button" id="demo-pw-toggle" aria-label="Toggle password"><i data-lucide="eye"></i></button></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header"><h3>Field Validation</h3></div>
+                <div class="card-body stack gap-4">
+                  <div class="field is-error">
+                    <div class="field-block"><label>Email</label><input type="email" value="not-an-email" /></div>
+                    <span class="field-hint">Enter a valid email address</span>
+                  </div>
+                  <div class="field is-success">
+                    <div class="field-block"><label>Username</label><input type="text" value="goblin_dev" /></div>
+                    <span class="field-hint">Username is available</span>
+                  </div>
+                  <div class="field">
+                    <div class="field-block"><label>Bio</label><input type="text" /></div>
+                    <span class="field-hint">Optional — shown on your profile</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header"><h3>Floating Label</h3></div>
+                <div class="card-body stack gap-4">
+                  <div class="text-field" data-bind>
+                    <input type="text" id="demo-tf-name" />
+                    <label for="demo-tf-name">Full name</label>
+                  </div>
+                  <div class="text-field" data-bind>
+                    <input type="email" id="demo-tf-email" />
+                    <label for="demo-tf-email">Email address</label>
+                  </div>
+                  <div class="text-field" data-bind>
+                    <input type="text" id="demo-tf-prefilled" value="Goblin" />
+                    <label for="demo-tf-prefilled">Project name</label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header"><h3>Multi-select</h3></div>
+                <div class="card-body stack gap-3">
+                  <div id="demo-multi-select" class="custom-select">
+                    <label for="demo-multi-select-native">Frameworks</label>
+                    <select id="demo-multi-select-native" multiple class="custom-select-native">
+                      <option value="react">React</option>
+                      <option value="vue">Vue</option>
+                      <option value="angular">Angular</option>
+                      <option value="svelte">Svelte</option>
+                      <option value="solid">Solid</option>
+                      <option value="qwik">Qwik</option>
+                    </select>
+                    <div class="custom-select-trigger"></div>
+                    <div class="custom-select-list"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header"><h3>Toast Queue</h3></div>
+                <div class="card-body stack gap-3">
+                  <span class="hint">Toasts stack — multiple can coexist</span>
+                  <div class="row gap-2" style="flex-wrap:wrap">
+                    <button id="demo-queue-success" class="secondary-btn slim-btn">Success</button>
+                    <button id="demo-queue-error" class="secondary-btn slim-btn">Error</button>
+                    <button id="demo-queue-info" class="secondary-btn slim-btn">Info + action</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header"><h3>Date Picker</h3></div>
+                <div class="card-body stack gap-4">
+                  <div class="field-block">
+                    <label for="demo-date-picker">Start date</label>
+                    <input id="demo-date-picker" type="text" style="width:100%" />
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
         </div>
       </div>
 
