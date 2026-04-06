@@ -12,6 +12,8 @@ export type { IconNode } from "./icons/index";
 export { byId, byIdOptional, qs, qsAll, populateSelectOptions, setGroupDisabled } from "./headless/dom";
 export { BUILTIN_THEMES, THEME_LABELS, applyTheme, getTheme, isBuiltinTheme, isUiTheme, setTheme } from "./theme";
 export type { ApplyThemeOptions, BuiltinTheme, UiTheme } from "./theme";
+export { bindAlert } from "./headless/alert";
+export type { AlertOptions, AlertHandle } from "./headless/alert";
 export { bindNavigation } from "./headless/navigation";
 export type { NavigationOptions, NavigationHandle } from "./headless/navigation";
 export { mountToast, showToast, createToastQueue } from "./headless/toast";
