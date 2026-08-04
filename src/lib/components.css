@@ -56,7 +56,6 @@
 /* ── Buttons ─────────────────────────────────────────────────────────────────── */
 .icon-btn,
 .secondary-btn,
-.top-tab,
 .document-tab {
   border: 1px solid var(--border);
   cursor: pointer;
@@ -171,7 +170,6 @@
 
 .icon-btn:hover,
 .secondary-btn:hover,
-.top-tab:hover,
 .document-tab:hover {
   border-color: var(--border-focus);
   color: var(--text-heading);
@@ -227,28 +225,52 @@
 }
 
 /* ── Top Tabs ────────────────────────────────────────────────────────────────── */
+/* A slim segmented control: the container is the recessed track, the active
+   tab is filled with the accent. Icons are optional but expected by default —
+   drop a `<i data-lucide="...">` inside each tab and run `applyIcons()`. */
 .top-tabs {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 3px;
+  padding: 3px;
+  background: var(--bg-deep);
+  border: 1px solid var(--border);
   app-region: no-drag;
   -webkit-app-region: no-drag;
 }
 
 .top-tab {
-  background: var(--top-tab-bg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 5px 8px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  letter-spacing: 0.04em;
   color: var(--text-muted);
-  border-radius: 0;
-  padding: 10px 16px;
-  font-weight: 600;
-  font-size: var(--font-size-base);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition:
+    color var(--duration-fast),
+    background var(--duration-fast);
 }
 
-.top-tab.is-active,
-.document-tab.is-active {
-  background: var(--top-tab-active-bg);
-  color: var(--text-heading);
-  border-color: var(--top-tab-active-border);
+.top-tab:hover {
+  color: var(--text);
+}
+
+.top-tab.is-active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.top-tab svg {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
 }
 
 .tab-panel {
@@ -712,6 +734,12 @@ body.modal-open {
   background: var(--warning);
   box-shadow: 0 0 8px rgba(251, 191, 36, 0.52);
   flex-shrink: 0;
+}
+
+.document-tab.is-active {
+  background: var(--top-tab-active-bg);
+  color: var(--text-heading);
+  border-color: var(--top-tab-active-border);
 }
 
 .document-tab-close {
@@ -3540,7 +3568,7 @@ a.breadcrumb-item:hover { color: var(--text); }
   }
 
   .top-tabs {
-    flex-wrap: wrap;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   }
 
   .language-grid {

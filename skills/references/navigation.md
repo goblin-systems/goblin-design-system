@@ -76,10 +76,14 @@ tabs.activate("panel-a");
 
 ### Markup
 
+Top tabs are a slim segmented control. Icons are optional but expected by
+default — drop a `<i data-lucide="...">` before the label and call
+`applyIcons()`; a label-only tab works too.
+
 ```html
 <div class="top-tabs">
-  <button class="top-tab is-active" data-tab-trigger="panel-a">Tab A</button>
-  <button class="top-tab" data-tab-trigger="panel-b">Tab B</button>
+  <button class="top-tab is-active" data-tab-trigger="panel-a"><i data-lucide="box"></i>Tab A</button>
+  <button class="top-tab" data-tab-trigger="panel-b"><i data-lucide="settings"></i>Tab B</button>
 </div>
 
 <div class="tab-panel is-active" data-tab-panel="panel-a">A</div>
