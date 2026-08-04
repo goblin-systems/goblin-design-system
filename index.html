@@ -610,6 +610,74 @@
             </div>
           </div>
 
+          <!-- Number Input / Drop Zone / Textarea / Hotkey -->
+          <div class="settings-section">
+            <h2>Number Input · Drop Zone · Textarea · Hotkey</h2>
+            <div class="demo-grid" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+
+              <div class="card">
+                <div class="card-header"><h3>Number Input</h3></div>
+                <div class="card-body stack gap-5">
+                  <div class="field-block">
+                    <label>Volume</label>
+                    <div id="demo-number-volume" class="number-input">
+                      <button class="number-input-dec icon-btn icon-btn-sm" type="button"><i data-lucide="minus"></i></button>
+                      <input type="number" value="50" min="0" max="100" step="1" style="width:60px" />
+                      <button class="number-input-inc icon-btn icon-btn-sm" type="button"><i data-lucide="plus"></i></button>
+                    </div>
+                  </div>
+                  <div class="field-block">
+                    <label>Step 0.5</label>
+                    <div id="demo-number-step" class="number-input">
+                      <button class="number-input-dec icon-btn icon-btn-sm" type="button"><i data-lucide="minus"></i></button>
+                      <input type="number" value="1.0" min="0" max="5" step="0.5" style="width:60px" />
+                      <button class="number-input-inc icon-btn icon-btn-sm" type="button"><i data-lucide="plus"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header"><h3>Drop Zone</h3></div>
+                <div class="card-body">
+                  <div id="demo-drop-zone" class="drop-zone">
+                    <i data-lucide="upload-cloud"></i>
+                    <p>Drop files here or <button class="text-btn drop-zone-browse" type="button">browse</button></p>
+                    <span class="drop-zone-hint">Any file type accepted</span>
+                  </div>
+                  <p id="demo-drop-zone-result" class="hint" style="margin-top:8px"></p>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header"><h3>Auto-resize Textarea</h3></div>
+                <div class="card-body stack gap-3">
+                  <div class="textarea-field">
+                    <label for="demo-textarea-basic">Notes</label>
+                    <textarea id="demo-textarea-basic" rows="2" placeholder="Type to grow…"></textarea>
+                  </div>
+                  <div class="textarea-field">
+                    <label for="demo-textarea-count">Bio (max 200)</label>
+                    <textarea id="demo-textarea-count" rows="2" maxlength="200" placeholder="With character count…"></textarea>
+                    <span class="textarea-count"></span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card">
+                <div class="card-header"><h3>Hotkeys</h3></div>
+                <div class="card-body stack gap-3">
+                  <p class="hint">Registered shortcuts (fires a toast):</p>
+                  <div class="stack gap-2">
+                    <div class="row gap-3"><span class="kbd">Mod+D</span><span class="hint">Demo hotkey</span></div>
+                    <div class="row gap-3"><span class="kbd">Shift+?</span><span class="hint">Help hotkey</span></div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
         </div>
       </div>
 

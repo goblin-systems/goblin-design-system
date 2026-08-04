@@ -28,7 +28,8 @@
 - `bindTree()` expects `.tree-item`, `.tree-toggle` / `.tree-leaf`, and nested `.tree-branch`
 - `bindTree()` sets `role="treeitem"`, `role="group"`, `aria-expanded`, `aria-level`, `aria-setsize`, `aria-posinset`, and implements roving tabindex for keyboard navigation
 - `bindTable()` with selection sets `aria-selected` on rows, `aria-multiselectable` on the table in multi mode, and adds keyboard row navigation (ArrowUp/Down, Enter/Space)
-- `bindContextMenu()` creates and owns the menu DOM
+- `bindContextMenu()` creates and owns the menu DOM and supports nested submenu items via `items`
+- `bindTooltips()` is delegated and portalled; bind once per root, including before dynamic tooltip anchors are rendered
 - `setupWindowControls()` is only for Tauri apps
 - `setupContextMenuGuard()` disables right-click and keyboard context-menu shortcuts globally
 - `drawWaveform()` is low-level canvas drawing; the caller owns animation, clearing, sizing, and DPR handling

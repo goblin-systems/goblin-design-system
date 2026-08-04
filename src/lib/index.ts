@@ -10,6 +10,17 @@ export type { IconNode } from "./icons/index";
 
 // ── Headless utilities ────────────────────────────────────────────────────────
 export { byId, byIdOptional, qs, qsAll, populateSelectOptions, setGroupDisabled } from "./headless/dom";
+export { bindHotkey } from "./headless/hotkey";
+export type { HotkeyOptions } from "./headless/hotkey";
+export { bindClickOutside } from "./headless/click-outside";
+export type { ClickOutsideOptions } from "./headless/click-outside";
+export { bindResizeObserver } from "./headless/resize-observer";
+export { bindNumberInput } from "./headless/number-input";
+export type { NumberInputOptions, NumberInputHandle } from "./headless/number-input";
+export { bindDropZone } from "./headless/drop-zone";
+export type { DropZoneOptions, DropZoneHandle } from "./headless/drop-zone";
+export { bindTextarea } from "./headless/textarea";
+export type { TextareaOptions, TextareaHandle } from "./headless/textarea";
 export { BUILTIN_THEMES, THEME_LABELS, applyTheme, getTheme, isBuiltinTheme, isUiTheme, setTheme } from "./theme";
 export type { ApplyThemeOptions, BuiltinTheme, UiTheme } from "./theme";
 export { bindAlert } from "./headless/alert";

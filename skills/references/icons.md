@@ -1,4 +1,4 @@
-# Icons
+# Icons & Utilities
 
 ## API
 
@@ -45,3 +45,48 @@ import {
 - `qsAll<T>(selector, root?)` — returns all matches
 - `populateSelectOptions(select, options, preferred)` — replaces all `<option>` nodes, disables `<select>` when empty
 - `setGroupDisabled(container, disabled)` — toggles `disabled` on child `input`, `select`, and `button` elements
+
+---
+
+## `bindHotkey`
+
+Registers a keyboard shortcut and returns an unbind function.
+
+```ts
+import { bindHotkey, type HotkeyOptions } from "@goblin-systems/goblin-design-system";
+
+const off = bindHotkey("mod+k", () => openPalette());
+const off2 = bindHotkey("ctrl+shift+p", handler);
+const off3 = bindHotkey("escape", close, { target: panelEl });
+
+off(); // removes listener
+```
+
+Key syntax: modifiers separated by `+`, then the key name (case-insensitive).
+
+Modifiers: `ctrl`, `shift`, `alt`, `meta`, `mod`  
+`mod` resolves to `ctrl` on Windows/Linux and `meta` (Cmd) on macOS.
+
+Options:
+
+- `target` — element to attach the listener to (default `window`)
+- `preventDefault` — prevent browser default for the key combo (default `true`)
+
+---
+
+## `bindClickOutside`
+
+Calls a callback whenever the user clicks/taps outside a given element.
+
+```ts
+import { bindClickOutside, type ClickOutsideOptions } from "@goblin-systems/goblin-design-system";
+
+const stop = bindClickOutside(menuEl, () => closeMenu());
+stop(); // removes listener
+```
+
+Options:
+
+- `event` — which pointer event to listen for: `"pointerdown"` (default), `"mousedown"`, or `"click"`
+
+Uses capture phase so it fires before any `stopPropagation` inside the element.

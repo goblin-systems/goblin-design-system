@@ -20,12 +20,12 @@ Full details for each group are in `skills/references/`. Read the relevant file 
 |---|---|---|
 | **Setup** | Install, bootstrap, design rules | `references/setup.md` |
 | **Tokens & Themes** | CSS tokens, built-in themes (`goblin`/`dark`/`light`), theme API | `references/tokens.md` |
-| **Icons & DOM** | `applyIcons`, `createIcon`, `byId`, `qs`, `populateSelectOptions` | `references/icons.md` |
+| **Icons & DOM & Utils** | `applyIcons`, `createIcon`, `byId`, `qs`, `populateSelectOptions`, `bindHotkey`, `bindClickOutside` | `references/icons.md` |
 | **Buttons** | `secondary-btn`, `icon-btn`, sizes, loading state (`.is-loading`) | `references/buttons.md` |
 | **Navigation** | Menu bar, tabs, document tabs, stepper, pagination, breadcrumbs, window shell | `references/navigation.md` |
 | **Overlays** | Modal, drawer, toast, alert, popover, context menu, tooltip | `references/overlays.md` |
-| **Forms** | Native inputs, field helpers, switch, custom select, multi-select, text field, transfer list, rating, radio/checkbox groups | `references/forms.md` |
-| **Inputs & Controls** | Range slider, radial dial, toggle group, search, date picker / date range picker | `references/inputs.md` |
+| **Forms** | Native inputs, field helpers, switch, custom select, multi-select (with chips), text field (floating label + validation), transfer list, rating, radio/checkbox groups | `references/forms.md` |
+| **Inputs & Controls** | Number input, range slider, radial dial, toggle group, search, date picker, file drop zone, auto-resize textarea | `references/inputs.md` |
 | **Data Display** | Table, tree, accordion, badges, status indicators, rich list, stats, empty state | `references/data-display.md` |
 | **Feedback** | Progress bar, spinner, skeleton/shimmer, chip/tag, divider, avatar | `references/feedback.md` |
 | **Layout** | Split pane, scroll panel, settings section, mini panel, stack/row utilities, status bar | `references/layout.md` |

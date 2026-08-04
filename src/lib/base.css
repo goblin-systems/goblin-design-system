@@ -78,6 +78,7 @@ input[type="text"],
 input[type="email"],
 input[type="password"],
 input[type="number"],
+textarea,
 select {
   background: var(--bg-input);
   border: 1px solid var(--border);
@@ -88,6 +89,18 @@ select {
   outline: none;
   transition: border-color var(--duration-base);
   width: 100%;
+}
+
+/* ── Autofill override ──────────────────────────────────────────────────────── */
+/* Browsers force their own bg on autofilled inputs. Override via inset box-shadow
+   (the only property allowed to change the visual background on :-webkit-autofill). */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px var(--bg-input) inset !important;
+  -webkit-text-fill-color: var(--text) !important;
+  caret-color: var(--text);
 }
 
 input:focus,

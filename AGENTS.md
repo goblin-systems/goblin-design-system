@@ -56,7 +56,7 @@ tsconfig.lib.json         ← separate tsconfig for declaration emit
 - **Dark theme only.** All colours reference CSS custom properties from `tokens.css`. Never hardcode colours.
 - **Square corners everywhere.** No `border-radius` anywhere — not in CSS, not inline. The design uses `0` for all radii. If you need to add rounding, the user will ask explicitly.
 - **No framework.** Pure vanilla TypeScript + DOM. No React, Vue, Svelte.
-- **Headless pattern.** Behaviour lives in TypeScript; appearance lives in CSS. A headless module accepts a DOM element (already in the page) and attaches event listeners. It does not create DOM except `confirmModal` which is self-contained by design.
+- **Headless pattern.** Behaviour lives in TypeScript; appearance lives in CSS. A headless module accepts a DOM element (already in the page) and attaches event listeners. Self-contained floating components such as tooltips, context menus, toasts, and confirmation modals may create and own portal DOM, which `destroy()` must remove.
 - **CSS custom properties for everything.** Spacing, colour, typography, shadows all use `var(--...)` tokens. Never use magic numbers.
 
 ---
@@ -139,6 +139,7 @@ bun run dev          # start Tauri dev server
 bun run build        # build demo app (Vite, for Tauri)
 bun run build:lib    # type-check + build npm package → dist/
 bun run lint         # tsc --noEmit type check
+bun run test         # vitest run
 ```
 
 The lib build outputs:

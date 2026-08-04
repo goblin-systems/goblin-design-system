@@ -24,6 +24,10 @@ import { bindContextMenu } from "./lib/headless/context-menu";
 import { bindTextField } from "./lib/headless/text-field";
 import { bindMultiSelect } from "./lib/headless/multi-select";
 import { bindDatePicker, bindDateRangePicker } from "./lib/headless/date-picker";
+import { bindNumberInput } from "./lib/headless/number-input";
+import { bindDropZone } from "./lib/headless/drop-zone";
+import { bindTextarea } from "./lib/headless/textarea";
+import { bindHotkey } from "./lib/headless/hotkey";
 import { createToastQueue } from "./lib/headless/toast";
 import { bindSplitPaneResize } from "./lib/headless/split-pane";
 import { THEME_LABELS, getTheme, isBuiltinTheme, setTheme } from "./lib/theme";
@@ -886,3 +890,46 @@ document.getElementById("demo-queue-error")?.addEventListener("click", () => {
 document.getElementById("demo-queue-info")?.addEventListener("click", () => {
   toastQueue.push({ message: "New version available", variant: "info", durationMs: 4000, action: { label: "Update", onClick: () => logDemoEvent("Update clicked") } });
 });
+
+// ── Number Input ──────────────────────────────────────────────────────────────
+const numberVolEl = document.getElementById("demo-number-volume");
+if (numberVolEl) {
+  bindNumberInput({ el: numberVolEl, onChange: (v) => logDemoEvent(`Volume: ${v}`) });
+}
+const numberStepEl = document.getElementById("demo-number-step");
+if (numberStepEl) {
+  bindNumberInput({ el: numberStepEl, onChange: (v) => logDemoEvent(`Step value: ${v}`) });
+}
+
+// ── Drop Zone ─────────────────────────────────────────────────────────────────
+const dropZoneEl = document.getElementById("demo-drop-zone");
+const dropZoneResult = document.getElementById("demo-drop-zone-result");
+if (dropZoneEl) {
+  bindDropZone({
+    el: dropZoneEl,
+    onDrop: (files) => {
+      const names = Array.from(files).map((f) => f.name).join(", ");
+      logDemoEvent(`Dropped: ${names}`);
+      if (dropZoneResult) dropZoneResult.textContent = `Received: ${names}`;
+    },
+    onDropPaths: (paths) => {
+      const names = paths.map((p) => p.split(/[\\/]/).pop() ?? p).join(", ");
+      logDemoEvent(`Dropped (Tauri): ${names}`);
+      if (dropZoneResult) dropZoneResult.textContent = `Received: ${names}`;
+    },
+  });
+}
+
+// ── Auto-resize Textarea ──────────────────────────────────────────────────────
+const taBasicEl = document.getElementById("demo-textarea-basic");
+if (taBasicEl) {
+  bindTextarea({ el: taBasicEl as HTMLTextAreaElement, onChange: (v) => logDemoEvent(`Textarea: ${v.length} chars`) });
+}
+const taCountEl = document.getElementById("demo-textarea-count");
+if (taCountEl) {
+  bindTextarea({ el: taCountEl.closest(".textarea-field") as HTMLElement });
+}
+
+// ── Hotkeys ───────────────────────────────────────────────────────────────────
+bindHotkey("mod+d", () => showToast("Mod+D fired", "info"));
+bindHotkey("shift+?", () => showToast("Shift+? fired — help!", "success"));

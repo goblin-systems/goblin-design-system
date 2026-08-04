@@ -1,5 +1,53 @@
 # Inputs & Controls
 
+## Number Input
+
+### API
+
+```ts
+import {
+  bindNumberInput,
+  type NumberInputHandle,
+  type NumberInputOptions,
+} from "@goblin-systems/goblin-design-system";
+
+const numInput = bindNumberInput({
+  el: document.getElementById("my-number-input")!,
+  onChange: (value) => console.log(value),
+});
+
+numInput.getValue();
+numInput.setValue(42);
+numInput.destroy();
+```
+
+- Wires `.number-input-dec` and `.number-input-inc` buttons to the enclosed `<input type="number">`
+- Respects `min`, `max`, and `step` attributes
+- Disables each button when the value reaches its boundary
+- `setValue()` clamps to `min`/`max` and calls `onChange`
+
+Handle: `getValue()`, `setValue(value)`, `destroy()`
+
+### Markup
+
+```html
+<div id="my-number-input" class="number-input">
+  <button class="number-input-dec icon-btn icon-btn-sm" type="button">
+    <i data-lucide="minus"></i>
+  </button>
+  <input type="number" value="5" min="0" max="100" step="1" />
+  <button class="number-input-inc icon-btn icon-btn-sm" type="button">
+    <i data-lucide="plus"></i>
+  </button>
+</div>
+```
+
+Classes: `number-input`, `number-input-dec`, `number-input-inc`
+
+Native spin buttons are hidden via CSS. The input width is fixed at 56 px; override with inline style if needed.
+
+---
+
 ## Double Range Slider
 
 ### API
@@ -231,3 +279,92 @@ Handle: `open()`, `close()`, `getValue()`, `setValue(start, end)`, `destroy()`
 ```
 
 Range-specific classes applied by JS on calendar day cells: `is-range-start`, `is-range-end`, `is-in-range`
+
+---
+
+## File Drop Zone
+
+### API
+
+```ts
+import {
+  bindDropZone,
+  type DropZoneHandle,
+  type DropZoneOptions,
+} from "@goblin-systems/goblin-design-system";
+
+const zone = bindDropZone({
+  el: document.getElementById("my-drop-zone")!,
+  onDrop: (files) => console.log([...files]),
+  accept: "image/*",   // optional MIME filter
+  multiple: true,      // default true
+});
+
+zone.browse();   // programmatically open file picker
+zone.destroy();
+```
+
+- Adds `.is-dragging-over` while a drag is in progress over the element
+- Filters dropped files by `accept` when provided (same syntax as `<input accept>`)
+- Click on the zone or a `.drop-zone-browse` button opens the native file picker
+- A hidden `<input type="file">` is injected and removed on `destroy()`
+
+Handle: `browse()`, `destroy()`
+
+### Markup
+
+```html
+<div id="my-drop-zone" class="drop-zone">
+  <i data-lucide="upload-cloud"></i>
+  <p>Drop files here or <button class="text-btn drop-zone-browse" type="button">browse</button></p>
+  <span class="drop-zone-hint">PNG, JPG up to 10 MB</span>
+</div>
+```
+
+Classes: `drop-zone`, `drop-zone-browse` (click triggers file picker), `drop-zone-hint`, `is-dragging-over`
+
+---
+
+## Auto-resize Textarea
+
+### API
+
+```ts
+import {
+  bindTextarea,
+  type TextareaHandle,
+  type TextareaOptions,
+} from "@goblin-systems/goblin-design-system";
+
+const ta = bindTextarea({
+  el: document.getElementById("my-textarea")!,  // textarea or .textarea-field container
+  onChange: (value) => console.log(value),
+});
+
+ta.getValue();
+ta.setValue("Hello");
+ta.destroy();
+```
+
+- Textarea grows as the user types, never shrinking below its `rows` height
+- If a `.textarea-count` sibling exists inside `.textarea-field`, it shows `n / max` (when `maxlength` is set) or just `n`
+- Counter gains `.is-near-limit` at 90 % and `.is-at-limit` at 100 %
+- Sets `overflow: hidden` and `resize: none` on the element; these are restored on `destroy()`
+
+Handle: `getValue()`, `setValue(value)`, `destroy()`
+
+### Markup
+
+```html
+<!-- Minimal -->
+<textarea id="my-textarea" rows="3"></textarea>
+
+<!-- With container, label, and counter -->
+<div class="textarea-field">
+  <label for="notes">Notes</label>
+  <textarea id="notes" rows="3" maxlength="500"></textarea>
+  <span class="textarea-count"></span>
+</div>
+```
+
+Classes: `textarea-field`, `textarea-count`, `is-near-limit`, `is-at-limit`

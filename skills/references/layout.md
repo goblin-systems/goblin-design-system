@@ -35,9 +35,17 @@ bindSplitPaneResize({
 </div>
 ```
 
-Classes: `editor-workspace`, `editor-tools-pane`, `editor-canvas-pane`, `editor-sidebar-pane`, `pane-resizer`, `left-collapsed`, `right-collapsed`
+Classes: `editor-workspace`, `editor-tools-pane`, `editor-canvas-pane`, `editor-sidebar-pane`, `pane-resizer`, `pane-resizer-h`, `left-collapsed`, `right-collapsed`
 
 Width variables: `--left-panel-width`, `--right-panel-width`
+
+### Horizontal resizer
+
+`.pane-resizer-h` — horizontal variant for splitting rows (e.g. timeline height). Defaults to `width: 100%; height: 5px` with `cursor: ns-resize`. Same pale→accent hover behaviour as the vertical resizer.
+
+### Visual behaviour
+
+Pane resizers are thin (5px), near-invisible by default (`color-mix(in srgb, var(--border) 18%, transparent)`), and glow `var(--accent)` on hover.
 
 ---
 

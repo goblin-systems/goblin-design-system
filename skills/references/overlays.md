@@ -234,6 +234,15 @@ const menu = bindContextMenu({
   target: document.getElementById("target")!,
   items: [
     { id: "rename", label: "Rename", icon: "pencil", onSelect: () => console.log("rename") },
+    {
+      id: "move",
+      label: "Move to",
+      icon: "folder-output",
+      items: [
+        { id: "move-notes", label: "Notes", icon: "sticky-note" },
+        { id: "move-todo", label: "Todo", icon: "square-check-big" },
+      ],
+    },
     { divider: true },
     { id: "delete", label: "Delete", icon: "trash-2", shortcut: "Del" },
   ],
@@ -242,13 +251,13 @@ const menu = bindContextMenu({
 menu.open(120, 80);
 ```
 
-`bindContextMenu()` creates and owns the menu DOM, reusing nav dropdown styles.
+`bindContextMenu()` creates and owns the menu DOM, reusing nav dropdown styles. Flat menus still work unchanged; submenu items use `items: ContextMenuItem[]` and inherit hover, click, and keyboard open/close behaviour.
 
 Handle: `open(x, y)`, `close()`, `destroy()`
 
 ### Classes (injected by JS)
 
-`context-menu`, `nav-dropdown`, `nav-option`, `nav-option--disabled`, `nav-option-icon`, `nav-option-label`, `nav-option-shortcut`, `nav-divider`, `is-open`
+`context-menu`, `nav-dropdown`, `nav-option`, `nav-option--disabled`, `nav-option--has-sub`, `nav-option-icon`, `nav-option-label`, `nav-option-shortcut`, `nav-option-arrow`, `nav-submenu`, `nav-divider`, `is-open`, `is-sub-open`
 
 ---
 
@@ -272,7 +281,7 @@ const tooltips = bindTooltips({
 tooltips.destroy();
 ```
 
-Binds every `[data-tooltip]` element within `root`. Uses `data-tooltip-placement` when present and flips when needed.
+Delegates from `root`, so `[data-tooltip]` elements added later work without re-binding. The rendered tooltip is portalled to `body`, measured, flipped when needed, and clamped to the visual viewport so clipped panels cannot cut it off. Calling `bindTooltips()` repeatedly with the same root returns the existing handle.
 
 ### Markup
 
@@ -283,3 +292,5 @@ Binds every `[data-tooltip]` element within `root`. Uses `data-tooltip-placement
 ```
 
 Attributes: `data-tooltip`, `data-tooltip-placement`, `data-tooltip-visible` (set by JS), `data-tooltip-side` (set by JS)
+
+Injected class: `tooltip-portal`. Existing `data-tooltip-visible` and `data-tooltip-side` selectors remain available for compatibility. For a wider or narrower tooltip, set `--tooltip-max-width` on the anchor; the portal copies it when shown. Tooltip content is non-interactive; use `bindPopover()` for interactive content.

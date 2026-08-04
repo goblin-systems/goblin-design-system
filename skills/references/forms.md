@@ -269,3 +269,118 @@ Handle: `getValue()`, `setValue(value)`, `destroy()`
 ```
 
 Classes: `rating`, `rating-star`, `is-active`
+
+---
+
+## Multi-Select
+
+### API
+
+```ts
+import {
+  bindMultiSelect,
+  type MultiSelectHandle,
+  type MultiSelectOption,
+  type MultiSelectOptions,
+} from "@goblin-systems/goblin-design-system";
+
+const ms = bindMultiSelect({
+  el: document.getElementById("my-multi-select")!,
+  placeholder: "Select options",
+  onChange: (values) => console.log(values),
+});
+
+ms.getValues();           // string[]
+ms.setValues(["a", "b"]);
+ms.open();
+ms.close();
+ms.destroy();
+```
+
+- Reads options from the enclosed native `<select multiple>` — add/remove `<option>` elements to change the list
+- Supports option groups via `<optgroup label="...">` → rendered as `.custom-select-group`
+- Supports leading icons via `data-icon="lucide-name"` on `<option>`
+- Stays open on selection (multi-select behaviour); Escape or outside click closes
+- Full ARIA: `role="combobox"` on trigger, `role="listbox"` + `aria-multiselectable="true"` on list, `role="option"` + `aria-selected` on items
+
+Handle: `getValues()`, `setValues(values)`, `open()`, `close()`, `destroy()`
+
+### Markup
+
+```html
+<div id="my-multi-select" class="custom-select">
+  <label for="my-ms-native">Frameworks</label>
+  <select id="my-ms-native" class="custom-select-native" multiple>
+    <optgroup label="Frontend">
+      <option value="react" data-icon="atom">React</option>
+      <option value="vue" data-icon="triangle">Vue</option>
+    </optgroup>
+    <optgroup label="Backend">
+      <option value="node">Node</option>
+      <option value="deno">Deno</option>
+    </optgroup>
+  </select>
+  <button type="button" class="secondary-btn custom-select-trigger"></button>
+  <div class="custom-select-list"></div>
+</div>
+```
+
+Classes (shared with custom select): `custom-select`, `custom-select-native`, `custom-select-trigger`, `custom-select-list`, `custom-select-group`, `custom-select-group-label`, `custom-select-option`, `custom-select-option-icon`, `custom-select-option-check`, `is-enhanced`, `is-open`, `is-selected`, `is-active`
+
+Chip classes (injected into trigger by JS): `multi-select-chips`, `multi-select-chip`, `multi-select-chip-remove`, `multi-select-placeholder`, `multi-select-clear`
+
+---
+
+## Text Field (Floating Label)
+
+### API
+
+```ts
+import {
+  bindTextField,
+  type TextFieldHandle,
+  type TextFieldOptions,
+  type ValidationResult,
+} from "@goblin-systems/goblin-design-system";
+
+const field = bindTextField({
+  el: document.getElementById("my-field")!,
+  validateOn: "blur",          // "input" | "blur" | "both"
+  validate: (value) => {
+    if (!value) return { valid: false, message: "Required" };
+    if (value.length < 3) return { valid: false, message: "Too short" };
+    return { valid: true };
+  },
+});
+
+field.setError("Server error");
+field.setSuccess("Looks good");
+field.clearState();
+field.validate();   // runs validate() immediately, returns boolean
+field.destroy();
+```
+
+- Floats the `<label>` above the input when focused or when the field has a value (`.has-value`)
+- `.field-hint` shows validation messages; its original text is restored by `clearState()`
+- `validate()` returns `null` → `clearState()`; `{ valid: false }` → `setError()`; `{ valid: true }` → `setSuccess()`
+
+Handle: `setError(msg?)`, `setSuccess(msg?)`, `clearState()`, `validate()`, `destroy()`
+
+### Markup
+
+```html
+<div id="my-field" class="text-field">
+  <input type="text" id="username" />
+  <label for="username">Username</label>
+  <span class="field-hint">3–20 characters</span>
+</div>
+
+<!-- Textarea variant -->
+<div id="my-textarea-field" class="text-field">
+  <textarea id="bio" rows="3"></textarea>
+  <label for="bio">Bio</label>
+  <span class="field-hint">Tell us about yourself</span>
+</div>
+```
+
+Classes: `text-field`, `field-hint`, `has-value` (set by JS), `is-error` (set by JS), `is-success` (set by JS)

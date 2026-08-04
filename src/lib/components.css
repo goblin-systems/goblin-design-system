@@ -405,6 +405,33 @@ kbd {
   text-align: center;
 }
 
+/* ── Number Input ────────────────────────────────────────────────────────────── */
+.number-input {
+  display: inline-flex;
+  align-items: stretch;
+}
+
+.number-input input[type="number"] {
+  width: 56px;
+  height: 26px;
+  padding: 0 6px;
+  text-align: center;
+  border-left: none;
+  border-right: none;
+  /* remove native spin buttons */
+  -moz-appearance: textfield;
+}
+
+.number-input input[type="number"]::-webkit-outer-spin-button,
+.number-input input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.number-input .icon-btn-sm {
+  flex-shrink: 0;
+}
+
 /* ── Form Fields ─────────────────────────────────────────────────────────────── */
 .field {
   display: flex;
@@ -744,17 +771,30 @@ body.modal-open {
 }
 
 .pane-resizer {
-  width: 8px;
+  width: 5px;
   border-radius: 0;
-  background: var(--pane-resizer-bg);
-  border: 1px solid var(--pane-resizer-border);
+  background: color-mix(in srgb, var(--border) 18%, transparent);
+  border: none;
   cursor: col-resize;
-  transition: background var(--duration-base), border-color var(--duration-base);
+  transition: background var(--duration-fast);
 }
 
 .pane-resizer:hover {
-  background: var(--pane-resizer-bg-hover);
-  border-color: var(--pane-resizer-border-hover);
+  background: var(--accent);
+}
+
+.pane-resizer-h {
+  width: 100%;
+  height: 5px;
+  border-radius: 0;
+  background: color-mix(in srgb, var(--border) 18%, transparent);
+  border: none;
+  cursor: ns-resize;
+  transition: background var(--duration-fast);
+}
+
+.pane-resizer-h:hover {
+  background: var(--accent);
 }
 
 .editor-workspace.left-collapsed #left-pane-resizer,
@@ -2375,6 +2415,93 @@ a.breadcrumb-item:hover { color: var(--text); }
   [data-tooltip]::after { transition: opacity var(--duration-fast); }
 }
 
+/* `bindTooltips()` uses this body-level portal so overflow and stacking
+   contexts around the anchor cannot clip the rendered tooltip. The legacy
+   anchor pseudo-elements above remain as a fallback for manually managed
+   `data-tooltip-visible` markup. */
+[data-tooltip][data-tooltip-bound="true"]::before,
+[data-tooltip][data-tooltip-bound="true"]::after {
+  display: none;
+}
+
+.tooltip-portal {
+  --tooltip-max-width: 280px;
+  position: fixed;
+  z-index: var(--z-tooltip);
+  width: max-content;
+  max-width: min(var(--tooltip-max-width), calc(100vw - var(--space-4)));
+  padding: var(--space-1) var(--space-2);
+  background: var(--bg-deep);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-card);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: var(--font-size-xs);
+  line-height: 1.4;
+  text-align: left;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--duration-fast);
+}
+
+.tooltip-portal[data-visible="true"] {
+  opacity: 1;
+  visibility: visible;
+}
+
+.tooltip-portal::after {
+  content: "";
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  background: var(--bg-deep);
+  border: 1px solid var(--border);
+  transform: rotate(45deg);
+}
+
+.tooltip-portal[data-side="top"]::after,
+.tooltip-portal[data-side="bottom"]::after {
+  left: var(--tooltip-arrow-offset);
+  margin-left: -4px;
+}
+
+.tooltip-portal[data-side="top"]::after {
+  bottom: -5px;
+  border-top: 0;
+  border-left: 0;
+}
+
+.tooltip-portal[data-side="bottom"]::after {
+  top: -5px;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.tooltip-portal[data-side="left"]::after,
+.tooltip-portal[data-side="right"]::after {
+  top: var(--tooltip-arrow-offset);
+  margin-top: -4px;
+}
+
+.tooltip-portal[data-side="left"]::after {
+  right: -5px;
+  border-bottom: 0;
+  border-left: 0;
+}
+
+.tooltip-portal[data-side="right"]::after {
+  left: -5px;
+  border-top: 0;
+  border-right: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tooltip-portal { transition: none; }
+}
+
 /* ── Spinner ──────────────────────────────────────────────────────────────────── */
 @keyframes spin {
   to { transform: rotate(360deg); }
@@ -3391,7 +3518,8 @@ a.breadcrumb-item:hover { color: var(--text); }
     grid-template-columns: 1fr;
   }
 
-  .pane-resizer {
+  .pane-resizer,
+  .pane-resizer-h {
     display: none;
   }
 
@@ -3994,3 +4122,82 @@ a.breadcrumb-item:hover { color: var(--text); }
 .date-picker-cell.is-in-range.is-today {
   color: var(--accent);
 }
+
+/* ── Drop Zone ────────────────────────────────────────────────────────────────── */
+.drop-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  padding: var(--space-8) var(--space-6);
+  border: 2px dashed var(--border);
+  background: var(--bg-section);
+  color: var(--text-muted);
+  text-align: center;
+  cursor: pointer;
+  transition:
+    border-color var(--duration-fast),
+    background var(--duration-fast),
+    color var(--duration-fast);
+  user-select: none;
+}
+
+.drop-zone:hover {
+  border-color: var(--border-focus);
+  color: var(--text);
+}
+
+.drop-zone.is-dragging-over {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--bg-section));
+  color: var(--text-heading);
+}
+
+.drop-zone svg {
+  width: 28px;
+  height: 28px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+.drop-zone p {
+  margin: 0;
+  font-size: var(--font-size-md);
+  line-height: 1.5;
+}
+
+.drop-zone-hint {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .drop-zone { transition: none; }
+}
+
+/* ── Textarea Field ───────────────────────────────────────────────────────────── */
+.textarea-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.textarea-field textarea {
+  resize: none;
+  box-sizing: border-box;
+}
+
+.textarea-count {
+  font-size: var(--font-size-xs);
+  color: var(--text-muted);
+  align-self: flex-end;
+  user-select: none;
+}
+
+.textarea-count.is-near-limit { color: var(--warning); }
+.textarea-count.is-at-limit   { color: var(--error); }
