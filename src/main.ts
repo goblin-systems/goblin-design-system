@@ -6,6 +6,7 @@ import { openModal, closeModal, confirmModal } from "./lib/headless/modal";
 import { bindSearch } from "./lib/headless/search";
 import { bindTooltips } from "./lib/headless/tooltip";
 import { bindRange } from "./lib/headless/range";
+import { bindSlider } from "./lib/headless/slider";
 import { bindRadial } from "./lib/headless/radial";
 import { bindNavigation } from "./lib/headless/navigation";
 import { bindSwitch } from "./lib/headless/switch";
@@ -201,6 +202,40 @@ const singleRange = document.getElementById("demo-single-range") as HTMLInputEle
 if (singleRange) {
   syncRangeFill(singleRange);
   singleRange.addEventListener("input", () => syncRangeFill(singleRange));
+}
+
+// ── Slider demos ─────────────────────────────────────────────────────────────
+const sliderLog = document.getElementById("slider-log");
+
+const sliderEl = document.getElementById("demo-slider");
+if (sliderEl) {
+  bindSlider({
+    el: sliderEl,
+    min: 0,
+    max: 100,
+    step: 1,
+    value: 60,
+    label: "Single slider",
+    onChange: (value) => {
+      if (sliderLog) sliderLog.textContent = `Slider: ${value}`;
+    },
+  });
+}
+
+const sliderVerticalEl = document.getElementById("demo-slider-vertical");
+if (sliderVerticalEl) {
+  bindSlider({
+    el: sliderVerticalEl,
+    min: 0,
+    max: 100,
+    step: 1,
+    value: 80,
+    orientation: "vertical",
+    label: "Fader",
+    onChange: (value) => {
+      if (sliderLog) sliderLog.textContent = `Fader: ${value}%`;
+    },
+  });
 }
 
 // ── Range slider demos ────────────────────────────────────────────────────────

@@ -35,6 +35,8 @@ export { bindTooltips } from "./headless/tooltip";
 export type { TooltipOptions, TooltipHandle } from "./headless/tooltip";
 export { bindRange } from "./headless/range";
 export type { RangeOptions, RangeHandle } from "./headless/range";
+export { bindSlider } from "./headless/slider";
+export type { SliderOptions, SliderHandle } from "./headless/slider";
 export { bindRadial } from "./headless/radial";
 export type { RadialOptions, RadialHandle } from "./headless/radial";
 export { openModal, closeModal, bindModal, confirmModal } from "./headless/modal";

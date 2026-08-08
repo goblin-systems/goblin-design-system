@@ -48,6 +48,74 @@ Native spin buttons are hidden via CSS. The input width is fixed at 56 px; overr
 
 ---
 
+## Slider (Single Value)
+
+A fully custom (non-native) slider with one thumb, in horizontal or vertical
+orientation. Use this instead of a native `input[type=range]` whenever you
+need a vertical fader — native range inputs cannot be made reliably vertical
+across browsers without fighting `appearance`/`writing-mode` quirks; this
+component sidesteps that by never using a native `<input>` at all.
+
+### API
+
+```ts
+import {
+  bindSlider,
+  type SliderHandle,
+  type SliderOptions,
+} from "@goblin-systems/goblin-design-system";
+
+const slider = bindSlider({
+  el: document.getElementById("my-slider")!,
+  min: 0,
+  max: 100,
+  step: 1,
+  value: 60,
+  orientation: "vertical",   // default "horizontal"
+  label: "Volume",
+  onChange: (value) => console.log(value),
+});
+
+slider.setValue(80);
+slider.getValue();
+slider.destroy();
+```
+
+`onChange` fires continuously (drag, click-to-jump, keyboard) — the same as
+`bindRange`. There is no separate "commit" event; if you need drag-preview now
+but a single undo step on release, wrap it yourself (buffer the value in
+`onChange`, dispatch on the container's `pointerup`/`keyup`).
+
+Handle: `setValue(value)`, `getValue()`, `destroy()`
+
+### Markup
+
+```html
+<!-- Horizontal (default) -->
+<div id="my-slider" class="slider">
+  <div class="slider-track">
+    <div class="slider-fill"></div>
+    <div class="slider-thumb"></div>
+  </div>
+</div>
+
+<!-- Vertical: add the modifier class and give the root a height -->
+<div id="my-fader" class="slider slider--vertical" style="height: 140px">
+  <div class="slider-track">
+    <div class="slider-fill"></div>
+    <div class="slider-thumb"></div>
+  </div>
+</div>
+```
+
+Classes: `slider`, `slider--vertical`, `slider-track`, `slider-fill`, `slider-thumb`, `is-dragging`
+
+Vertical reads low-to-high bottom-to-top, like a fader. The root element must
+have an explicit or flex-derived height for the vertical track to have
+anything to fill.
+
+---
+
 ## Double Range Slider
 
 ### API

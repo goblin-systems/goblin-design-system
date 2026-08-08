@@ -394,6 +394,21 @@
               <label>Single range</label>
               <input id="demo-single-range" type="range" min="0" max="100" value="60" />
             </div>
+            <div class="demo-row" style="align-items:start; gap:20px; margin-top:8px">
+              <div class="field-block" style="max-width:220px">
+                <label>Single slider (horizontal)</label>
+                <div id="demo-slider" class="slider">
+                  <div class="slider-track"><div class="slider-fill"></div><div class="slider-thumb"></div></div>
+                </div>
+              </div>
+              <div class="field-block">
+                <label>Fader (vertical)</label>
+                <div id="demo-slider-vertical" class="slider slider--vertical" style="height:140px">
+                  <div class="slider-track"><div class="slider-fill"></div><div class="slider-thumb"></div></div>
+                </div>
+              </div>
+            </div>
+            <div id="slider-log" style="font-size:var(--font-size-sm);color:var(--text-muted);margin-top:4px"></div>
             <div class="field-block" style="max-width:400px; margin-top:8px">
               <label>Price range (double)</label>
               <div id="demo-range" class="range-slider">

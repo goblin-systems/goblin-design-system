@@ -1460,6 +1460,102 @@ body.modal-open {
   pointer-events: none;
 }
 
+/* ── Slider (single-value) ───────────────────────────────────────────────────
+ * Markup:
+ *   <div class="slider" [class="slider slider--vertical"]>
+ *     <div class="slider-track">
+ *       <div class="slider-fill"></div>
+ *       <div class="slider-thumb"></div>
+ *     </div>
+ *   </div>
+ *
+ * Horizontal reads low-to-high left-to-right; the `.slider--vertical`
+ * modifier reads low-to-high bottom-to-top, like a fader. Bind with
+ * `bindSlider({ el, orientation: "vertical", ... })`.
+ */
+
+.slider {
+  --slider-track-h: 3px;
+  --slider-thumb-size: 13px;
+  padding: 6px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.slider-track {
+  position: relative;
+  height: var(--slider-track-h);
+  background: var(--border);
+  cursor: pointer;
+}
+
+.slider-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: var(--accent);
+  pointer-events: none;
+}
+
+.slider-thumb {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-50%, -50%);
+  width: var(--slider-thumb-size);
+  height: var(--slider-thumb-size);
+  background: var(--accent);
+  border: 2px solid var(--bg);
+  cursor: grab;
+  transition: background var(--duration-fast), box-shadow var(--duration-fast);
+  touch-action: none;
+}
+
+.slider-thumb:hover {
+  background: var(--accent-hover);
+}
+
+.slider-thumb:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--range-thumb-focus-ring);
+}
+
+.slider-thumb.is-dragging,
+.slider-thumb:active {
+  cursor: grabbing;
+  background: var(--accent-hover);
+  box-shadow: 0 0 0 4px var(--range-thumb-drag-ring);
+}
+
+.slider--vertical {
+  display: inline-flex;
+  justify-content: center;
+  padding: 0 6px;
+  height: 100%;
+}
+
+.slider--vertical .slider-track {
+  width: var(--slider-track-h);
+  height: 100%;
+  min-height: 40px;
+}
+
+.slider--vertical .slider-fill {
+  top: auto;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+}
+
+.slider--vertical .slider-thumb {
+  top: auto;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 50%);
+}
+
 /* ── Radial control ──────────────────────────────────────────────────────────── */
 
 /**
